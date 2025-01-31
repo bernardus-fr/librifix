@@ -130,10 +130,6 @@ Initial functional version of the project.
 
 - Stable and finalized version
 
-## Contribution
-
-Contributions are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for more details.
-
 ## License
 
 ### Project License
