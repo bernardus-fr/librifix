@@ -110,6 +110,10 @@ From the root directory of the program, execute the following command:
 ./librifix.sh
 ```
 
+### Result
+
+Find the final file '**livre.epub**' in the '**temp**' folder of the program.
+
 ## Version History
 
 ### Alpha Version 1.0
