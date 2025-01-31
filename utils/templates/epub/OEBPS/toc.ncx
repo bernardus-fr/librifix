@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ncx PUBLIC "-//NISO//DTD ncx 2005-1//EN" "http://www.daisy.org/z3986/2005/ncx-2005-1.dtd">
+<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1" xml:lang="fr">
+  <head>
+    <meta name="dtb:uid" content="urn:isbn:1234567890"/>
+    <meta name="dtb:depth" content="1"/>
+    <meta name="dtb:totalPageCount" content="0"/>
+    <meta name="dtb:maxPageNumber" content="0"/>
+  </head>
+  <docTitle>
+    <text>title</text>
+  </docTitle>
+  <navMap>
+    <navPoint id="navpoint-1" playOrder="1">
+      <navLabel>
+        <text>Page de Garde</text>
+      </navLabel>
+      <content src="Text/page_de_garde.xhtml"/>
+    </navPoint>
+    <navPoint id="navpoint-2" playOrder="2">
+      <navLabel>
+        <text>Table des matières</text>
+      </navLabel>
+      <content src="Text/nav.xhtml"/>
+    </navPoint>
+  </navMap>
+</ncx>

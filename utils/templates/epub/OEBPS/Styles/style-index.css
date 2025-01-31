@@ -1,0 +1,29 @@
+/* Styles d'index */
+h1 {
+  font-size: 2.25em;
+  margin-top: 0;
+  padding-top: 3em;
+  text-align: center;
+}
+a {
+  text-decoration: none;
+  color: black;
+}
+.rang1 {
+  text-align: justify;
+  padding-top: 0.3em;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+.rang2 {
+  text-align: justify;
+  padding-top: 0.2em;
+  font-size: 1em;
+  font-weight: normal;
+}
+.rang3 {
+  text-align: justify;
+  padding-top: 0.1em;
+  font-size: 0.75em;
+  font-style: italic;
+}
