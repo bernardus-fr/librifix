@@ -39,6 +39,7 @@ Librifix runs with **Bash** and **Python**.
   - `bs4` (BeautifulSoup)
   - `uuid`
 - **Java**: Required to run **EPUBCheck**, which is included in the software.
+- **ImageMagick**: Required for image processing.
 
 ### Installation Steps
 
@@ -51,6 +52,10 @@ Librifix runs with **Bash** and **Python**.
    - **Bash**:
      ```sh
      sudo apt install zenity
+     ```
+   - **ImageMagick**:
+     ```sh
+     sudo apt install imagemagick
      ```
    - **Java** (for EPUBCheck):
      ```sh
