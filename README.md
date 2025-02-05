@@ -40,6 +40,7 @@ Librifix runs with **Bash** and **Python**.
   - `uuid`
 - **Java**: Required to run **EPUBCheck**, which is included in the software.
 - **ImageMagick**: Required for image processing.
+- **Zip**: Required for EPUB archive creation.
 
 ### Installation Steps
 
@@ -56,6 +57,10 @@ Librifix runs with **Bash** and **Python**.
    - **ImageMagick**:
      ```sh
      sudo apt install imagemagick
+     ```
+   - **Zip**:
+     ```sh
+     sudo apt install zip
      ```
    - **Java** (for EPUBCheck):
      ```sh
