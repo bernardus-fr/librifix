@@ -1,0 +1,10 @@
+Annex C: Case Studies
+
+The Curiosity Mission on Mars
+NASA's Curiosity rover, which landed on Mars in 2012, is one of the most prominent examples of AI in space exploration. Curiosity is equipped with an autonomous navigation system that allows it to make real-time decisions to avoid obstacles on the Martian surface. The rover uses computer vision algorithms to identify and analyze terrain, ensuring efficient and error-free exploration.
+
+AI in the International Space Station (ISS) Management
+The International Space Station also utilizes AI to manage its vital systems, such as atmosphere regulation and resource management. For example, AI is used to optimize energy consumption and water management, two critical resources for astronaut survival onboard. Additionally, autonomous robots aboard the ISS can perform minor repairs without requiring astronauts to oversee the process.
+
+SpaceX Missions and AI
+SpaceX has also integrated AI into its space projects, particularly for rocket launches and landings. The company uses AI systems to analyze flight data in real-time and make instant decisions to adjust the trajectory or correct anomalies during launch or landing. These systems allow SpaceX to reduce risks and ensure successful missions.

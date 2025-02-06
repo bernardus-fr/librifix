@@ -1,0 +1,16 @@
+Annex B: Glossary of Key Terms
+
+Machine Learning Algorithms
+Machine learning algorithms are computer methods that allow a system to improve its performance over time through experience and data analysis. These algorithms are central to modern AI, enabling machines to learn from data without being explicitly programmed.
+
+Robot Autonomy
+Robot autonomy refers to a robot's ability to perform tasks independently, without constant human intervention. In space exploration, this can include autonomous navigation of rovers on Mars or managing systems aboard a space station without Earth assistance.
+
+Neural Networks
+Neural networks are computer structures inspired by the human brain, enabling machines to analyze and process complex information. They are used in a variety of AI applications, such as image recognition, decision-making, and result prediction.
+
+Embedded AI
+Embedded AI refers to intelligent systems integrated directly into devices like satellites, rovers, or even spacecraft. These systems are designed to operate autonomously in environments where communication with Earth is limited or impossible.
+
+Deep Learning
+Deep learning is a subset of machine learning that uses deep neural networks to analyze complex datasets. This type of AI is particularly used for image recognition and real-time decision-making.

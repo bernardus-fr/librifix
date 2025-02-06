@@ -14,12 +14,22 @@
 # If not, see <http://www.gnu.org/licenses/>.
 
 
+#       FONCTION DU SCRIPT:
+#  Script de mise à jour de l'index: fichiers nav.xhtml et toc.ncx par la réception d'un fichiers
+# à la foi, reçu en argument, et qui doit être intégré dans l'ordre de lecture juste.
+# Extraction du titre et son ID
+# Défénition de l'ordre
+# Attention aux namespaces
+# Indentation du xml
+# Mise à jour des fichiers respectifs toc et nav.
+
+
 import os
 import sys
 from xml.etree.ElementTree import ElementTree, Element, SubElement, parse, tostring
 import xml.etree.ElementTree as ET
-import subprocess
 import re
+from LibFix import utils
 
 # Configuration des chemins
 TOC_FILE = "temp/epub_temp/OEBPS/toc.ncx"
@@ -37,10 +47,6 @@ order_keys = [
 	*[f"chapitre{i}" for i in range(1, 100)],  # Gérer jusqu'à chapitre99
 	*[f"complement{i}" for i in range(1, 100)]  # Gérer jusqu'à complement99
 ]
-
-# Gestion des logs
-def log_message(level, message):
-    subprocess.run(["./scripts/bash/log_manager.sh", "add", level, message], check=True)
 
 # Enlever les namespaces indésirables
 def remove_specific_namespaces(elem):
@@ -90,11 +96,11 @@ def extract_title_and_id(file_path):
             title, file_id = "Sans titre", None
 
         if not file_id:
-            log_message("WARNING", f"Aucun ID trouvé dans {file_path}.")
+            utils.log_message("WARNING", f"│ Aucun ID trouvé dans {file_path}.")
         
         return title, file_id
     except ET.ParseError as e:
-        log_message("ERROR", f"Erreur de parsing XML dans {file_path} : {e}")
+        utils.log_message("ERROR", f"│ Erreur de parsing XML dans {file_path} : {e}")
         return None, None
 
 # Ajout de l'indentation pour le formatage XML
@@ -139,10 +145,10 @@ def update_toc(file_name, title_text, file_id):
     relative_path = f"Text/{file_name}#{file_id}" if file_id else f"Text/{file_name}"
 
     if not os.path.exists(TOC_FILE):
-        log_message("ERROR", f"│ Le fichier {TOC_FILE} est introuvable.")
+        utils.log_message("ERROR", f"│ Le fichier {TOC_FILE} est introuvable.")
         raise FileNotFoundError(f"Le fichier {TOC_FILE} est introuvable.")
 
-    log_message("INFO", "│ Mise à jour du fichier toc.ncx commencée.")
+    utils.log_message("DEBUG", "│ Mise à jour du fichier toc.ncx commencée.")
     tree = parse(TOC_FILE)
     root = tree.getroot()
     remove_specific_namespaces(root)
@@ -176,19 +182,19 @@ def update_toc(file_name, title_text, file_id):
     
     indent_tree(root)
     tree.write(TOC_FILE, encoding="utf-8", xml_declaration=True)
-    log_message("INFO", f"toc.ncx mis à jour avec {file_name}.")
+    utils.log_message("DEBUG", f"│ toc.ncx mis à jour avec {file_name}.")
 
 # Mettre à jour le fichier nav.xhtml
 def update_nav(file_name, title_text, file_id):
     """Met à jour le fichier nav.xhtml en insérant les entrées triées."""
     if not os.path.exists(NAV_FILE):
-        log_message("ERROR", f"│ Le fichier {NAV_FILE} est introuvable.")
+        utils.log_message("ERROR", f"│ Le fichier {NAV_FILE} est introuvable.")
         raise FileNotFoundError(f"Le fichier {NAV_FILE} est introuvable.")
 
     html_ns = "http://www.w3.org/1999/xhtml"
     epub_ns = "http://www.idpf.org/2007/ops"
 
-    log_message("INFO", "│ Mise à jour du fichier nav.xhtml commencée.")
+    utils.log_message("DEBUG", "│ Mise à jour du fichier nav.xhtml commencée.")
     tree = parse(NAV_FILE)
     root = tree.getroot()
 
@@ -228,12 +234,12 @@ def update_nav(file_name, title_text, file_id):
         
     indent_tree(root)
     tree.write(NAV_FILE, encoding="utf-8", xml_declaration=True)
-    log_message("INFO", f"nav.xhtml mis à jour avec {file_name}.")
+    utils.log_message("DEBUG", f"│ nav.xhtml mis à jour avec {file_name}.")
 
 # Script principal
 def main():
     if len(sys.argv) != 2:
-        log_message("ERROR", "Usage: python update_index.py <file_name>")
+        utils.log_message("ERROR", "│ Usage: python update_index.py <file_name>")
         sys.exit(1)
 
     file_name = sys.argv[1]
@@ -242,7 +248,7 @@ def main():
     file_id = None
 
     if not os.path.exists(file_path):
-        log_message("ERROR", f"Fichier introuvable : {file_path}")
+        utils.log_message("ERROR", f"│ Fichier introuvable : {file_path}")
         sys.exit(1)
 
     if basename == "page_de_couverture":
@@ -264,7 +270,7 @@ def main():
         update_toc(file_name, title_text, file_id)
         update_nav(file_name, title_text, file_id)
     else:
-        log_message("WARNING", f"Impossible d'extraire les données pour {file_name}.")
+        utils.log_message("WARNING", f"│ Impossible d'extraire les données pour {file_name}.")
 
 if __name__ == "__main__":
     main()

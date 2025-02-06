@@ -1,0 +1,14 @@
+Annexe A : Historique de l'Intelligence Artificielle dans l'Exploration Spatiale
+
+L'intelligence artificielle (IA) a joué un rôle croissant dans l'exploration spatiale depuis ses premières utilisations dans les années 1960. Au départ, les systèmes informatiques étaient principalement utilisés pour automatiser des tâches simples, comme la collecte et le traitement de données envoyées depuis des satellites ou des sondes. Mais avec l'avancée technologique, l'IA a pris une place de plus en plus importante dans les missions spatiales, allant de l'automatisation des processus à la gestion des ressources en passant par la navigation autonome.
+
+Les premières missions avec IA
+L'un des premiers exemples notables de l'utilisation de l'IA dans l'espace a été l'intégration de l'ordinateur de bord dans les missions Apollo. Bien que l'IA en tant que telle n'existait pas encore, les premières formes d'automatisation étaient déjà présentes, avec des systèmes capables de traiter des informations et d'effectuer des ajustements en temps réel pour la navigation.
+
+Les rovers martiens
+Plus récemment, l'IA a permis de révolutionner l'exploration de Mars avec les missions de rovers tels que Spirit, Opportunity, Curiosity, et Perseverance. Ces rovers sont équipés d'algorithmes d'IA leur permettant de naviguer de manière autonome, d'analyser des échantillons, et d'éviter des obstacles. Par exemple, Curiosity a utilisé l'IA pour sa navigation autonome sur le sol martien, permettant au rover de prendre des décisions en temps réel, en fonction des conditions du terrain, sans attendre des instructions de la Terre.
+
+L'IA et la gestion des satellites
+Un autre domaine clé dans lequel l'IA joue un rôle est la gestion des satellites. L'IA est utilisée pour optimiser l'orbite des satellites, détecter et réparer des pannes, ou encore améliorer la collecte des données environnementales. L'introduction de l'IA dans le domaine de la gestion de satellites a permis d'améliorer l'efficacité des missions et de réduire les coûts.
+
+L'intelligence artificielle, en constante évolution, continue de jouer un rôle de plus en plus crucial dans l'exploration spatiale. Les progrès récents ouvrent des perspectives prometteuses pour l'autonomie des missions spatiales futures, notamment pour les missions habitées sur Mars.

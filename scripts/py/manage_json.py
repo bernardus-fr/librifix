@@ -14,15 +14,17 @@
 # If not, see <http://www.gnu.org/licenses/>.
 
 
+#       FONCTION DU SCRIPT:
+#  Script d'utilité pour facilité la gestion du fichiers user_files.json. Pourrait devenir
+# une simple library. Peut mettre à jour le status d'un fichiers, renvoyer le premier non
+# traité, rechercher un éventuel fichires note lié à un chapitre.
+
+
 import json
 import sys
-import subprocess
+from LibFix import utils
 
 USER_FILES_PATH = "temp/user_files.json"
-
-# Gestion des logs
-def log_message(level, message):
-    subprocess.run(["./scripts/bash/log_manager.sh", "add", level, message], check=True)
 
 # Charger le contenu du fichier user_files.json.
 def load_user_files():
@@ -30,10 +32,10 @@ def load_user_files():
         with open(USER_FILES_PATH, "r", encoding="utf-8") as file:
             return json.load(file)
     except FileNotFoundError:
-        log_message("ERROR", f"{USER_FILES_PATH} introuvable.")
+        utils.log_message("ERROR", f"│ {USER_FILES_PATH} introuvable.")
         sys.exit(1)
     except json.JSONDecodeError:
-        log_message("ERROR", f"Le fichier {USER_FILES_PATH} contient des erreurs JSON.")
+        utils.log_message("ERROR", f"│ Le fichier {USER_FILES_PATH} contient des erreurs JSON.")
         sys.exit(1)
 
 # Enregistrer les données dans le fichier user_files.json.
@@ -42,7 +44,7 @@ def save_user_files(data):
         with open(USER_FILES_PATH, "w", encoding="utf-8") as file:
             json.dump(data, file, indent=4, ensure_ascii=False)
     except Exception as e:
-        log_message("ERROR", f"Impossible d'enregistrer les données dans {USER_FILES_PATH}: {e}")
+        utils.log_message("ERROR", f"│ Impossible d'enregistrer les données dans {USER_FILES_PATH}: {e}")
         sys.exit(1)
 
 # Récupérer le premier fichier non traité.
@@ -67,15 +69,15 @@ def update_file_status(file_name, new_status):
     if file_name in data:
         data[file_name] = new_status
         save_user_files(data)
-        log_message("INFO", f"Statut de {file_name} mis à jour en {new_status}.")
+        utils.log_message("DEBUG", f"│ Statut de {file_name} mis à jour en {new_status}.")
         return True
-    log_message("WARNING", f"Fichier {file_name} non trouvé dans user_files.json.")
+    utils.log_message("WARNING", f"│ Fichier {file_name} non trouvé dans user_files.json.")
     return False
 
 # Programme principal
 def main():
     if len(sys.argv) < 2:
-        log_message("ERROR", "Usage: python user_files_manager.py <action> [arguments]")
+        utils.log_message("ERROR", "│ Usage: python user_files_manager.py <action> [arguments]")
         sys.exit(1)
 
     action = sys.argv[1]
@@ -84,40 +86,36 @@ def main():
         result = get_first_unprocessed()
         if result:
             print(result)
-            #log_message("INFO", f"Premier fichier à traiter : {result}")
             sys.exit(0)
         else:
             print("none")
-            #log_message("INFO", "Aucun fichier à traiter trouvé.")
             sys.exit(0)
 
     elif action == "find-note":
         if len(sys.argv) < 3:
-            log_message("ERROR", "Usage: python user_files_manager.py find-note <file_name>")
+            utils.log_message("ERROR", "│ Usage: python user_files_manager.py find-note <file_name>")
             sys.exit(1)
         file_name = sys.argv[2]
         result = find_corresponding_note(file_name)
         if result:
             print(result)
-            #log_message("INFO", f"Note correspondante trouvée : {result}")
             sys.exit(0)
         else:
             print("none")
-            #log_message("INFO", f"Aucune note trouvée pour {file_name}.")
             sys.exit(0)
 
     elif action == "update-status":
         if len(sys.argv) < 4:
-            log_message("ERROR", "Usage: python user_files_manager.py update-status <file_name> <new_status>")
+            utils.log_message("ERROR", "│ Usage: python user_files_manager.py update-status <file_name> <new_status>")
             sys.exit(1)
         file_name = sys.argv[2]
         new_status = sys.argv[3]
         if update_file_status(file_name, new_status):
-            log_message("INFO", f"Statut mis à jour pour {file_name}.")
+            utils.log_message("DEBUG", f"│ Statut mis à jour pour {file_name}.")
             sys.exit(0)
 
     else:
-        log_message("ERROR", f"Action inconnue: {action}")
+        utils.log_message("ERROR", f"Action inconnue: {action}")
         sys.exit(1)
 
 if __name__ == "__main__":

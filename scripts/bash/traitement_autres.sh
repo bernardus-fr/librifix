@@ -15,11 +15,16 @@
 # You should have received a copy of the GNU General Public License along with this program.
 # If not, see <http://www.gnu.org/licenses/>.
 
-# Dossiers spécifiques
-WORKDIR="temp/workdir"
-DEST_DIR="temp/epub_temp/OEBPS"
-LOG="./scripts/bash/log_manager.sh"
-UPDATE_MANIFEST_SCRIPT="./scripts/py/update_manifest.py"
+
+#       FONCTION DU SCRIPT:
+#  Script du traitement des fichiers qui ne sont pas à retoucher, feuilles de style, fonts, etc,
+# et déplacement dans les dossiers adéquats de la structure epub temporaire. Met à jours le
+# manifeste avec le fichier intégré.
+# Utilisation: ./traitement_autres.sh <fichier>
+
+
+# Définition des Variables d'environnement:
+source scripts/bash/utils.sh
 
 # Vérification des arguments
 if [[ $# -ne 1 ]]; then
@@ -38,6 +43,7 @@ fi
 
 # Détection du type de fichier et traitement
 extension="${file_name##*.}"
+"$LOG" add DEBUG "│ Fichier de type $extension trouvé"
 case "$extension" in
     css)
         dest_subdir="Styles"
@@ -58,14 +64,14 @@ case "$extension" in
 esac
 
 # Déplacement du fichier dans le dossier approprié
-dest_path="$DEST_DIR/$dest_subdir/$file_name"
-mkdir -p "$DEST_DIR/$dest_subdir"
+dest_path="$OEBPS_TEMP/$dest_subdir/$file_name"
+mkdir -p "$OEBPS_TEMP/$dest_subdir"
 if cp "$source_file" "$dest_path"; then
-    "$LOG" add INFO "│ Fichier déplacé vers : $dest_path"
+    "$LOG" add DEBUG "│ Fichier déplacé vers : $dest_path"
     # Mise à jour du manifest avec le script Python
     relative_path="${dest_subdir}/${file_name}"
-    if python3 "$UPDATE_MANIFEST_SCRIPT" "$relative_path"; then
-        "$LOG" add INFO "│ Fichier ajouté au manifest via le script Python : $relative_path"
+    if python3 "$UPDATE_MANIFEST" "$relative_path"; then
+        "$LOG" add DEBUG "│ Fichier ajouté au manifest via le script Python : $relative_path"
     else
         "$LOG" add ERROR "│ Échec de la mise à jour du manifest pour : $relative_path"
         exit 1

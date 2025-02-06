@@ -1,0 +1,58 @@
+Chapter 1 Footnotes
+
+1) Artificial intelligence in our daily lives
+Artificial intelligence has become an integral part of our daily lives, with applications in areas as diverse as voice recognition, movie recommendations, and autonomous vehicles. Although we may not always be aware of it, we interact with AI systems almost every day.
+
+2) The Turing question
+Alan Turing posed a question that remains at the heart of AI debates: "Can machines think?" The answer to this question is not simple, and current technology is still far from achieving human-like intelligence in its complexity.
+
+3) The Turing machine
+The Turing machine is a theoretical model that revolutionized computational thinking. This concept shows that any calculation can be performed by a simple machine, opening the door to the idea of universal computability. The Turing machine also shows that intelligence is not necessarily tied to a biological body.
+
+4) John McCarthy and the Dartmouth Conference
+The Dartmouth Conference in 1956 is considered the founding event of artificial intelligence. John McCarthy, along with other pioneers, introduced the idea that machines could be programmed to imitate human intelligent behavior.
+
+5) Creating a machine that mimics human intelligence
+The goal of the Dartmouth Conference was ambitious: to create machines capable of simulating human intelligence. This idea became a major driver of AI research, although complex challenges remain.
+
+6) Games as a test of intelligence
+Games such as chess have always been a testing ground for AI researchers because they require complex strategies, long-term thinking, and rapid analysis. AI made significant progress in this field, achieving remarkable milestones.
+
+7) The limitations of early chess programs
+Early chess programs paved the way for AIs capable of making strategic decisions at a high level. However, the computing power of the time limited the capabilities of machines in solving more complex problems.
+
+8) Search algorithms
+Search algorithms were central to early AI research, enabling the exploration of solution spaces to solve complex problems. These algorithms were widely used in the first AI systems.
+
+9) The limits of pure algorithms
+Search algorithms, while innovative, could not solve all types of problems. The complexity of real-world tasks required new approaches and more flexible techniques.
+
+10) Expert systems
+Expert systems were specialized programs capable of simulating human expertise in specific fields. They were among the first practical applications of AI.
+
+11) Practical applications of expert systems
+Expert systems were used in areas like medical diagnosis, where they helped professionals analyze complex data and make informed decisions.
+
+12) The challenges of expert systems
+Expert systems, though groundbreaking, lacked flexibility and required vast amounts of data to function effectively. They were often difficult to adapt to new domains.
+
+13) Machine learning and deep learning
+Today, advances in machine learning and deep learning allow AIs to "learn" from vast amounts of data, offering limitless possibilities for solving complex problems.
+
+14) Science fiction and AI
+Science fiction has long shaped our perception of AI, with visions of machines possessing consciousness. While these ideas remain largely fictional, they influenced the direction of AI research.
+
+15) AI ethics
+One of the major debates surrounding AI’s evolution is its ethics. Questions about machine autonomy, their role in society, and their impact on employment continue to spark lively discussions.
+
+16) Asimov's Laws of Robotics
+Isaac Asimov envisioned laws that would govern the behavior of robots. While imaginary, these laws have had a significant influence on ethical discussions surrounding AI development.
+
+17) AI today
+Today, AI is ubiquitous, in fields ranging from medicine to finance. The advancements made in recent years open up infinite possibilities for the technologies of tomorrow.
+
+18) Creative AI
+AI has not only been used to solve complex problems but also to create art and music, challenging our perceptions of creativity and human intuition.
+
+19) The ongoing challenges of AI
+AI still faces many challenges, particularly regarding adaptability and the consideration of context in complex situations. Many problems remain to be solved before AI can truly be compared to human intelligence.

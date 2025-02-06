@@ -1,0 +1,13 @@
+Notes du Chapitre 4
+
+1) Dans des situations imprévues, comme celles rencontrées sur Mars, l'IA peut avoir du mal à réagir de manière optimale, nécessitant souvent une intervention humaine.
+
+2) Les erreurs d'interprétation des données sont une préoccupation constante dans l'utilisation de l'IA pour l'analyse des phénomènes cosmiques.
+
+3) Les environnements extrêmes de l'espace peuvent altérer le fonctionnement des systèmes d'IA, rendant leur performance moins fiable.
+
+4) La question de la responsabilité en cas de défaillance des systèmes d'IA est un défi important dans la gestion des missions spatiales automatisées.
+
+5) L'éthique de l'IA dans l'exploration spatiale, notamment en matière de prise de décision sur les ressources et la gestion des colonies, reste une question ouverte.
+
+6) L'IA, bien qu'avancée, ne possède pas encore la capacité de raisonnement ou de créativité humaine et ne pourra pas remplacer entièrement l'humain dans les missions spatiales.

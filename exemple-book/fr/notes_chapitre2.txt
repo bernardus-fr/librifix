@@ -1,0 +1,55 @@
+Notes du Chapitre 2
+
+1) Le parcours de l'IA
+L'évolution de l'IA n'a pas été un chemin droit, mais plutôt une série de percées et de défis. Ces changements reflètent comment l'IA a été continuellement redéfinie par les avancées technologiques et les besoins sociétaux changeants.
+
+2) Le Logic Theorist
+Développé par Newell et Simon en 1955, le Logic Theorist était l'un des premiers programmes d'IA capables de résoudre des démonstrations mathématiques. Cette réalisation a marqué le début de la recherche en IA telle que nous la connaissons aujourd'hui.
+
+3) Imiter le raisonnement humain
+Le Logic Theorist a démontré que les machines pouvaient simuler le raisonnement humain. Cela a constitué un grand bond en avant, prouvant que les machines pouvaient accomplir des tâches que l'on pensait réservées aux humains.
+
+4) L'IA symbolique
+Dans les années 1960 et 1970, les chercheurs en IA se sont concentrés sur l'IA symbolique, qui reposait sur des données structurées et un raisonnement logique pour simuler l'intelligence humaine. Bien que cette approche ait été innovante, elle peinait à gérer la complexité des situations réelles.
+
+5) Les limites de l'IA symbolique
+Les systèmes d'IA symbolique étaient limités par leur incapacité à s'adapter à de nouvelles situations imprévues. Cette inflexibilité les rendait moins efficaces pour traiter les complexités du monde réel.
+
+6) L'émergence des réseaux neuronaux
+Les années 1980 ont vu l'émergence des réseaux neuronaux, qui ont permis aux systèmes d'IA d'apprendre à partir des données, au lieu de se fier uniquement à des règles prédéfinies. Ce changement a ouvert de nouvelles possibilités pour l'apprentissage automatique et la reconnaissance de modèles.
+
+7) Les réseaux neuronaux et la reconnaissance de modèles
+Les réseaux neuronaux sont composés de couches interconnectées de nœuds qui peuvent apprendre à identifier des motifs et à faire des prédictions. Cette capacité a été révolutionnaire, permettant aux systèmes d'IA d'accomplir des tâches telles que la reconnaissance d'images et la reconnaissance vocale.
+
+8) Les systèmes experts et les réseaux neuronaux
+Dans les années 1980, la recherche en IA a également mis l'accent sur les systèmes experts, qui utilisaient des réseaux neuronaux pour simuler les processus de décision des experts humains. Ces systèmes étaient particulièrement utiles dans des domaines comme le diagnostic médical et la prise de décision financière.
+
+9) L'hiver de l'IA
+Malgré les succès initiaux, les années 1990 ont vu un déclin de la recherche en IA, connu sous le nom d'"hiver de l'IA". Le manque de puissance de calcul et l'échec des premiers systèmes d'IA ont conduit à la désillusion dans le domaine.
+
+10) Les défis de l'hiver de l'IA
+L'hiver de l'IA a été une période difficile pour le domaine, car les systèmes d'IA n'ont pas répondu aux attentes. Cependant, cette période de stagnation a finalement conduit à des avancées importantes dans les années 2000.
+
+11) Le traitement du langage naturel et l'apprentissage automatique
+Durant l'hiver de l'IA, certaines branches de l'IA, comme le traitement du langage naturel et l'apprentissage automatique, ont continué à progresser, posant les bases des futures percées.
+
+12) L'apprentissage automatique et les grandes données
+Les années 2000 ont marqué le renouveau de l'IA, alimenté par les avancées dans l'apprentissage automatique et la disponibilité des grandes données. Ces progrès ont permis aux systèmes d'IA de traiter et d'analyser de grandes quantités d'informations efficacement.
+
+13) La puissance de calcul et le potentiel de l'IA
+Avec l'augmentation des ressources informatiques, les systèmes d'IA pouvaient désormais traiter d'énormes quantités de données, ce qui a conduit à des avancées significatives dans des domaines comme la reconnaissance d'images et le traitement du langage naturel.
+
+14) L'apprentissage profond
+L'apprentissage profond, un sous-ensemble de l'apprentissage automatique, utilise des réseaux neuronaux multicouches pour extraire des informations complexes à partir de grandes quantités de données. Cette technologie a permis des percées majeures dans des domaines comme la reconnaissance vocale et les véhicules autonomes.
+
+15) Les applications modernes de l'IA
+Aujourd'hui, l'IA est utilisée dans une multitude d'industries, allant de la médecine à l'automobile, en passant par les finances. Ses applications sont variées, allant de la prédiction des maladies à la conduite autonome.
+
+16) L'intégration de l'IA dans la société
+L'IA est maintenant omniprésente dans notre vie quotidienne, mais son intégration dans les industries nécessite une réflexion éthique et sociétale, notamment sur les questions de vie privée, de biais algorithmique et de responsabilité.
+
+17) Les questions éthiques de l'IA
+À mesure que l'IA devient plus omniprésente, des questions éthiques telles que la transparence des algorithmes et la responsabilité des décisions prises par l'IA sont devenues des préoccupations majeures.
+
+18) L'impact sociétal de l'IA
+L'un des plus grands défis liés à l'IA est son impact potentiel sur la société, en particulier en ce qui concerne la perte d'emplois, la surveillance accrue et les effets sur la vie privée des individus. Ces questions nécessitent une réflexion approfondie sur la manière de réguler l'utilisation de l'IA.

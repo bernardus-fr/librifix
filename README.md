@@ -1,4 +1,4 @@
-# Librifix
+# LIBRIFIX
 
 ## Introduction
 
@@ -44,33 +44,20 @@ Librifix runs with **Bash** and **Python**.
 
 ### Installation Steps
 
-1. Clone the repository:
+1. Install the required dependencies:
+   - **Bash**:
+     ```sh
+     sudo apt install zenity imagemagick zip default-jre python3 jq
+     ```
+   - **Python libraries**:
+     ```sh
+     pip install bs4 os json pathlib subprocess re sys xml.etree.ElementTree datetime time uuid
+     ```
+2. Clone the repository:
    ```sh
    git clone https://github.com/bernardus-fr/librifix.git
    cd librifix
    ```
-2. Install the required dependencies:
-   - **Bash**:
-     ```sh
-     sudo apt install zenity
-     ```
-   - **ImageMagick**:
-     ```sh
-     sudo apt install imagemagick
-     ```
-   - **Zip**:
-     ```sh
-     sudo apt install zip
-     ```
-   - **Java** (for EPUBCheck):
-     ```sh
-     sudo apt install default-jre
-     ```
-   - **Python and its libraries**:
-     ```sh
-     sudo apt install python3
-     pip install os json pathlib subprocess re sys xml.etree.ElementTree datetime time bs4 uuid
-     ```
 3. Run Librifix:
    ```sh
    ./librifix.sh
@@ -128,7 +115,8 @@ Find the final file '**livre.epub**' in the '**temp**' folder of the program.
 
 ### Alpha Version 1.0
 
-Initial functional version of the project.
+- v1.0: Initial functional version of the project.
+- v1.1: Current version. See [CHANGELOG.md](CHANGELOG.md) for details.
 
 ### Beta Version 2.0 (Upcoming)
 
@@ -154,9 +142,8 @@ This program is distributed in the hope that it will be useful, but **WITHOUT AN
 
 This project includes the following third-party libraries:
 
-- **Zenity** (GPL v3)
 - **BeautifulSoup 4** (MIT License)
 - **EPUBCheck** (Apache 2.0 License)
 
-Please see the [third\_party\_licenses.txt](third_party_licenses.txt) file for more information on these libraries and their licenses.
+Please see the [third\_party\_licenses.md](third_party_licenses.md) file for more information on these libraries and their licenses.
 

@@ -14,9 +14,16 @@
 # If not, see <http://www.gnu.org/licenses/>.
 
 
+#       FONCTION DU SCRIPT:
+#  Formatation de chaque numéro de note codée (1), (2), (3),... dans le texte du chapitre
+# en ajoutant le lien correspondant au texte de la note dans le fichiers note. Gère les
+# références multiples avec un indice dans l'ID de la balise.
+
+
 import re
 import sys
 import os
+from LibFix import utils
 
 # Vérifier les arguments
 if len(sys.argv) != 4:
@@ -58,14 +65,16 @@ def ajouter_balises_chapitre_avec_doublons(texte, chemin_fichier_notes):
     return texte_modifie
 
 # Lecture du fichier
+utils.log_message("DEBUG", f"│ Ouverture de {fichier_chapitre} pour lier les numéros de notes")
 with open(fichier_chapitre, "r", encoding="utf-8") as fichier:
     texte_chapitre = fichier.read()
 
 # Ajout des balises avec gestion des doublons
 texte_modifie = ajouter_balises_chapitre_avec_doublons(texte_chapitre, chemin_fichier_notes)
+utils.log_message("DEBUG", f"│ Nunéros de notes liées pour {fichier_chapitre}")
 
 # Écriture dans le fichier
 with open(fichier_sortie, "w", encoding="utf-8") as fichier:
     fichier.write(texte_modifie)
 
-print(f"   Traitement du chapitre : OK")
+utils.log_message("DEBUG", f"│ Enregistrement de {fichier_sortie}")

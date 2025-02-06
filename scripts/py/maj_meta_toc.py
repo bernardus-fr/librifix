@@ -14,25 +14,26 @@
 # If not, see <http://www.gnu.org/licenses/>.
 
 
+#       FONCTION DU SCRIPT:
+#  Simple mise à jour du fichiers toc.ncx avec les données entrées par l'utilisateur et conservées
+# dans les metadata.json. Une version ultérieure fera peut-être la fusion avec le update_index.py
+
+
 import os
 import json
 from xml.etree.ElementTree import ElementTree, Element, SubElement, parse, tostring
 from datetime import datetime, timezone
-import subprocess
+from LibFix import utils
 
 # Chemins des fichiers
 metadata_file = "temp/metadata.json"
 language_codes_file = "utils/language_codes.json"
 toc_ncx_file = "temp/epub_temp/OEBPS/toc.ncx"
 
-# Gestion des logs
-def log_message(level, message):
-    subprocess.run(["./scripts/bash/log_manager.sh", "add", level, message], check=True)
-
 # Chargement des métadonnées
 def load_metadata():
     if not os.path.exists(metadata_file):
-        log_message("ERROR", f"│ Le fichier {metadata_file} est introuvable.")
+        utils.log_message("ERROR", f"│ Le fichier {metadata_file} est introuvable.")
         raise FileNotFoundError(f"Le fichier {metadata_file} est introuvable.")
 
     with open(metadata_file, "r", encoding="utf-8") as f:
@@ -41,22 +42,22 @@ def load_metadata():
     # Vérification des champs obligatoires
     for field in ["title", "language", "identifier"]:
         if field not in metadata or not metadata[field].strip():
-            log_message("ERROR", f"│ Le champ obligatoire '{field}' est manquant ou vide dans les métadonnées.")
+            utils.log_message("ERROR", f"│ Le champ obligatoire '{field}' est manquant ou vide dans les métadonnées.")
             raise ValueError(f"Le champ obligatoire '{field}' est manquant ou vide dans les métadonnées.")
 
-    log_message("INFO", "│ Méta-données chargées avec succès.")
+    utils.log_message("DEBUG", "│ Méta-données chargées avec succès.")
     return metadata
 
 # Chargement de la correspondance des codes de langue
 def load_language_codes():
     if not os.path.exists(language_codes_file):
-        log_message("ERROR", f"│ Le fichier {language_codes_file} est introuvable.")
+        utils.log_message("ERROR", f"│ Le fichier {language_codes_file} est introuvable.")
         raise FileNotFoundError(f"Le fichier {language_codes_file} est introuvable.")
 
     with open(language_codes_file, "r", encoding="utf-8") as f:
         language_map = json.load(f)
 
-    log_message("INFO", "│ Fichier de codes de langues chargé avec succès.")
+    utils.log_message("DEBUG", "│ Fichier de codes de langues chargé avec succès.")
     return language_map
 
 # Conversion du nom de la langue en code ISO
@@ -105,10 +106,10 @@ def get_current_iso8601():
 # Mise à jour du fichier toc.ncx
 def update_toc_ncx(metadata, language_map):
     if not os.path.exists(toc_ncx_file):
-        log_message("ERROR", f"│ Le fichier {toc_ncx_file} est introuvable.")
+        utils.log_message("ERROR", f"│ Le fichier {toc_ncx_file} est introuvable.")
         raise FileNotFoundError(f"Le fichier {toc_ncx_file} est introuvable.")
 
-    log_message("INFO", "│ Mise à jour du fichier toc.ncx commencée.")
+    utils.log_message("DEBUG", "│ Mise à jour du fichier toc.ncx commencée.")
     tree = parse(toc_ncx_file)
     root = tree.getroot()
 
@@ -118,14 +119,14 @@ def update_toc_ncx(metadata, language_map):
     # Mise à jour de l'attribut xml:lang
     language_code = get_language_code(metadata["language"], language_map)
     root.set("{http://www.w3.org/XML/1998/namespace}lang", language_code)
-    log_message("INFO", f"│ Langue ajoutée: {metadata["language"]}")
+    utils.log_message("DEBUG", f"│ Langue ajoutée: {metadata["language"]}")
 
     # Mise à jour de l'identifiant dans <meta name="dtb:uid">
     meta_uid_elem = root.find(f".//{{{ncx_ns}}}meta[@name='dtb:uid']")
     if meta_uid_elem is None:
         meta_uid_elem = SubElement(root, f"{{{ncx_ns}}}meta", {"name": "dtb:uid"})
     meta_uid_elem.attrib["content"] = metadata["identifier"]
-    log_message("INFO", f"│ Identifiant ajouté: {metadata["identifier"]}")
+    utils.log_message("DEBUG", f"│ Identifiant ajouté: {metadata["identifier"]}")
 
     # Mise à jour du titre dans <docTitle>
     doc_title_elem = root.find(f".//{{{ncx_ns}}}docTitle")
@@ -135,7 +136,7 @@ def update_toc_ncx(metadata, language_map):
     if text_elem is None:
         text_elem = SubElement(doc_title_elem, f"{{{ncx_ns}}}text")
     text_elem.text = metadata["title"]
-    log_message("INFO", f"│ Titre ajouté: {metadata["title"]}")
+    utils.log_message("DEBUG", f"│ Titre ajouté: {metadata["title"]}")
 
     # Supprimer les préfixes des espaces de noms
     remove_namespace_prefixes(root)
@@ -144,20 +145,20 @@ def update_toc_ncx(metadata, language_map):
     indent_tree(root)
 
     # Écriture des modifications
-    log_message("INFO", f"│ Écriture du fichier {toc_ncx_file}")
+    utils.log_message("DEBUG", f"│ Écriture du fichier {toc_ncx_file}")
     tree.write(toc_ncx_file, encoding="utf-8", xml_declaration=True)
     
 
 # Programme principal
 def main():
     try:
-        log_message("INFO", "│ Début de la mise à jour du fichier toc.ncx.")
+        utils.log_message("DEBUG", "│ Début de la mise à jour du fichier toc.ncx.")
         metadata = load_metadata()
         language_map = load_language_codes()
         update_toc_ncx(metadata, language_map)
-        log_message("INFO", "│ Mise à jour du fichier toc.ncx terminée avec succès.")
+        utils.log_message("DEBUG", "│ Mise à jour du fichier toc.ncx terminée avec succès.")
     except Exception as e:
-        log_message("ERROR", f"│ Erreur : {e}")
+        utils.log_message("ERROR", f"│ Erreur : {e}")
         print(f"Erreur : {e}")
 
 if __name__ == "__main__":

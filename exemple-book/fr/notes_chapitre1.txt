@@ -1,0 +1,58 @@
+Notes du Chapitre 1
+
+1) L’intelligence artificielle dans notre quotidien
+L’intelligence artificielle est devenue une partie intégrante de notre vie quotidienne, avec des applications dans des domaines aussi variés que la reconnaissance vocale, la recommandation de films et l'automatisation des véhicules. Bien que nous n'en soyons pas toujours conscients, nous interagissons avec des systèmes d'IA presque chaque jour.
+
+2) La question de Turing
+Alan Turing a proposé une question qui reste au cœur des débats sur l'IA : "Les machines peuvent-elles penser ?" La réponse à cette question n’est pas simple, et la technologie actuelle reste encore loin d’atteindre l'intelligence humaine dans sa complexité.
+
+3) La machine de Turing
+La machine de Turing est un modèle théorique qui a révolutionné la pensée informatique. Ce concept montre que tout calcul peut être effectué par une machine simple, ouvrant la voie à l'idée de la calculabilité universelle. La machine de Turing montre également que l’intelligence n’est pas nécessairement liée à un corps biologique.
+
+4) John McCarthy et la conférence de Dartmouth
+La conférence de Dartmouth en 1956 est considérée comme l’événement fondateur de l’intelligence artificielle. John McCarthy, avec d’autres pionniers, a introduit l’idée que les machines pouvaient être programmées pour imiter des comportements intelligents humains.
+
+5) Créer une machine imitant l’intelligence humaine
+L'objectif de la conférence de Dartmouth était ambitieux : créer des machines capables de simuler l'intelligence humaine. Ce concept a été l'un des principaux moteurs de la recherche en IA, bien que des défis complexes subsistent.
+
+6) Les jeux comme test d’intelligence
+Les jeux comme les échecs ont toujours été un terrain d'expérimentation pour les chercheurs en IA, car ils exigent des stratégies complexes, de la réflexion à long terme et une analyse rapide. L’IA s’est particulièrement illustrée dans ce domaine, marquant des avancées significatives.
+
+7) Les limitations des premiers programmes d’échecs
+Les premiers programmes d'échecs ont ouvert la voie à des IA capables de prendre des décisions stratégiques à un niveau de compétence élevé. Cependant, la puissance de calcul de l’époque limitait les capacités des machines à résoudre des problèmes plus complexes.
+
+8) Les algorithmes de recherche
+Les algorithmes de recherche ont été au cœur de la recherche initiale en IA, permettant de parcourir l’espace des solutions pour résoudre des problèmes complexes. Ces algorithmes ont été largement utilisés dans les premiers systèmes d’IA.
+
+9) Les limites des algorithmes purs
+Les algorithmes de recherche, bien que novateurs, ne pouvaient pas résoudre tous les types de problèmes. La complexité des tâches réelles nécessitait de nouvelles approches et techniques plus flexibles.
+
+10) Les systèmes experts
+Les systèmes experts sont des programmes spécialisés capables de simuler l'expertise humaine dans des domaines spécifiques. Ils sont parmi les premières applications concrètes de l’IA.
+
+11) Les applications pratiques des systèmes experts
+Les systèmes experts ont été utilisés dans des domaines comme le diagnostic médical, où ils pouvaient aider les professionnels à analyser des données complexes et à prendre des décisions éclairées.
+
+12) Les défis des systèmes experts
+Les systèmes experts, bien qu'innovants, manquaient de flexibilité et nécessitaient une grande quantité d'informations pour fonctionner efficacement. Ils étaient souvent difficiles à adapter à de nouveaux domaines.
+
+13) Machine learning et deep learning
+Aujourd'hui, les avancées en machine learning et deep learning permettent aux IA de "apprendre" à partir de grandes quantités de données, offrant des possibilités quasi infinies en matière de résolution de problèmes complexes.
+
+14) La science-fiction et l’IA
+La science-fiction a longtemps façonné notre perception de l’IA, avec des visions de machines dotées de conscience. Bien que ces idées restent largement fictives, elles ont influencé la direction de la recherche en IA.
+
+15) L’éthique des IA
+L’un des grands débats qui accompagne l’évolution de l’IA est celui de son éthique. Les questions sur l’autonomie des machines, leur rôle dans la société et leurs impacts sur l’emploi continuent de susciter de vives discussions.
+
+16) Les lois de la robotique d’Asimov
+Isaac Asimov a imaginé des lois qui régiraient le comportement des robots. Bien qu'imaginaires, ces lois ont eu une influence importante sur les discussions éthiques entourant le développement de l'IA.
+
+17) L'IA aujourd'hui
+Aujourd’hui, l’IA est omniprésente, dans des domaines allant de la médecine à la finance. Les progrès réalisés ces dernières années ouvrent des perspectives infinies pour les technologies de demain.
+
+18) L'IA créative
+L'IA a non seulement été utilisée pour résoudre des problèmes complexes, mais elle crée également de l'art et de la musique, défiant nos perceptions de la créativité et de l'intuition humaine.
+
+19) Les défis persistants de l’IA
+L’IA reste confrontée à de nombreux défis, notamment en ce qui concerne l’adaptabilité et la prise en compte du contexte dans des situations complexes. De nombreux problèmes doivent encore être résolus pour que l’IA devienne véritablement comparable à l’intelligence humaine.

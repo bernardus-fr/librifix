@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Librifix - Open Source Software
 # Copyright (C) 2025 Bernard Langlet
 #
@@ -14,13 +16,13 @@
 # If not, see <http://www.gnu.org/licenses/>.
 
 
-#!/bin/bash
+#       FONCTION DU SCRIPT:
+#  Script principal du programme, gère toutes les fonctions pricipales: verrou, initialisation
+# des logs et appel de chaque script indépendant pour les travaux.
 
-# Définir les répertoires pour les scripts
-BASH_DIR="./scripts/bash"
-PY_DIR="./scripts/py"
 
-EXIT_SCRIPT="./scripts/bash/exit.sh"
+# Définition des Variables d'environnement:
+source scripts/bash/utils.sh
 
 # 1. GÉNÉRATION ET VÉRIFICATION D'INSTANCE
 LOCK_FILE=".librifix.lock"
@@ -78,14 +80,14 @@ create_lock
 
 
 # 2. ACTIVATION DES LOGS
-"$BASH_DIR/log_manager.sh" create
+"$LOG" create
 if [ $? -ne 0 ]; then
     echo "Erreur lors de l'activation des logs. Arrêt du programme."
     exit 1
 fi
 
 # Ajout d'une entrée dans les logs pour le début de l'exécution
-"$BASH_DIR/log_manager.sh" add INFO "Début de l'exécution du script principal."
+"$LOG" add DEBUG "Début de l'exécution du script principal."
 
 # --------------------------------------------------------------
 
@@ -93,83 +95,96 @@ fi
 
 # 3. PROGRAMME PRINCIPAL
 #    A) Activation du dossier temporaire temp/
-"$BASH_DIR/log_manager.sh" add INFO "┌---- Exécution check_temp.sh ----"
+"$LOG" add DEBUG "┌---- Exécution check_temp.sh ----"
 # recherche d'un dossier temp + choix s'il existe:
-"$BASH_DIR/check_temp.sh"
-temp_status=$?
-"$BASH_DIR/log_manager.sh" add INFO "├---- Sortie de check_temp.sh ----"
+source "$CHECK_TEMP"
+"$LOG" add DEBUG "├---- Sortie de check_temp.sh ----"
 
 #    -----------------
 
 #   B) Gestion des métadonnées temp/metadata.json
 
-"$BASH_DIR/log_manager.sh" add INFO "│ GESTION DES METADONNÉES"
-if [ $temp_status -eq 1 ]; then
+"$LOG" add DEBUG "│ GESTION DES METADONNÉES"
+if (( !TEMP_STATUS )); then
     # Dossier temp/ n'existe pas -> Nouvelle session
     # Appel au script de gestion des métadonnées avec interface graphique
-    "$BASH_DIR/log_manager.sh" add INFO "├---- Exécution de metadata_manager.sh ----"
-    "$BASH_DIR/metadata_manager.sh"
-    if [ $? -ne 0 ]; then
-        "$BASH_DIR/log_manager.sh" add CRITICAL "Annulation, extinction du programme. - Retour incorrect de metadata_manager.sh"
-        "$EXIT_SCRIPT"
-        exit 1
-    fi
-    "$BASH_DIR/log_manager.sh" add INFO "├---- Sortie de metadata_manager.sh ----"
+    "$LOG" add DEBUG "├---- Exécution de metadata_manager.sh ----"
+    source "$META_MANAG"
+    "$LOG" add DEBUG "├---- Sortie de metadata_manager.sh ----"
 fi
 
 # Vérification de l'identifient du livre:
-"$BASH_DIR/log_manager.sh" add INFO "│ VÉRIFICATION IDENTIFIENT DU LIVRE"
-"$BASH_DIR/log_manager.sh" add INFO "├---- Exécution uuid_gen.py ----"
-python3 "$PY_DIR/uuid_gen.py"
-"$BASH_DIR/log_manager.sh" add INFO "├---- Sortie de uuid_gen.py ----"
+"$LOG" add DEBUG "│ VÉRIFICATION IDENTIFIENT DU LIVRE"
+"$LOG" add DEBUG "├---- Exécution uuid_gen.py ----"
+python3 "$GEN_UUID"
+"$LOG" add DEBUG "├---- Sortie de uuid_gen.py ----"
 
 #    -----------------
 
 #   C) Création des dossiers de travail: creation de la structure de l'epub, copie des fichiers utilisateur.
-"$BASH_DIR/log_manager.sh" add INFO "│ CRÉATION STRUCTURE EPUB"
-"$BASH_DIR/log_manager.sh" add INFO "├---- Exécution work_dir.sh ----"
-"$BASH_DIR/work_dir.sh"
+"$LOG" add DEBUG "│ CRÉATION STRUCTURE EPUB"
+"$LOG" add DEBUG "├---- Exécution work_dir.sh ----"
+"$TRAIT_WORKDIR"
 if [ $? -ne 0 ]; then
-    "$BASH_DIR/log_manager.sh" add CRITICAL "Annulation, extinction du programme. - Retour incorrect de work_dir.sh"
-    "$EXIT_SCRIPT"
+    "$LOG" add ERROR "Erreur de traitement du script work_dir.sh"
+    afficher_fenetre_erreur "Erreur de traitement des dossier de travail. Extinction du programme."
+    "$EXIT_SCRIPT" "error"
     exit 1
 fi
-"$BASH_DIR/log_manager.sh" add INFO "├---- Sortie de work_dir.sh ----"
+"$LOG" add DEBUG "├---- Sortie de work_dir.sh ----"
 
 #    -----------------
 
 #   D) Mise à jour des métadonnées dans les fichiers de base epub
-"$BASH_DIR/log_manager.sh" add INFO "│ MISE À JOUR MÉTADONNÉES DANS FICHIERS DE BASE"
-"$BASH_DIR/log_manager.sh" add INFO "├--- Exécution maj_meta_content.py ----"
-python3 "$PY_DIR/maj_meta_content.py"
-"$BASH_DIR/log_manager.sh" add INFO "├---- Sortie de maj_meta_content.py ----"
+"$LOG" add DEBUG "│ MISE À JOUR MÉTADONNÉES DANS FICHIERS DE BASE"
+"$LOG" add DEBUG "├--- Exécution maj_meta_content.py ----"
+python3 "$UPDATE_META_CONTENT"
+"$LOG" add DEBUG "├---- Sortie de maj_meta_content.py ----"
 
-"$BASH_DIR/log_manager.sh" add INFO "├---- Exécution maj_meta_toc.py ----"
-python3 "$PY_DIR/maj_meta_toc.py"
-"$BASH_DIR/log_manager.sh" add INFO "├---- Sortie de maj_meta_toc.py ----"
+"$LOG" add DEBUG "├---- Exécution maj_meta_toc.py ----"
+python3 "$UPDATE_META_TOC"
+"$LOG" add DEBUG "├---- Sortie de maj_meta_toc.py ----"
 
-"$BASH_DIR/log_manager.sh" add INFO "├---- Exécution maj_meta_garde.py ----"
-python3 "$PY_DIR/maj_meta_garde.py"
-"$BASH_DIR/log_manager.sh" add INFO "├---- Sortie de maj_meta_garde.py ----"
+"$LOG" add DEBUG "├---- Exécution maj_meta_garde.py ----"
+python3 "$UPDATE_META_GARDE"
+"$LOG" add DEBUG "├---- Sortie de maj_meta_garde.py ----"
 
 #    -----------------
 
 #   E) Traitement des fichiers utilisateur
-"$BASH_DIR/log_manager.sh" add INFO "│ TRAITEMENT DES FICHIERS UTILISATEUR"
+"$LOG" add DEBUG "│ TRAITEMENT DES FICHIERS UTILISATEUR"
 # - Analyse des fichiers utilisateurs:
-"$BASH_DIR/log_manager.sh" add INFO "│ - Analyser fichiers utilisateur -"
-"$BASH_DIR/log_manager.sh" add INFO "├---- Exécution analyse_files.py ----"
-python3 "$PY_DIR/analyse_files.py"
-"$BASH_DIR/log_manager.sh" add INFO "├---- Sortie de analyse_files.py ----"
+"$LOG" add DEBUG "│ - Analyser fichiers utilisateur -"
+"$LOG" add DEBUG "├---- Exécution analyse_files.py ----"
+python3 "$ANALYSE_FILES"
+"$LOG" add DEBUG "├---- Sortie de analyse_files.py ----"
 
 # - Insersion des fichiers dans la sturture temporaire
-"$BASH_DIR/log_manager.sh" add INFO "├---- Exécution insert_user_files.sh ----"
-"$BASH_DIR/insert_user_files.sh"
-"$BASH_DIR/log_manager.sh" add INFO "├---- Sortie de insert_user_files.sh ----"
+"$LOG" add DEBUG "├---- Exécution insert_user_files.sh ----"
+"$INSERT_FILES"
+if [ $? -ne 0 ]; then
+    "$LOG" add ERROR "Erreur de traitement du script insert_user_files.sh"
+    afficher_fenetre_erreur "Erreur de traitement des fichiers lors de l'insertion dans la structure epub. Extinction du programme."
+    "$EXIT_SCRIPT" "error"
+    exit 1
+fi
+"$LOG" add DEBUG "├---- Sortie de insert_user_files.sh ----"
 
-"$BASH_DIR/epubizer.sh"
+#    -----------------
+
+#   F) Compilation de l'EPUB et vérification de conformité
+"$LOG" add DEBUG "├---- Exécution epubizer.sh ----"
+"$EPUBIZER"
+if [ $? -ne 0 ]; then
+    "$LOG" add ERROR "Erreur de traitement du script epubizer.sh"
+    afficher_fenetre_erreur "Erreur dans la compliation de l'archive epub. Extinction du programme."
+    "$EXIT_SCRIPT" "error"
+    exit 1
+fi
+"$LOG" add DEBUG "└---- Sortie de epubizer.sh ----"
 
 # Fin de l'exécution
-"$BASH_DIR/log_manager.sh" add INFO "Fin de l'exécution du script principal."
-"$BASH_DIR/log_manager.sh" close
+"$LOG" add DEBUG "Fin de l'exécution du script principal."
+"$LOG" close
 
+exit 0

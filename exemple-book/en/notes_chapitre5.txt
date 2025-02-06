@@ -1,0 +1,19 @@
+Chapter 5 Footnotes
+
+1) While AI can be powerful, it still relies heavily on its programming and data, which can limit its ability to think creatively in unpredictable situations.
+
+2) In tasks that involve ethical decision-making or critical thinking, humans remain essential in space exploration.
+
+3) In emergency situations, humans are often needed to make quick decisions that AI may not be capable of handling.
+
+4) The challenge of balancing autonomy and human intervention will be key in future space missions involving AI.
+
+5) AI's ability to process large datasets quickly allows it to uncover scientific insights that would take humans much longer to find.
+
+6) Despite AI's ability to identify patterns, humans are needed to interpret those findings and guide the direction of scientific inquiry.
+
+7) By automating routine tasks, AI can allow astronauts to focus on more complex and creative aspects of space missions.
+
+8) As AI systems are given more autonomy, ethical considerations regarding their decisions will become increasingly important.
+
+9) As AI becomes more integrated into space missions, it will be essential to ensure that ethical guidelines are in place to guide its actions.

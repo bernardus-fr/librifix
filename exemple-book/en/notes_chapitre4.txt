@@ -1,0 +1,13 @@
+Chapter 4 Footnotes
+
+1) In unforeseen situations, such as those encountered on Mars, AI can struggle to respond optimally, often requiring human intervention.
+
+2) Misinterpretations of data are a constant concern when using AI to analyze cosmic phenomena.
+
+3) The extreme environments of space can impair the performance of AI systems, making them less reliable.
+
+4) The question of accountability in the event of AI system failure is a major challenge in managing automated space missions.
+
+5) The ethics of AI in space exploration, particularly in decision-making regarding resources and colony management, remains an open issue.
+
+6) While advanced, AI still lacks human reasoning and creativity, and cannot entirely replace humans in space missions.

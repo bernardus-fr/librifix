@@ -14,9 +14,16 @@
 # If not, see <http://www.gnu.org/licenses/>.
 
 
+#       FONCTION DU SCRIPT:
+#  Formatation de chaque texte de note du fichier de note, en ajoutant le lien au numéro de
+# note dans le chapitre correspondant. Gère les références multiples avec un indice dans l'ID
+# de la balise
+
+
 import re
 import sys
 import os
+from LibFix import utils
 
 # Vérifier les arguments
 if len(sys.argv) != 4:
@@ -28,6 +35,7 @@ fichier_notes = sys.argv[1]
 fichier_chapitre = sys.argv[2]
 fichier_sortie = sys.argv[3]
 
+utils.log_message("DEBUG", f"│ Ouverture de {fichier_notes} mettre en forme les notes")
 # Lire le fichier source
 with open(fichier_notes, "r", encoding="utf-8") as f:
     notes = f.read()
@@ -71,9 +79,10 @@ def ajouter_aside_et_paragraphes(notes, fichier_chapitre):
 
 # Appliquer la fonction
 notes_modifiees = ajouter_aside_et_paragraphes(notes, fichier_chapitre)
+utils.log_message("DEBUG", f"│ Notes misent en formme pour {fichier_notes}")
 
 # Sauvegarder le fichier modifié
 with open(fichier_sortie, "w", encoding="utf-8") as f:
     f.write(notes_modifiees)
 
-print("   Traitement des notes: OK")
+utils.log_message("DEBUG", f"│ Enregistrement de {fichier_sortie}")

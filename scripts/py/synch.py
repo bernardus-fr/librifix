@@ -14,8 +14,15 @@
 # If not, see <http://www.gnu.org/licenses/>.
 
 
+#       FONCTION DU SCRIPT:
+#  Synchronisation du nombre de notes dans le fichiers de notes pour correspondre exactement
+# aux références du chapitre dans le cadre de références multiples: (3) itéré 5 fois dans le
+# chapitre dupliquera la note 3) dans le fichiers note pour avoir 5 itérations par exemple.
+
+
 import re
 import sys
+from LibFix import utils
 
 # Vérifier les arguments
 if len(sys.argv) != 4:
@@ -27,9 +34,11 @@ fichier_notes = sys.argv[2]
 fichier_notes_sortie = sys.argv[3]
 
 # Lire les fichiers
+utils.log_message("DEBUG", f"│ Ouverture de {fichier_chapitre} pour synchronisation avec notes")
 with open(fichier_chapitre, "r", encoding="utf-8") as f:
     texte_chapitre = f.read()
 
+utils.log_message("DEBUG", f"│ Ouverture de {fichier_notes} pour synchronisation avec chapitre")
 with open(fichier_notes, "r", encoding="utf-8") as f:
     texte_notes = f.read()
 
@@ -61,9 +70,10 @@ def synchroniser_notes(chapitre, notes):
     return "\n".join(notes_modifiees)
 
 notes_synchronisees = synchroniser_notes(texte_chapitre, texte_notes)
+utils.log_message("DEBUG", f"│ Notes synchronisées pour {fichier_chapitre} et {fichier_notes}")
 
 # Sauvegarde
 with open(fichier_notes_sortie, "w", encoding="utf-8") as f:
     f.write(notes_synchronisees)
 
-print(f"   Synchronisation : OK")
+utils.log_message("DEBUG", f"│ Enregistrement de {fichier_notes_sortie}")

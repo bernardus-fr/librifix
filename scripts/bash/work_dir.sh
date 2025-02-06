@@ -15,20 +15,20 @@
 # You should have received a copy of the GNU General Public License along with this program.
 # If not, see <http://www.gnu.org/licenses/>.
 
-# Chemins
-TEMP_DIR="./temp"
-TEMPLATE_DIR="./utils/templates/epub"
-SCRIPT_DIR="./scripts/bash"
-LOG_SCRIPT="$SCRIPT_DIR/log_manager.sh"
-METADATA_FILE="$TEMP_DIR/metadata.json"
-WORKDIR="$TEMP_DIR/workdir"
-EPUB_TEMP="$TEMP_DIR/epub_temp"
+
+#       FONCTION DU SCRIPT:
+#  Mise en place des dossiers et fichiers temporaires de travail: copie du dossier utilisateur
+# dans workdir, copie du template epub dans epub_temp.
+
+
+# Définition des Variables d'environnement:
+source scripts/bash/utils.sh
 
 # 1. VÉRIFICATIONS
 # Vérification et création du répertoire temporaire
 if [ ! -d "$TEMP_DIR" ]; then
   mkdir -p "$TEMP_DIR"
-  "$LOG_SCRIPT" add WARNING "│ Répertoire temporaire absent : $TEMP_DIR - Creation du dossier !"
+  "$LOG" add DEBUG "│ Répertoire temporaire absent : $TEMP_DIR - Creation du dossier !"
 fi
 
 # --------------------------------------------------------------
@@ -39,18 +39,18 @@ fi
 # 	A) Lecture du chemin utilisateur depuis metadata.json
 USER_WORKDIR=$(jq -r '.workdir' "$METADATA_FILE")
 if [ -z "$USER_WORKDIR" ] || [ ! -d "$USER_WORKDIR" ]; then
-  "$LOG_SCRIPT" add ERROR "│ Erreur : le chemin utilisateur défini dans metadata.json est invalide ou inexistant."
+  "$LOG" add ERROR "│ Erreur : le chemin utilisateur défini dans metadata.json est invalide ou inexistant."
   zenity --info --title="Fichiers non trouvés" \
   		--text="Le chemin du dossier est invalide ou inexistant" \
         --timeout=10
   exit 1
 fi
 
-"$LOG_SCRIPT" add INFO "│ Dossier utilisateur détecté : $USER_WORKDIR"
+"$LOG" add DEBUG "│ Dossier utilisateur détecté : $USER_WORKDIR"
 
 # 	B) Copie du dossier utilisateur dans temp/
 cp -r "$USER_WORKDIR" "$WORKDIR"
-"$LOG_SCRIPT" add INFO "│ Dossier utilisateur copié dans : $WORKDIR"
+"$LOG" add DEBUG "│ Dossier utilisateur copié dans : $WORKDIR"
 
 # --------------------------------------------------------------
 
@@ -59,13 +59,13 @@ cp -r "$USER_WORKDIR" "$WORKDIR"
 # 3. COPIE DE LE STRUCTURE EPUB
 # Copie du template EPUB dans temp/
 if [ ! -d "$TEMPLATE_DIR" ]; then
-  "$LOG_SCRIPT" add ERROR "│ Template absent : $TEMPLATE_DIR"
+  "$LOG" add ERROR "│ Template absent : $TEMPLATE_DIR"
   zenity --info --title="Fichiers manquants" \
   		--text="Certains fichiers ou dossier nécessaire au bon fonctionnement du programme sont absents, veuillez vérifier l'intégrité du programme" \
         --timeout=10
   exit 1
 fi
 cp -r "$TEMPLATE_DIR" "$EPUB_TEMP"
-"$LOG_SCRIPT" add INFO "│ Structure EPUB copiée dans : $EPUB_TEMP"
+"$LOG" add DEBUG "│ Structure EPUB copiée dans : $EPUB_TEMP"
 
 exit 0

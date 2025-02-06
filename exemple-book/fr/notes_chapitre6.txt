@@ -1,0 +1,19 @@
+Notes du Chapitre 6
+
+1) L'optimisation des ressources dans l'espace est cruciale pour la survie des astronautes, mais elle doit être équilibrée avec leur bien-être.
+
+2) Une IA pourrait optimiser les ressources d'une mission, mais elle ne doit pas compromettre la santé des astronautes pour maximiser l'efficacité.
+
+3) Les événements imprévus, comme les défaillances techniques ou les tempêtes solaires, nécessitent une intervention humaine pour compléter les capacités de l'IA.
+
+4) L'espace présente des défis imprévisibles qui obligent l'IA à s'adapter constamment aux nouvelles conditions.
+
+5) Les longues distances rendent la communication en temps réel difficile, ce qui rend l'IA essentielle pour des décisions instantanées dans des missions lointaines.
+
+6) L'IA doit être en mesure d'évaluer des situations complexes en l'absence de données complètes et fournir des solutions viables.
+
+7) L'IA doit comprendre et prendre en compte l'état psychologique des astronautes pour les soutenir au mieux dans un environnement extrême.
+
+8) Les systèmes d'IA doivent être fiables et capables de s'adapter aux conditions extrêmes de l'espace pour fonctionner correctement.
+
+9) La sécurité des données est essentielle, car des cyberattaques ou des interférences pourraient compromettre la mission spatiale.

@@ -1,0 +1,19 @@
+Notes du Chapitre 5
+
+1) Bien que l'IA puisse être puissante, elle dépend toujours fortement de sa programmation et des données qui lui sont fournies, ce qui peut limiter sa capacité à penser de manière créative dans des situations imprévues.
+
+2) Dans les tâches impliquant la prise de décisions éthiques ou une réflexion critique, l'humain reste indispensable dans l'exploration spatiale.
+
+3) En situation d'urgence, l'humain est souvent nécessaire pour prendre des décisions rapides qu'une IA pourrait ne pas être capable de gérer.
+
+4) Le défi d'équilibrer autonomie et intervention humaine sera clé dans les futures missions spatiales impliquant l'IA.
+
+5) La capacité de l'IA à traiter rapidement de grandes quantités de données lui permet de faire des découvertes scientifiques qui prendraient beaucoup plus de temps aux humains.
+
+6) Bien que l'IA puisse identifier des motifs, l'humain est nécessaire pour interpréter ces résultats et guider le processus de recherche scientifique.
+
+7) En automatisant les tâches routinières, l'IA permet aux astronautes de se concentrer sur des aspects plus complexes et créatifs des missions spatiales.
+
+8) À mesure que les systèmes d'IA gagnent en autonomie, les considérations éthiques concernant leurs décisions deviendront de plus en plus importantes.
+
+9) À mesure que l'IA s'intègre davantage dans les missions spatiales, il sera essentiel de garantir que des lignes directrices éthiques sont en place pour encadrer ses actions.

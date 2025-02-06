@@ -15,21 +15,37 @@
 # You should have received a copy of the GNU General Public License along with this program.
 # If not, see <http://www.gnu.org/licenses/>.
 
+
+#       FONCTION DU SCRIPT:
+#  Sortie correcte du programme en terminant les logs et nettoyant les fichiers temporaires
+# tant en cas d'erreur que d'annulation.
+
+
+# Définition des Variables d'environnement:
+source scripts/bash/utils.sh
+
 # Variables
-TEMP_DIR="./temp"
+STATUS="$1"
 
 # Initialisation des logs
-LOG_SCRIPT="./scripts/bash/log_manager.sh" 
-"$LOG_SCRIPT" add INFO "Annulation du programme"
+"$LOG" add DEBUG "Annulation du programme"
 
 # Nettoyage des fichiers temporaires
 if [ -d "$TEMP_DIR" ]; then
 	rm -r "$TEMP_DIR"
 	# Entrée dans les logs
-	"$LOG_SCRIPT" add INFO "Suppression des fichiers temporaires: [OK]"
+	"$LOG" add DEBUG "Suppression des fichiers temporaires: [OK]"
 fi
 
 # Fin des logs
-"$LOG_SCRIPT" close error
+
+if [[ "$STATUS" == "error" ]]; then
+    "$LOG" close error
+elif [[ "$STATUS" == "annulation" ]]; then
+    "$LOG" close
+else
+    echo "Mauvais usage du script. Utilisation : $0 {error|annulation}"
+    exit 1
+fi
 
 exit 0

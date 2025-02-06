@@ -14,19 +14,25 @@
 # If not, see <http://www.gnu.org/licenses/>.
 
 
+#       FONCTION DU SCRIPT:
+#  Script de mise à jour du <manifest> et <spine> (ordre de lecture) du fichiers conten.opf
+# par la réceptions des fichiers un par un donnés comme argument.
+# Ordre des fichiers
+# Fonction de chaque fichiers
+# Où l'intégrer
+# Namespaces
+# Indentation ...
+
+
 import os
 import json
 import time
 from xml.etree.ElementTree import ElementTree, Element, SubElement, parse, tostring
 import xml.etree.ElementTree as ET
-import subprocess
+from LibFix import utils
 
 # Chemins des fichiers
 content_opf_file = "temp/epub_temp/OEBPS/content.opf"
-
-# Gestion des logs
-def log_message(level, message):
-    subprocess.run(["./scripts/bash/log_manager.sh", "add", level, message], check=True)
 
 # Ajout de l'indentation pour le formatage XML
 def indent_tree(elem, level=0):
@@ -90,10 +96,10 @@ def sort_spine(spine,):
 # Mise à jour du manifest et du spine dans content.opf
 def update_manifest_and_spine(file_path):
     if not os.path.exists(content_opf_file):
-        log_message("ERROR", f"│ Le fichier {content_opf_file} est introuvable.")
+        utils.log_message("ERROR", f"│ Le fichier {content_opf_file} est introuvable.")
         raise FileNotFoundError(f"Le fichier {content_opf_file} est introuvable.")
 
-    log_message("INFO", "│ Mise à jour du manifest et du spine commencée.")
+    utils.log_message("DEBUG", "│ Mise à jour du manifest et du spine commencée.")
     tree = parse(content_opf_file)
     root = tree.getroot()
 
@@ -144,17 +150,18 @@ def update_manifest_and_spine(file_path):
     media_type = media_type_map.get(file_ext)
 
     if not media_type:
-        log_message("ERROR", f"│ Type de fichier non reconnu pour {file_name}.")
+        utils.log_message("ERROR", f"│ Type de fichier non reconnu pour {file_name}.")
         raise ValueError(f"Type de fichier non reconnu pour {file_name}.")
+        # Améliorer ici en ignorant le fichiers s'il n'est pas reconnu
 
-    log_message("INFO", f"│ Fichier détecté : {file_name} (type {media_type})")
+    utils.log_message("DEBUG", f"│ Fichier détecté : {file_name} (type {media_type})")
 
     # Vérifier si le fichier est déjà dans le manifest
     existing_item = manifest.find(f".//{{{package_ns}}}item[@href='{file_path}']")
     if existing_item is not None:
-        log_message("WARNING", f"│ Le fichier {file_name} est déjà présent dans <manifest>.")
+        utils.log_message("INFO", f"│ Le fichier {file_name} est déjà présent dans <manifest>.")
     else:
-        log_message("INFO", f"│ {file_path} pas trouvé dans <manifest>. Ajout du fichier.")
+        utils.log_message("DEBUG", f"│ {file_path} non trouvé dans <manifest>. Ajout du fichier.")
         item_id = os.path.splitext(file_name)[0]
         if item_id == "4cover":
             item_id = "cover4"
@@ -163,7 +170,7 @@ def update_manifest_and_spine(file_path):
             "href": file_path,
             "media-type": media_type
         })
-        log_message("INFO", f"│ Fichier ajouté à <manifest> : {file_name}")
+        utils.log_message("DEBUG", f"│ Fichier ajouté à <manifest> : {file_name}")
 
         # Image de couverture
         if item_id == "cover":
@@ -171,9 +178,9 @@ def update_manifest_and_spine(file_path):
             existing_cover_meta = metadata_elem.find(".//meta[@name='cover']")
             if existing_cover_meta is None:
                 existing_cover_meta = SubElement(metadata_elem, "meta", {"name": "cover", "content": file_path})
-                log_message("INFO", f"│ Couverture ajouté à la section <metadata>: {file_path}")
+                utils.log_message("DEBUG", f"│ Couverture ajouté à la section <metadata>: {file_path}")
             else:
-                log_message("WARNING", f"│ Le fichier {file_name} est déjà présent dans <metadata>.")
+                utils.log_message("INFO", f"│ Le fichier {file_name} est déjà présent dans <metadata>.")
 
         # Page de couverture
         if item_id == "page_de_couverture":
@@ -185,25 +192,25 @@ def update_manifest_and_spine(file_path):
                     "href": file_path,
                     "property": "coverpage",
                 })
-                log_message("INFO", f"│ Couverture ajoutée à la section <guide>: {file_path}")
+                utils.log_message("DEBUG", f"│ Couverture ajoutée à la section <guide>: {file_path}")
             else:
                 # Mise à jour de guide
-                log_message("WARNING", f"│ Couverture déjà présent dans <guide> - modification")
+                utils.log_message("INFO", f"│ Couverture déjà présent dans <guide> - modification")
                 existing_cover_guide.set("type", "cover")
                 existing_cover_guide.set("title", "Couverture")
                 existing_cover_guide.set("href", file_path)
-                log_message("INFO", f"│ Couverture mise à jour dans la section <guide>: {file_path}")
+                utils.log_message("DEBUG", f"│ Couverture mise à jour dans la section <guide>: {file_path}")
 
         # Ajouter au spine si nécessaire
         if media_type == "application/xhtml+xml" and file_name != "toc.xhtml":
             existing_spine_item = spine.find(f".//{{{package_ns}}}itemref[@idref='{item_id}']")
             if existing_spine_item is not None:
-                log_message("WARNING", f"│ Le fichier {file_name} est déjà présent dans le spine.")
+                utils.log_message("INFO", f"│ Le fichier {file_name} est déjà présent dans le spine.")
             else:
                 SubElement(spine, "itemref", {"idref": item_id})
-                log_message("INFO", f"│ Fichier ajouté au spine : {file_name}")
+                utils.log_message("DEBUG", f"│ Fichier ajouté au spine : {file_name}")
         else:
-            log_message("INFO", f"│ Le fichier {file_name} n'a pas été ajouté au spine (non éligible).")
+            utils.log_message("DEBUG", f"│ Le fichier {file_name} n'a pas été ajouté au spine (non éligible).")
                 
 
     # Supprimer les préfixes ns0 et ns1
@@ -216,24 +223,24 @@ def update_manifest_and_spine(file_path):
     indent_tree(root)
 
     # Écriture des modifications
-    log_message("INFO", "│ Écriture des données dans content.opf")
+    utils.log_message("DEBUG", "│ Écriture des données dans content.opf")
     tree.write(content_opf_file, encoding="utf-8", xml_declaration=True)
-    log_message("INFO", "│ Mise à jour du manifest et du spine terminée avec succès.")
+    utils.log_message("DEBUG", "│ Mise à jour du manifest et du spine terminée avec succès.")
 
 # Programme principal
 def main():
     try:
         import sys
         if len(sys.argv) != 2:
-            log_message("ERROR", "│ Usage : python3 update_manifest.py <chemin_du_fichier>")
+            utils.log_message("ERROR", "│ Usage : python3 update_manifest.py <chemin_du_fichier>")
             return
 
         file_path = sys.argv[1]
-        log_message("INFO", f"│ Début de la mise à jour pour {file_path}.")
+        utils.log_message("DEBUG", f"│ Début de la mise à jour pour {file_path}.")
         update_manifest_and_spine(file_path)
-        log_message("INFO", "│ Mise à jour terminée avec succès.")
+        utils.log_message("DEBUG", "│ Mise à jour terminée avec succès.")
     except Exception as e:
-        log_message("ERROR", f"│ Erreur : {e}")
+        utils.log_message("ERROR", f"│ Erreur : {e}")
         print(f"Erreur : {e}")
 
 if __name__ == "__main__":

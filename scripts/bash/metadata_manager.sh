@@ -15,21 +15,22 @@
 # You should have received a copy of the GNU General Public License along with this program.
 # If not, see <http://www.gnu.org/licenses/>.
 
-# Chemin vers le répertoire temporaire et fichier JSON
-TEMP_DIR="./temp"
-METADATA_FILE="$TEMP_DIR/metadata.json"
 
-# Dépendances
-LOG_SCRIPT="./scripts/bash/log_manager.sh" 
+#       FONCTION DU SCRIPT:
+#  Gestion des métadonnées du livre. Utilise des fenêtre Zenity pour interragir avec
+# l'utilisateur: métadonnées obligatoires - optionnelles- chemin du dossier de travail.
+#  Les métadonnées sont conservées dans le fichiers metadata.json
+
 
 # Fonction pour vérifier et créer le répertoire temp si nécessaire
 if [ ! -d "$TEMP_DIR" ]; then
   mkdir -p "$TEMP_DIR"
   # Entrée log
-  "$LOG_SCRIPT" add INFO "│ Répertoire temporaire créé : $TEMP_DIR"
+  "$LOG" add DEBUG "│ Répertoire temporaire créé : $TEMP_DIR"
 fi
 
-# Fenêtre pour les données obligatoires
+#   1) RÉCUPÉRATION DES DONNÉES OBLIGATOIRES titre - auteur - langue
+# a - Fenêtre pour les données obligatoires
 while true; do
   output=$(zenity --forms \
     --title="Métadonnées obligatoires" \
@@ -42,8 +43,9 @@ while true; do
 
   if [ $? -ne 0 ]; then
     # Entrée log
-    "$LOG_SCRIPT" add INFO "└-Annulation par l'utilisateur lors de la saisie des données obligatoires."
-    exit 1
+    "$LOG" add DEBUG "└-Annulation par l'utilisateur lors de la saisie des données obligatoires."
+    "$EXIT_SCRIPT" "annulation"
+    exit 0
   fi
 
   IFS="|" read -r title creator language <<< "$output"
@@ -51,15 +53,20 @@ while true; do
   if [[ -z "$title" || -z "$creator" || -z "$language" ]]; then
     zenity --error --text="Veuillez remplir tous les champs s'il vous plaît."
     # Entrée log
-    "$LOG_SCRIPT" add INFO "│ Champs manquants lors de la saisie des données obligatoires."
+    "$LOG" add DEBUG "│ Champs manquants lors de la saisie des données obligatoires."
   else
     # Entrée log
-    "$LOG_SCRIPT" add INFO "│ Données obligatoires collectées avec succès."
+    "$LOG" add DEBUG "│ Données obligatoires collectées avec succès."
     break
   fi
+
+  # Ajouter vérification que la langue soit bien prise en charge
+
 done
 
-# Enregistrement des données obligatoires dans metadata.json
+#    -----------------
+
+# b - Enregistrement des données obligatoires dans metadata.json
 cat > "$METADATA_FILE" <<EOF
 {
   "title": "$title",
@@ -68,9 +75,14 @@ cat > "$METADATA_FILE" <<EOF
 }
 EOF
 # Entrée log
-"$LOG_SCRIPT" add INFO "│ Données obligatoires enregistrées dans $METADATA_FILE."
+"$LOG" add DEBUG "│ Données obligatoires enregistrées dans $METADATA_FILE."
 
-# Fenêtre pour les données facultatives
+# --------------------------------------------------------------
+
+
+
+#   2) RÉCUPÉRATION DES DONNÉES FACULTATIVES
+# a - Fenêtre pour les données facultatives
 output=$(zenity --forms \
   --title="Métadonnées facultatives" \
   --text="Données facultatives (remplissez uniquement ce que vous souhaitez)." \
@@ -87,14 +99,16 @@ output=$(zenity --forms \
 
 if [ $? -ne 0 ]; then
   # Entrée log
-  "$LOG_SCRIPT" add INFO "│ Annulation par l'utilisateur lors de la saisie des données facultatives."
-  rm "$METADATA_FILE"
-  exit 1
+  "$LOG" add DEBUG "│ Annulation par l'utilisateur lors de la saisie des données facultatives."
+  "$EXIT_SCRIPT" "annulation"
+  exit 0
 fi
 
 IFS="|" read -r identifier date publisher contributor subject source rights description <<< "$output"
 
-# Ajout des données facultatives si elles existent
+#    -----------------
+
+# b - Ajout des données facultatives si elles existent
 if [[ -n "$identifier" || -n "$date" || -n "$publisher" || -n "$contributor" || -n "$subject" || -n "$source" || -n "$rights" || -n "$description" ]]; then
   jq \
     --arg identifier "$identifier" \
@@ -108,31 +122,40 @@ if [[ -n "$identifier" || -n "$date" || -n "$publisher" || -n "$contributor" || 
     '. + {identifier: $identifier, date: $date, publisher: $publisher, contributor: $contributor, subject: $subject, source: $source, rights: $rights, description: $description}' \
     "$METADATA_FILE" > "$METADATA_FILE.tmp" && mv "$METADATA_FILE.tmp" "$METADATA_FILE"
   # Entrée log
-  "$LOG_SCRIPT" add INFO "│ Données facultatives ajoutées au fichier $METADATA_FILE."
+  "$LOG" add DEBUG "│ Données facultatives ajoutées au fichier $METADATA_FILE."
 fi
 
-# Fenêtre pour sélectionner le dossier de travail
+# --------------------------------------------------------------
+
+
+
+#   2) RÉCUPÉRATION DU DOSSIER DE TRAVAIL
+# a - Fenêtre pour sélectionner le dossier de travail
 while true; do
-  workdir=$(zenity --file-selection --directory --title="Sélectionnez le dossier de travail")
+  workdir=$(zenity --file-selection --directory --title="Sélectionnez le dossier de travail" --filename="~/")
 
   if [ $? -ne 0 ]; then
     # Entrée log
-    "$LOG_SCRIPT" add INFO "│ Annulation par l'utilisateur lors de la sélection du dossier de travail."
-    exit 1
+    "$LOG" add DEBUG "│ Annulation par l'utilisateur lors de la sélection du dossier de travail."
+    "$EXIT_SCRIPT" "annulation"
+    exit 0
   fi
 
   if [ -d "$workdir" ]; then
+
+#    -----------------
+
+# b - Ajout des données au metadata
     jq --arg workdir "$workdir" '. + {workdir: $workdir}' "$METADATA_FILE" > "$METADATA_FILE.tmp" && mv "$METADATA_FILE.tmp" "$METADATA_FILE"
     # Entrée log
-    "$LOG_SCRIPT" add INFO "│ Dossier de travail ajouté au fichier $METADATA_FILE : $workdir."
+    "$LOG" add DEBUG "│ Dossier de travail ajouté au fichier $METADATA_FILE : $workdir."
     break
   else
     zenity --error --text="Le chemin sélectionné n'est pas valide. Veuillez réessayer."
     # Entrée log
-    "$LOG_SCRIPT" add INFO "│ Chemin invalide lors de la sélection du dossier de travail."
+    "$LOG" add DEBUG "│ Chemin invalide lors de la sélection du dossier de travail."
   fi
 done
 
 # Fin du script
-"$LOG_SCRIPT" add INFO "│ Métadonnées collectées et enregistrées avec succès."
-exit 0
+"$LOG" add DEBUG "│ Métadonnées collectées et enregistrées avec succès."

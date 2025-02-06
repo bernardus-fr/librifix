@@ -14,8 +14,15 @@
 # If not, see <http://www.gnu.org/licenses/>.
 
 
+#       FONCTION DU SCRIPT:
+#  Ajout de toutes les balises html dans le fichiers des notes: entêtes et pieds. Une formatation
+# est déjà faite par l'application des notes, on ajoute donc seulement entête et pieds, le reste
+# est seulement indenté pour une meilleure lisibilité.
+
+
 import sys
 import re
+from LibFix import utils
 
 # Vérification des arguments
 if len(sys.argv) != 4:
@@ -27,6 +34,7 @@ fichier_notes = sys.argv[2]
 fichier_sortie = sys.argv[3]
 
 # Lire le fichier texte brut des notes
+utils.log_message("DEBUG", f"│ Ouverture de {fichier_notes} pour ajout des balises html")
 with open(fichier_notes, "r", encoding="utf-8") as f:
     texte = f.read()
 
@@ -68,9 +76,10 @@ def ajouter_balises_html_notes(texte, nom_du_livre):
 
 # Générer le HTML pour les notes
 notes_html = ajouter_balises_html_notes(texte, nom_du_livre)
+utils.log_message("DEBUG", f"│ Génération des balises html pour {fichier_notes} terminée")
 
 # Sauvegarder dans un fichier de sortie
 with open(fichier_sortie, "w", encoding="utf-8") as f:
     f.write(notes_html)
 
-print(f"   Génération HTML notes : OK")
+utils.log_message("DEBUG", f"│ Enregistrement de {fichier_sortie} terminée")

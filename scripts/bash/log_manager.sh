@@ -16,10 +16,29 @@
 # If not, see <http://www.gnu.org/licenses/>.
 
 
-# Configuration du répertoire des logs
-LOG_DIR="logs"
-ERROR_DIR="${LOG_DIR}/errors"
-CURRENT_LOG="${LOG_DIR}/current.log"
+#       FONCTION DU SCRIPT:
+#  Script de gestion des logs, inscrit chaque message des étapes dans le fichiers log ainsi
+# que l'affichage dans le terminal.
+# s'utilise ainsi: ./log_manager.sh <option> <argument> <message>
+# - Option:
+#      create
+#      add
+#      close
+# - Arguments:
+#      add
+#         DEBUG
+#         INFO
+#         WARNING
+#         ERROR
+#         CRITICAL
+#      close
+#         None
+#         error
+# - Message: "message du script ou erreur."
+
+
+# Définition des Variables d'environnement:
+source scripts/bash/utils.sh
 
 # Couleurs pour la coloration syntaxique
 RESET="\033[0m"
@@ -38,8 +57,11 @@ initialize_log_dirs() {
 # Fonction pour créer un nouveau log
 create_log() {
     if [ -f "$CURRENT_LOG" ]; then
-        echo -e "${RED}Un log est déjà en cours. Veuillez le fermer avant d'en créer un nouveau.${RESET}"
-        exit 1
+        echo -e "${RED}Un log est déjà en cours. Cela peut signifier que le programme c'est mal terminé ou qu'il est en cours.${RESET}"
+        echo -e "Déplacement du log dans le dossier errors"
+        local timestamp=$(date "+%Y%m%d_%H%M%S")
+        local new_log="${ERROR_DIR}/error_${timestamp}.log"
+        mv "$CURRENT_LOG" "$new_log"
     fi
 
     local timestamp=$(date "+%Y-%m-%d %H:%M:%S")

@@ -14,17 +14,19 @@
 # If not, see <http://www.gnu.org/licenses/>.
 
 
+#       FONCTION DU SCRIPT:
+#  Script de gestion d'identifiant unique obligatoire pour le livre, à partir des métadonnées
+# s'il y a un ISBN existant, le programme s'arrête, s'il n'existe pas d'identifiant il en
+# crée un.
+
+
 import json
 import uuid
 import os
-import subprocess
+from LibFix import utils
 
 # Définition des variables
 file_path = "temp/metadata.json"
-
-# Fonction de logging
-def log_message(level, message):
-    subprocess.run(["./scripts/bash/log_manager.sh", "add", level, message], check=True)
 
 # Fonction pour générer un UUID
 def generate_identifier():
@@ -34,7 +36,7 @@ def generate_identifier():
 def update_identifier_in_metadata(file_path):
     # Vérifier si le fichier existe
     if not os.path.exists(file_path):
-        log_message("ERROR", f"│ Le fichier {file_path} est introuvable.")
+        utils.log_message("ERROR", f"│ Le fichier {file_path} est introuvable.")
         return
 
     # Ouvrir et lire le fichier JSON
@@ -43,24 +45,24 @@ def update_identifier_in_metadata(file_path):
 
     # Vérifier si le champ "identifier" est vide
     if not metadata.get("identifier"):
-        log_message("INFO", "│ Identifiant manquant... Génération d'un UUID")
+        utils.log_message("INFO", "│ Identifiant manquant... Génération d'un UUID")
         # Générer un identifiant UUID et l'ajouter au champ "identifier"
         metadata["identifier"] = generate_identifier()
-        log_message("INFO", f"│ Identifiant généré : {metadata['identifier']}")
+        utils.log_message("DEBUG", f"│ Identifiant généré : {metadata['identifier']}")
 
         # Sauvegarder les modifications dans le fichier
         with open(file_path, 'w', encoding='utf-8') as f:
             json.dump(metadata, f, ensure_ascii=False, indent=4)
 
-        log_message("INFO", "│ Le fichier metadata.json a été mis à jour avec un nouvel identifiant.")
+        utils.log_message("DEBUG", "│ Le fichier metadata.json a été mis à jour avec un nouvel identifiant.")
     else:
-        log_message("INFO", "│ Le champ 'identifier' est déjà rempli.")
+        utils.log_message("DEBUG", "│ Le champ 'identifier' est déjà rempli.")
 
 # Fonction main pour lancer l'exécution
 def main():
-    log_message("INFO", "│ Controle de l'identifiant du livre")
+    utils.log_message("DEBUG", "│ Controle de l'identifiant du livre")
     update_identifier_in_metadata(file_path)
-    log_message("INFO", "│ Controle terminé")
+    utils.log_message("DEBUG", "│ Controle terminé")
 
 # Appeler la fonction main pour exécuter le script
 if __name__ == "__main__":

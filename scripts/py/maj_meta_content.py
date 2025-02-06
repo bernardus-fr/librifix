@@ -14,25 +14,27 @@
 # If not, see <http://www.gnu.org/licenses/>.
 
 
+#       FONCTION DU SCRIPT:
+#  Mise à jour des métadonnées dans le fichiers content.opf, récupérées dans le metadata.json
+# contenant les données de l'utilisateur. Ce script ne fait que préparer l'archive sans inclure
+# quelque fichiers que ce soit. Une version ultérieure fera peut-être la fusion avec le update_manifest.py
+
+
 import os
 import json
 from xml.etree.ElementTree import ElementTree, Element, SubElement, parse, tostring
 from datetime import datetime, timezone
-import subprocess
+from LibFix import utils
 
 # Chemins des fichiers
 metadata_file = "temp/metadata.json"
 language_codes_file = "utils/language_codes.json"
 content_opf_file = "temp/epub_temp/OEBPS/content.opf"
 
-# Gestion des logs
-def log_message(level, message):
-    subprocess.run(["./scripts/bash/log_manager.sh", "add", level, message], check=True)
-
 # Chargement des métadonnées
 def load_metadata():
     if not os.path.exists(metadata_file):
-        log_message("ERROR", f"│ Le fichier {metadata_file} est introuvable.")
+        utils.log_message("ERROR", f"│ Le fichier {metadata_file} est introuvable.")
         raise FileNotFoundError(f"Le fichier {metadata_file} est introuvable.")
 
     with open(metadata_file, "r", encoding="utf-8") as f:
@@ -41,22 +43,22 @@ def load_metadata():
     # Vérification des champs obligatoires
     for field in ["title", "creator", "language"]:
         if field not in metadata or not metadata[field].strip():
-            log_message("ERROR", f"│ Le champ obligatoire '{field}' est manquant ou vide dans les métadonnées.")
+            utils.log_message("ERROR", f"│ Le champ obligatoire '{field}' est manquant ou vide dans les métadonnées.")
             raise ValueError(f"Le champ obligatoire '{field}' est manquant ou vide dans les métadonnées.")
 
-    log_message("INFO", "│ Méta-données chargées avec succès.")
+    utils.log_message("DEBUG", "│ Méta-données chargées avec succès.")
     return metadata
 
 # Chargement de la correspondance des codes de langue
 def load_language_codes():
     if not os.path.exists(language_codes_file):
-        log_message("ERROR", f"│ Le fichier {language_codes_file} est introuvable.")
+        utils.log_message("ERROR", f"│ Le fichier {language_codes_file} est introuvable.")
         raise FileNotFoundError(f"Le fichier {language_codes_file} est introuvable.")
 
     with open(language_codes_file, "r", encoding="utf-8") as f:
         language_map = json.load(f)
 
-    log_message("INFO", "│ Fichier de codes de langues chargé avec succès.")
+    utils.log_message("DEBUG", "│ Fichier de codes de langues chargé avec succès.")
     return language_map
 
 # Conversion du nom de la langue en code ISO
@@ -96,10 +98,10 @@ def get_current_iso8601():
 # Mise à jour du fichier content.opf
 def update_content_opf(metadata, language_map):
     if not os.path.exists(content_opf_file):
-        log_message("ERROR", f"│ Le fichier {content_opf_file} est introuvable.")
+        utils.log_message("ERROR", f"│ Le fichier {content_opf_file} est introuvable.")
         raise FileNotFoundError(f"Le fichier {content_opf_file} est introuvable.")
 
-    log_message("INFO", "│ Mise à jour du fichier content.opf commencée.")
+    utils.log_message("DEBUG", "│ Mise à jour du fichier content.opf commencée.")
     tree = parse(content_opf_file)
     root = tree.getroot()
 
@@ -129,14 +131,14 @@ def update_content_opf(metadata, language_map):
 
     # Mise à jour des métadonnées obligatoires
     update_or_create("title", metadata["title"])
-    log_message("INFO", f"│ Titre ajouté: {metadata["title"]}")
+    utils.log_message("DEBUG", f"│ Titre ajouté: {metadata["title"]}")
 
     update_or_create("creator", metadata["creator"])
-    log_message("INFO", f"│ Auteur ajouté: {metadata["creator"]}")
+    utils.log_message("DEBUG", f"│ Auteur ajouté: {metadata["creator"]}")
 
     language_code = get_language_code(metadata["language"], language_map)
     update_or_create("language", language_code)
-    log_message("INFO", f"│ Lange ajoutée: {metadata["language"]}")
+    utils.log_message("DEBUG", f"│ Lange ajoutée: {metadata["language"]}")
 
     # Mise à jour de la balise dcterms:modified
     current_time = get_current_iso8601()
@@ -144,7 +146,7 @@ def update_content_opf(metadata, language_map):
     if dcterms_modified is None:
         dcterms_modified = SubElement(metadata_elem, "meta", {"property": "dcterms:modified"})
     dcterms_modified.text = current_time
-    log_message("INFO", f"│ Date ajoutée {current_time}")
+    utils.log_message("DEBUG", f"│ Date ajoutée {current_time}")
 
     # Mise à jour des champs optionnels
     optional_fields = {
@@ -161,7 +163,7 @@ def update_content_opf(metadata, language_map):
     for meta_key, opf_tag in optional_fields.items():
         if metadata.get(meta_key):
             update_or_create(opf_tag, metadata[meta_key])
-    log_message("INFO", "│ Ajout des champs facultatifs")
+    utils.log_message("DEBUG", "│ Ajout des champs facultatifs")
 
     # Supprimer les préfixes ns0 et ns1
     remove_ns_prefixes(root)
@@ -170,21 +172,21 @@ def update_content_opf(metadata, language_map):
     indent_tree(root)
 
     # Écriture des modifications
-    log_message("INFO", "│ Écriture des données")
+    utils.log_message("DEBUG", "│ Écriture des données")
     tree.write(content_opf_file, encoding="utf-8", xml_declaration=True)
-    log_message("INFO", "│ Mise à jour du fichier content.opf terminée avec succès.")
+    utils.log_message("DEBUG", "│ Mise à jour du fichier content.opf terminée avec succès.")
 
 
 # Programme principal
 def main():
     try:
-        log_message("INFO", "│ Début de la mise à jour des métadonnées EPUB.")
+        utils.log_message("DEBUG", "│ Début de la mise à jour des métadonnées EPUB.")
         metadata = load_metadata()
         language_map = load_language_codes()
         update_content_opf(metadata, language_map)
-        log_message("INFO", "│ Mise à jour des métadonnées terminée avec succès.")
+        utils.log_message("DEBUG", "│ Mise à jour des métadonnées terminée avec succès.")
     except Exception as e:
-        log_message("ERROR", f"│ Erreur : {e}")
+        utils.log_message("ERROR", f"│ Erreur : {e}")
         print(f"Erreur : {e}")
 
 if __name__ == "__main__":

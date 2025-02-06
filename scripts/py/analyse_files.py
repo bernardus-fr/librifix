@@ -14,18 +14,19 @@
 # If not, see <http://www.gnu.org/licenses/>.
 
 
+#       FONCTION DU SCRIPT:
+#  Script d'analyse des fichiers de l'utilisateur pour les répertorier et les trier dans
+# un fichiers .json et faciliter leur traitement.
+
+
 import os
 import json
 from pathlib import Path
-import subprocess
+from LibFix import utils
 
 # Variables globales
 INPUT_DIR = "temp/workdir"
 OUTPUT_JSON = "temp/user_files.json"
-
-# Gestion des logs
-def log_message(level, message):
-    subprocess.run(["./scripts/bash/log_manager.sh", "add", level, message], check=True)
 
 # Ordre des fichiers
 FILE_ORDER_BY_PREFIX = [
@@ -103,7 +104,7 @@ def analyze_user_files(input_dir, output_json):
     files_status = {}
     
     # Analyser les fichiers présents
-    log_message("INFO", f"│ Analyse du dossier : {input_dir}")
+    utils.log_message("DEBUG", f"│ Analyse du dossier : {input_dir}")
     all_files = []
     for root, _, files in os.walk(input_dir):
         for file in files:
@@ -123,7 +124,7 @@ def analyze_user_files(input_dir, output_json):
     with open(output_json, "w", encoding="utf-8") as f:
         json.dump(ordered_files_status, f, ensure_ascii=False, indent=4)
 
-    log_message("INFO", f"│ Fichier JSON généré : {output_json}")
+    utils.log_message("DEBUG", f"│ Fichier JSON généré : {output_json}")
 
 # Exemple d'utilisation
 if __name__ == "__main__":

@@ -1,0 +1,10 @@
+Annexe C : Études de Cas
+
+La mission Curiosity sur Mars
+Le rover Curiosity de la NASA, qui a atterri sur Mars en 2012, est l'un des exemples les plus marquants de l'application de l'IA dans l'exploration spatiale. Curiosity est équipé d'un système de navigation autonome qui lui permet de prendre des décisions en temps réel pour éviter les obstacles sur le sol martien. Le rover utilise des algorithmes de vision par ordinateur pour identifier et analyser les terrains, garantissant ainsi une exploration efficace et sans erreur.
+
+L'IA dans la gestion de la Station Spatiale Internationale (ISS)
+La Station Spatiale Internationale utilise également l'IA pour la gestion de ses systèmes vitaux, comme la régulation de l'atmosphère et la gestion des ressources. Par exemple, l'IA est utilisée pour optimiser la consommation d'énergie et la gestion de l'eau, deux ressources cruciales pour la survie des astronautes à bord. De plus, des robots autonomes sur la station peuvent effectuer des réparations mineures sans la nécessité d'un astronaute pour superviser le processus.
+
+Les missions avec SpaceX et l'IA
+SpaceX a également intégré l'IA dans ses projets spatiaux, notamment pour les lancements et l'atterrissage des fusées. L'entreprise utilise des systèmes d'IA pour analyser les données de vol en temps réel et prendre des décisions instantanées pour ajuster la trajectoire ou corriger des anomalies pendant le lancement ou l'atterrissage. Ces systèmes permettent à SpaceX de réduire les risques et de garantir des missions réussies.

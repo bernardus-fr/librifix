@@ -1,0 +1,16 @@
+Annexe B : Glossaire des Termes Clés
+
+Algorithmes d'apprentissage automatique
+Les algorithmes d'apprentissage automatique sont des méthodes informatiques qui permettent à un système d'améliorer ses performances au fil du temps grâce à l'expérience et à l'analyse de données. Ces algorithmes sont au cœur de l'IA moderne, permettant à des machines d'apprendre à partir de données sans être explicitement programmées.
+
+Autonomie des robots
+L'autonomie des robots fait référence à leur capacité à effectuer des tâches de manière indépendante, sans intervention humaine constante. Dans le contexte de l'exploration spatiale, cela peut inclure la navigation autonome des rovers sur Mars ou la gestion des systèmes de station spatiale sans assistance terrestre.
+
+Réseaux neuronaux
+Les réseaux neuronaux sont des structures informatiques inspirées du cerveau humain, permettant à des machines d'analyser et de traiter des informations complexes. Ils sont utilisés dans une variété d'applications d'IA, telles que la reconnaissance d'images, la prise de décisions, et la prédiction de résultats.
+
+IA embarquée
+L'IA embarquée désigne des systèmes intelligents intégrés directement dans des dispositifs comme des satellites, des rovers ou même des vaisseaux spatiaux. Ces systèmes sont conçus pour fonctionner de manière autonome dans des environnements où la communication avec la Terre est limitée ou impossible.
+
+Apprentissage profond (Deep Learning)
+L'apprentissage profond est une sous-catégorie de l'apprentissage automatique qui utilise des réseaux neuronaux profonds pour analyser des ensembles de données complexes. Ce type d'IA est particulièrement utilisé pour la reconnaissance d'images et la prise de décisions en temps réel.

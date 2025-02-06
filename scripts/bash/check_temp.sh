@@ -15,14 +15,15 @@
 # You should have received a copy of the GNU General Public License along with this program.
 # If not, see <http://www.gnu.org/licenses/>.
 
-# Déclaration des variables
-TEMP_DIR="./temp"
-BASH_DIR="./scripts/bash"
+
+#       FONCTION DU SCRIPT:
+#  Script de vérification des fichiers temporaires et choix s'il existe.
+
 
 # Vérification de l'existence du dossier temp/
 if [ -d "$TEMP_DIR" ]; then
     # Enregistrement des logs
-    "$BASH_DIR/log_manager.sh" add INFO "│ Dossier temp déjà existant: exécution choix utilisateur"
+    "$LOG" add DEBUG "│ Dossier temp déjà existant: exécution choix utilisateur"
     # Le dossier existe, demander à l'utilisateur ce qu'il souhaite faire
     ACTION=$(zenity --question --title="Projet existant" \
         --text="Il semble qu'un projet soit déjà en cours. Voulez-vous le reprendre ?" \
@@ -30,20 +31,20 @@ if [ -d "$TEMP_DIR" ]; then
 
     if [ $? -eq 0 ]; then
         # L'utilisateur a choisi "Oui" (reprendre l'ancien projet) Enregistrement du log
-        "$BASH_DIR/log_manager.sh" add INFO "│ Reprise ancien projet: [OK]"
-        exit 0
+        "$LOG" add DEBUG "│ Reprise ancien projet: [OK]"
+        TEMP_STATUS=1
     else
         # L'utilisateur a choisi "Non" (repartir de zéro)
         rm -rf "$TEMP_DIR"/*   # Supprime uniquement le contenu du dossier temp/
         # Enregistrement des logs
-        "$BASH_DIR/log_manager.sh" add INFO "│ Nouveau Projet, Vider dossier temp/: [OK]"
-        exit 1
+        "$LOG" add DEBUG "│ Nouveau Projet, Vider dossier temp/: [OK]"
+        TEMP_STATUS=0
     fi
 else
     # Le dossier n'existe pas, le créer
     mkdir "$TEMP_DIR"
     # Enregistrement des logs
-    "$BASH_DIR/log_manager.sh" add INFO "│ Dossier temp/ inexistant. Creation dossier temp: [OK]"
-    exit 1
+    "$LOG" add DEBUG "│ Dossier temp/ inexistant. Creation dossier temp: [OK]"
+    TEMP_STATUS=0
 fi
 

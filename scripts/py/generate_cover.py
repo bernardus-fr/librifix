@@ -14,13 +14,14 @@
 # If not, see <http://www.gnu.org/licenses/>.
 
 
+#       FONCTION DU SCRIPT:
+#  Création d'une page XHTML pour la couverture ainsi que le quatrième de couverture avec
+# la feuille de style correspondante
+
+
 import os
 import sys
-import subprocess
-
-# Gestion des logs
-def log_message(level, message):
-    subprocess.run(["./scripts/bash/log_manager.sh", "add", level, message], check=True)
+from LibFix import utils
 
 def generate_cover_page(image_path):
     """
@@ -32,13 +33,15 @@ def generate_cover_page(image_path):
     if "4cover" in image_path.lower():
         xhtml_name = "quatrieme_couverture.xhtml"
         page_title = "Quatrième de couverture"
+        utils.log_message("DEBUG", "│ Génération de la page pour le quatrième de couverture")
     else:
         xhtml_name = "page_de_couverture.xhtml"
         page_title = "Couverture"
+        utils.log_message("DEBUG", "│ Génération de la page de couverture")
 
     # Chemins relatifs des fichiers générés
     output_path = f"temp/epub_temp/OEBPS/Text/{xhtml_name}"
-    output_css = f"temp/epub_temp/OEBPS/Styles/style-cover.css"
+    output_css = "temp/epub_temp/OEBPS/Styles/style-cover.css"
     css_path = "../Styles/style-cover.css"
 
     # Contenu de base de la page XHTML
@@ -81,12 +84,12 @@ img {
     # Écriture du fichier XHTML
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(cover_template)
-    log_message("INFO", f"Page de couverture générée avec succès : {output_path}")
+    utils.log_message("DEBUG", f"│ Page de couverture générée avec succès : {output_path}")
 
     # Écriture du fichier CSS
     with open(output_css, "w", encoding="utf-8") as f:
         f.write(style_template)
-    log_message("INFO", f"Page de style générée avec succès : {output_css}")
+    utils.log_message("DEBUG", f"│ Page de style générée avec succès : {output_css}")
 
 # Programme principal
 def main():

@@ -1,0 +1,19 @@
+Chapter 6 Footnotes
+
+1) Optimizing resources in space is crucial for astronaut survival, but it must be balanced with their well-being.
+
+2) AI could optimize mission resources, but it should not compromise astronauts' health to maximize efficiency.
+
+3) Unexpected events, such as technical failures or solar storms, require human intervention to complement AI's capabilities.
+
+4) Space presents unpredictable challenges that force AI to constantly adapt to new conditions.
+
+5) Vast distances make real-time communication difficult, making AI essential for instantaneous decisions in remote missions.
+
+6) AI must be able to assess complex situations in the absence of complete data and provide viable solutions.
+
+7) AI must understand and take into account the psychological state of astronauts to support them in an extreme environment.
+
+8) AI systems must be reliable and capable of adapting to space's extreme conditions to function properly.
+
+9) Data security is critical, as cyberattacks or interference could compromise the space mission.

@@ -15,6 +15,11 @@
 # You should have received a copy of the GNU General Public License along with this program.
 # If not, see <http://www.gnu.org/licenses/>.
 
+
+#       FONCTION DU SCRIPT:
+#  Création de l'archive epub et vérification de conformité
+
+
 # Définir les variables de répertoires et de fichiers
 EPUB_DIR="temp/epub_temp"
 EPUB_FILE="temp/livre.epub"
@@ -36,15 +41,17 @@ if [ ! -d "$META_INF_DIR" ] || [ ! -d "$OEBPS_DIR" ]; then
 fi
 
 # Créer l'archive EPUB
-"$LOG" add INFO "│ Création de l'archive EPUB..."
+"$LOG" add DEBUG "│ Création de l'archive EPUB..."
 
 # Créer un fichier zip et ajouter tous les fichiers et dossiers nécessaires
 cd "$EPUB_DIR"
 zip -Xr ../livre.epub mimetype * -x "*.DS_Store"
 cd - || exit 1
 
-"$LOG" add INFO "│ L'EPUB a été créé avec succès sous le nom $EPUB_FILE."
+"$LOG" add DEBUG "│ L'EPUB a été créé avec succès sous le nom $EPUB_FILE."
 
+# Vérification de la conformité avec les normes epub.
 java -jar "$CHECK" "$EPUB_FILE"
 
 #ebook-viewer "$EPUB_FILE"
+exit 0

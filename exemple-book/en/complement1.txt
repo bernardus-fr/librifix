@@ -1,0 +1,14 @@
+Annex A: History of Artificial Intelligence in Space Exploration
+
+Artificial intelligence (AI) has played an increasingly significant role in space exploration since its first use in the 1960s. Initially, computer systems were primarily used to automate simple tasks, such as collecting and processing data sent from satellites or probes. However, with technological advancements, AI has taken on a larger role in space missions, ranging from automation of processes to resource management and autonomous navigation.
+
+The Early AI Missions
+One of the earliest notable examples of AI in space was the integration of onboard computers in the Apollo missions. While AI as we know it didn't exist at the time, early forms of automation were already in place, with systems capable of processing information and making real-time adjustments for navigation.
+
+Mars Rovers
+More recently, AI has revolutionized Mars exploration with rover missions such as Spirit, Opportunity, Curiosity, and Perseverance. These rovers are equipped with AI algorithms that allow them to navigate autonomously, analyze samples, and avoid obstacles. For example, Curiosity used AI for autonomous navigation on the Martian surface, enabling the rover to make real-time decisions based on terrain conditions without waiting for instructions from Earth.
+
+AI in Satellite Management
+Another key area where AI is playing a role is satellite management. AI is used to optimize satellite orbits, detect and fix malfunctions, and improve the collection of environmental data. The integration of AI in satellite management has increased mission efficiency and reduced costs.
+
+Artificial intelligence, continuously evolving, continues to play a crucial role in space exploration. Recent advancements open promising perspectives for the autonomy of future space missions, especially for manned missions to Mars.

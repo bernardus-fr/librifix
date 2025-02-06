@@ -14,8 +14,14 @@
 # If not, see <http://www.gnu.org/licenses/>.
 
 
+#       FONCTION DU SCRIPT:
+#  Ajout de toutes les balises html dans le chapitre: entêtes et pieds, paragraphes et titre.
+# Le titre est reconnu comme étant toujours la première ligne du fichiers.
+
+
 import re
 import sys
+from LibFix import utils
 
 # Vérification des arguments
 if len(sys.argv) != 4:
@@ -26,6 +32,7 @@ titre = sys.argv[1]
 fichier_texte = sys.argv[2]
 fichier_sortie = sys.argv[3]
 
+utils.log_message("DEBUG", f"│ Ouverture de {fichier_texte} pour ajout des balises html")
 # Lire le fichier texte brut
 with open(fichier_texte, "r", encoding="utf-8") as f:
     texte = f.read()
@@ -67,9 +74,10 @@ def ajouter_balises_html(texte, titre):
 
 # Générer le HTML
 texte_html = ajouter_balises_html(texte, titre)
+utils.log_message("DEBUG", f"│ Génération des balises html pour {fichier_texte} terminée")
 
 # Sauvegarder dans un fichier de sortie
 with open(fichier_sortie, "w", encoding="utf-8") as f:
     f.write(texte_html)
 
-print(f"   Génération HTML Chapitre : OK")
+utils.log_message("DEBUG", f"│ Enregistrement de {fichier_sortie} terminée")

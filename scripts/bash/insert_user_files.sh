@@ -16,30 +16,37 @@
 # If not, see <http://www.gnu.org/licenses/>.
 
 
-PY_DIR="scripts/py"
-BASH_DIR="scripts/bash"
-MAN_JSON="$PY_DIR/manage_json.py"
-LOG="./$BASH_DIR/log_manager.sh"
-TEMP_DIR="temp"
-WORKDIR="$TEMP_DIR/workdir"
-USER_FILES_JSON="$TEMP_DIR/user_files.json"
 
-"$LOG" add INFO "│ Début du script de gestion des fichiers à insérer dans l'EPUB."
+#       FONCTION DU SCRIPT:
+#  Script d'insersion des fichiers de l'utilisateur dans la structure temporaire epub_temp.
+# Se base sur la liste des fichiers déclarée dans user_files.json, et les gère un par un
+# en fonction de leur extension
+#  Recherche des fichiers avec manage_json.py et après analyse, les envoie au script adéquat
+# selon l'extension: traitement_xhtml.sh, traitement_image.sh, traitement_autre.sh.
+#  Après chaque traitement le fichier json est mis à jour.
 
+
+# Définition des Variables d'environnement:
+source scripts/bash/utils.sh
+
+# Définition des Fonctions:
 # Mise à jour de user_files.json
 update_json() {
     local file="$1"
     python3 "$MAN_JSON" update-status "$file" OK
     if [[ $? -eq 0 ]]; then
-        "$LOG" add INFO "│ Fichier marqué comme traité dans user_files.json : $file"
+        "$LOG" add DEBUG "│ Fichier marqué comme traité dans user_files.json : $file"
     else
         "$LOG" add ERROR "│ Échec de la mise à jour de user_files.json pour : $file"
     fi
 }
 
+"$LOG" add DEBUG "│ Début du script de gestion des fichiers à insérer dans l'EPUB."
+
 # Vérification du fichier user_files.json
 if [[ ! -f "$USER_FILES_JSON" ]]; then
-    "$LOG" add ERROR "│ Fichier $USER_FILES_JSON introuvable ."
+    "$LOG" add ERROR "│ Fichier $USER_FILES_JSON introuvable."
+    afficher_fenetre_erreur "Erreur: $USER_FILES_JSON introuvable."
     exit 1
 fi
 
@@ -49,40 +56,40 @@ while true; do
     next_file=$(python3 "$MAN_JSON" get-first)
 
     if [[ "$next_file" == "none" ]]; then
-        "$LOG" add INFO "│ Aucun fichier à traiter dans user_files.json."
+        "$LOG" add DEBUG "│ Aucun fichier à traiter dans user_files.json."
         break
     elif [[ "$next_file" == *ERROR* ]]; then
         "$LOG" add ERROR "│ Une erreur s'est produite : ${next_file#ERROR:}"
         break
     fi
 
-    "$LOG" add INFO "│ Fichier à traiter : $next_file"
+    "$LOG" add DEBUG "│ Fichier à traiter : $next_file"
 
     # Déterminer le type de fichier
     file_extension="${next_file##*.}"
-    "$LOG" add INFO "│ Extension du fichier détectée : $file_extension"
+    "$LOG" add DEBUG "│ Extension du fichier détectée : $file_extension"
 
     case "$file_extension" in
         # Traitement des images
         jpg|jpeg|png|gif)
-            "$LOG" add INFO "│ Fichier Image détecté."
+            "$LOG" add DEBUG "│ Fichier Image détecté."
             ./scripts/bash/traitement_images.sh "$next_file"
             update_json "$next_file"
             ;;
 
         # Traitement des fichiers texte
         txt)
-            "$LOG" add INFO "│ Fichier Texte détecté. Vérification des fichiers associés."
+            "$LOG" add DEBUG "│ Fichier Texte détecté. Vérification des fichiers associés."
             linked_notes=$(python3 "$MAN_JSON" find-note "$next_file")
 
             if [[ "$linked_notes" == "none" ]]; then
-                "$LOG" add INFO "│ Aucun fichier de notes associé trouvé."
+                "$LOG" add DEBUG "│ Aucun fichier de notes associé trouvé."
                 ./scripts/bash/traitement_xhtml.sh "$next_file"
                 update_json "$next_file"
             elif [[ "$linked_notes" == *ERROR* ]]; then
                 "$LOG" add ERROR "│ Une erreur s'est produite lors de la recherche des notes : ${linked_notes#ERROR:}"
             else
-                "$LOG" add INFO "│ Fichiers de notes associés trouvés : $linked_notes"
+                "$LOG" add DEBUG "│ Fichiers de notes associés trouvés : $linked_notes"
                 ./scripts/bash/traitement_xhtml.sh "$next_file" "$linked_notes"
                 update_json "$next_file"
                 update_json "$linked_notes"
@@ -99,6 +106,6 @@ while true; do
 
 done
 
-"$LOG" add INFO "│ Fin du script de gestion des fichiers."
+"$LOG" add DEBUG "│ Fin du script de gestion des fichiers."
 
 exit 0
