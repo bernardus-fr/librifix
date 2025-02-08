@@ -1,8 +1,8 @@
 {
   "title": {
-    "error": "Fehler",
-    "warning": "Warnung",
-    "info": "Information",
+    "error": "FEHLER",
+    "warning": "WARNUNG",
+    "info": "INFO",
     "question": "Frage",
     "metadata": "Metadaten",
     "browse": "Wählen Sie das Arbeitsverzeichnis aus"
@@ -11,7 +11,11 @@
     "file_not_found": "Datei nicht gefunden.",
     "re_install": "Bitte installieren Sie das Programm neu!",
     "operation_success": "Operation erfolgreich.",
-    "operation_failed": "Operation fehlgeschlagen."
+    "operation_failed": "Operation fehlgeschlagen.",
+    "exit": "Programm wird beendet.",
+    "invalid_dir": "Ungültiger Pfad.",
+    "try_again": "Bitte versuchen Sie es erneut.",
+    "check_integrity": "Bitte überprüfen Sie die Integrität des Programms."
   },
   "label": {
     "ok": "OK",
@@ -23,16 +27,23 @@
     "no": "Nein"
   },
   "text": {
-    "data_base": "Grunddaten - Alle Felder sind erforderlich",
+    "data_base": "Grunddaten - Alle Felder sind obligatorisch",
     "error_data_base": "Bitte füllen Sie alle Felder aus.",
     "data_opt": "Optionale Daten - Füllen Sie nur das aus, was Sie möchten",
-    "proj_in": "Es scheint, dass ein Projekt bereits läuft. Möchten Sie es fortsetzen?"
+    "proj_in": "Es scheint, dass ein Projekt bereits läuft. Möchten Sie es fortsetzen?",
+    "lock_exec": "Eine andere Instanz des Programms läuft bereits, bitte versuchen Sie es später erneut. PID: ",
+    "lock_obs": "Eine veraltete Sperre wurde gefunden und wird entfernt.",
+    "lock_act": "Eine aktive Sperre ist vorhanden, aber der zugehörige Prozess ist tot.\nBitte warten Sie bis zum Ende des Timeouts oder versuchen Sie es später erneut.",
+    "error_workdir": "Fehler bei der Verarbeitung des Arbeitsverzeichnisses.",
+    "error_insert_files": "Fehler beim Einfügen der Dateien in die EPUB-Struktur.",
+    "error_epubizer": "Fehler beim Kompilieren des EPUB-Archivs.",
+    "error_depend_distro": "Abhängigkeitsprüfung auf Ihrem System nicht möglich! Bitte überprüfen Sie diese manuell. Das Programm kann auf einige Fehler stoßen."
   },
   "entry": {
     "title": "Titel",
     "creator": "Autor",
     "lang": "Sprache",
-    "identifier": "Kennung (ISBN)",
+    "identifier": "Identifikator (ISBN)",
     "date": "Datum (YYYY-MM-DD)",
     "publisher": "Verlag",
     "contributor": "Mitwirkende",

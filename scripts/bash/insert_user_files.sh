@@ -46,7 +46,7 @@ update_json() {
 # Vérification du fichier user_files.json
 if [[ ! -f "$USER_FILES_JSON" ]]; then
     "$LOG" add ERROR "│ Fichier $USER_FILES_JSON introuvable."
-    afficher_fenetre_erreur "Erreur: $USER_FILES_JSON introuvable."
+    afficher_message error "$LANG_MESSAGE_FILE_NOT_FOUND: $USER_FILES_JSON."
     exit 1
 fi
 

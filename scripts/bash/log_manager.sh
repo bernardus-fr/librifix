@@ -38,7 +38,9 @@
 
 
 # Définition des Variables d'environnement:
-source scripts/bash/utils.sh
+LOG_DIR="logs"
+ERROR_DIR="$LOG_DIR/errors"
+CURRENT_LOG="$LOG_DIR/current.log"
 
 # Couleurs pour la coloration syntaxique
 RESET="\033[0m"

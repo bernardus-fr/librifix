@@ -151,7 +151,7 @@ while true; do
     "$LOG" add DEBUG "│ Dossier de travail ajouté au fichier $METADATA_FILE : $workdir."
     break
   else
-    zenity --error --text="Le chemin sélectionné n'est pas valide. Veuillez réessayer."
+    afficher_message error "$LANG_MESSAGE_INVALID_DIR $LANG_MESSAGE_TRY_AGAIN"
     # Entrée log
     "$LOG" add DEBUG "│ Chemin invalide lors de la sélection du dossier de travail."
   fi

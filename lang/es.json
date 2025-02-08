@@ -1,17 +1,21 @@
 {
   "title": {
-    "error": "Error",
-    "warning": "Advertencia",
-    "info": "Información",
+    "error": "ERROR",
+    "warning": "ADVERTENCIA",
+    "info": "INFO",
     "question": "Pregunta",
     "metadata": "Metadatos",
     "browse": "Seleccione la carpeta de trabajo"
   },
   "message": {
     "file_not_found": "Archivo no encontrado.",
-    "re_install": "Por favor, reinstale el programa!",
+    "re_install": "¡Por favor, reinstale el programa!",
     "operation_success": "Operación exitosa.",
-    "operation_failed": "Operación fallida."
+    "operation_failed": "Fallo en la operación.",
+    "exit": "Cerrando el programa.",
+    "invalid_dir": "Ruta no válida.",
+    "try_again": "Por favor, inténtelo de nuevo.",
+    "check_integrity": "Por favor, verifique la integridad del programa."
   },
   "label": {
     "ok": "OK",
@@ -24,9 +28,16 @@
   },
   "text": {
     "data_base": "Datos básicos - Todos los campos son obligatorios",
-    "error_data_base": "Per favore, compila tutti i campi.",
-    "data_opt": "Datos opcionales - Rellene solo lo que desee",
-    "proj_in": "Parece que un proyecto ya está en curso. ¿Quieres retomarlo?"
+    "error_data_base": "Por favor, complete todos los campos.",
+    "data_opt": "Datos opcionales - Complete solo lo que desee",
+    "proj_in": "Parece que ya hay un proyecto en curso. ¿Quieres retomarlo?",
+    "lock_exec": "Otra instancia del programa ya se está ejecutando, inténtelo de nuevo más tarde. PID: ",
+    "lock_obs": "Se encontró un bloqueo obsoleto y será eliminado.",
+    "lock_act": "Hay un bloqueo activo en curso, pero el proceso asociado está muerto.\nEspere el final del tiempo de espera o inténtelo de nuevo más tarde.",
+    "error_workdir": "Error al procesar la carpeta de trabajo.",
+    "error_insert_files": "Error al procesar los archivos al insertarlos en la estructura epub.",
+    "error_epubizer": "Error al compilar el archivo epub.",
+    "error_depend_distro": "¡No se pueden verificar las dependencias en su sistema! Revísalas manualmente. El programa puede encontrar algunos errores."
   },
   "entry": {
     "title": "Título",

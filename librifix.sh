@@ -37,24 +37,16 @@ check_lock() {
 
         # Vérifie si le processus est toujours actif
         if ps -p "$lock_pid" > /dev/null 2>&1; then
-            afficher_message "info" "Une autre instance du programme est déjà en cours d'exécution (PID : $lock_pid). Veuillez réessayer plus tard."
-            #zenity --info --title="Instance Active" \
-            #    --text="Une autre instance du programme est déjà en cours d'exécution (PID : $lock_pid). Veuillez réessayer plus tard." \
-            #    --timeout=10
+            afficher_message "info" "$LANG_TEXT_LOCK_EXEC $lock_pid"
             exit 1
         else
             # Vérifie si le verrou est expiré
             local current_time=$(date +%s)
             if (( current_time - lock_time > LOCK_TIMEOUT )); then
-                afficher_message "warning" "Un verrou obsolète a été trouvé et sera supprimé."
-                #zenity --warning --title="Verrou Expiré" \
-                #    --text="Un verrou obsolète a été trouvé et sera supprimé."
+                afficher_message "warning" "$LANG_TEXT_LOCK_OBS"
                 rm -f "$LOCK_FILE"
             else
-                afficher_message "info" "Un verrou actif est en cours, mais le processus associé est mort.\nVeuillez attendre la fin du timeout ou réessayer plus tard."
-                #zenity --info --title="Instance Active" \
-                #    --text="Un verrou actif est en cours, mais le processus associé est mort.\nVeuillez attendre la fin du timeout ou réessayer plus tard." \
-                #    --timeout=10
+                afficher_message "info" "$LANG_TEXT_LOCK_ACT"
                 exit 1
             fi
         fi
@@ -171,7 +163,7 @@ python3 "$GEN_UUID"
 "$TRAIT_WORKDIR"
 if [ $? -ne 0 ]; then
     "$LOG" add ERROR "Erreur de traitement du script work_dir.sh"
-    afficher_fenetre_erreur "Erreur de traitement des dossier de travail. Extinction du programme."
+    afficher_message error "$LANG_TEXT_ERROR_WORKDIR $LANG_MESSAGE_EXIT"
     "$EXIT_SCRIPT" "error"
     exit 1
 fi
@@ -208,7 +200,7 @@ python3 "$ANALYSE_FILES"
 "$INSERT_FILES"
 if [ $? -ne 0 ]; then
     "$LOG" add ERROR "Erreur de traitement du script insert_user_files.sh"
-    afficher_fenetre_erreur "Erreur de traitement des fichiers lors de l'insertion dans la structure epub. Extinction du programme."
+    afficher_message error "$LANG_TEXT_ERROR_INSERT_FILES $LANG_MESSAGE_EXIT"
     "$EXIT_SCRIPT" "error"
     exit 1
 fi
@@ -221,7 +213,7 @@ fi
 "$EPUBIZER"
 if [ $? -ne 0 ]; then
     "$LOG" add ERROR "Erreur de traitement du script epubizer.sh"
-    afficher_fenetre_erreur "Erreur dans la compliation de l'archive epub. Extinction du programme."
+    afficher_message error "$LANG_TEXT_ERROR_EPUBIZER $LANG_MESSAGE_EXIT"
     "$EXIT_SCRIPT" "error"
     exit 1
 fi

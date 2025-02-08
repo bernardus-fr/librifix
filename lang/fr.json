@@ -1,8 +1,8 @@
 {
   "title": {
-    "error": "Erreur",
-    "warning": "Avertissement",
-    "info": "Information",
+    "error": "ERREUR",
+    "warning": "AVERTISSEMENT",
+    "info": "INFO",
     "question": "Question",
     "metadata": "Métadonnées",
     "browse": "Sélectionnez le dossier de travail"
@@ -11,7 +11,11 @@
     "file_not_found": "Fichier introuvable.",
     "re_install": "Veuillez réinstaller le programme!",
     "operation_success": "Opération réussie.",
-    "operation_failed": "Échec de l'opération."
+    "operation_failed": "Échec de l'opération.",
+    "exit": "Extinction du programme.",
+    "invalid_dir": "Chemin invalide.",
+    "try_again": "Veuillez réessayer.",
+    "check_integrity": "Veuillez vérifier l'intégrité du programme."
   },
   "label": {
     "ok": "OK",
@@ -26,7 +30,14 @@
     "data_base": "Données de base - Tous les champs sont obligatoire",
     "error_data_base": "Veuillez remplir tous les champs s'il vous plaît.",
     "data_opt": "Données optionnelles - Remplissez uniquement ce que vous souhaitez",
-    "proj_in": "Il semble qu'un projet soit déjà en cours. Voulez-vous le reprendre ?"
+    "proj_in": "Il semble qu'un projet soit déjà en cours. Voulez-vous le reprendre ?",
+    "lock_exec": "Une autre instance du programme est déjà en cours d'exécution, Veuillez réessayer plus tard. PID : ",
+    "lock_obs": "Un verrou obsolète a été trouvé et sera supprimé.",
+    "lock_act": "Un verrou actif est en cours, mais le processus associé est mort.\nVeuillez attendre la fin du timeout ou réessayer plus tard.",
+    "error_workdir": "Erreur de traitement des dossier de travail.",
+    "error_insert_files": "Erreur de traitement des fichiers lors de l'insertion dans la structure epub.",
+    "error_epubizer": "Erreur dans la compliation de l'archive epub.",
+    "error_depend_distro": "Impossible de vérifier les dépendances sur votre système! Veuillez les vérifier manuellement. Il se peut que le programme rencontre quelques erreurs."
   },
   "entry": {
     "title": "Titre",

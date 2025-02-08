@@ -1,0 +1,55 @@
+{
+  "title": {
+    "error": "HIBA",
+    "warning": "FIGYELMEZTETÉS",
+    "info": "INFO",
+    "question": "Kérdés",
+    "metadata": "Metaadatok",
+    "browse": "Válassza ki a munkamappát"
+  },
+  "message": {
+    "file_not_found": "A fájl nem található.",
+    "re_install": "Kérjük, telepítse újra a programot!",
+    "operation_success": "A művelet sikeresen befejeződött.",
+    "operation_failed": "A művelet sikertelen.",
+    "exit": "A program bezárása.",
+    "invalid_dir": "Érvénytelen útvonal.",
+    "try_again": "Kérjük, próbálja újra.",
+    "check_integrity": "Kérjük, ellenőrizze a program integritását."
+  },
+  "label": {
+    "ok": "OK",
+    "cancel": "Mégse",
+    "next": "Következő",
+    "open": "Megnyitás",
+    "close": "Bezárás",
+    "yes": "Igen",
+    "no": "Nem"
+  },
+  "text": {
+    "data_base": "Alapadatok - Minden mező kötelező",
+    "error_data_base": "Kérjük, töltse ki az összes mezőt.",
+    "data_opt": "Opcionális adatok - Csak azt töltse ki, amit szeretne",
+    "proj_in": "Úgy tűnik, egy projekt már folyamatban van. Szeretné folytatni?",
+    "lock_exec": "A program egy másik példánya már fut, próbálja újra később. PID: ",
+    "lock_obs": "Egy elavult zárolás található, amelyet törölni fogunk.",
+    "lock_act": "Egy aktív zárolás van érvényben, de a kapcsolódó folyamat leállt.\nVárjon a timeout végéig, vagy próbálja meg később újra.",
+    "error_workdir": "Hiba a munkamappa feldolgozásakor.",
+    "error_insert_files": "Hiba a fájlok epub szerkezetbe történő beszúrásakor.",
+    "error_epubizer": "Hiba az epub fájl összeállításakor.",
+    "error_depend_distro": "Nem sikerült ellenőrizni a függőségeket a rendszeren! Kérjük, ellenőrizze manuálisan. A program hibákba ütközhet."
+  },
+  "entry": {
+    "title": "Cím",
+    "creator": "Szerző",
+    "lang": "Nyelv",
+    "identifier": "Azonosító (ISBN)",
+    "date": "Dátum (YYYY-MM-DD)",
+    "publisher": "Kiadó",
+    "contributor": "Közreműködők",
+    "subject": "Kategória",
+    "source": "Forrás (eredeti cím)",
+    "rights": "Jogok",
+    "description": "Leírás"
+  }
+}

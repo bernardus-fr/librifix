@@ -1,17 +1,21 @@
 {
   "title": {
-    "error": "Errore",
-    "warning": "Avviso",
-    "info": "Informazione",
+    "error": "ERRORE",
+    "warning": "AVVISO",
+    "info": "INFO",
     "question": "Domanda",
     "metadata": "Metadati",
     "browse": "Seleziona la cartella di lavoro"
   },
   "message": {
     "file_not_found": "File non trovato.",
-    "re_install": "Per favore, reinstalla il programma!",
+    "re_install": "Si prega di reinstallare il programma!",
     "operation_success": "Operazione riuscita.",
-    "operation_failed": "Operazione fallita."
+    "operation_failed": "Operazione fallita.",
+    "exit": "Chiusura del programma.",
+    "invalid_dir": "Percorso non valido.",
+    "try_again": "Riprova per favore.",
+    "check_integrity": "Si prega di verificare l'integrità del programma."
   },
   "label": {
     "ok": "OK",
@@ -24,9 +28,16 @@
   },
   "text": {
     "data_base": "Dati di base - Tutti i campi sono obbligatori",
-    "error_data_base": "Per favore, compila tutti i campi.",
+    "error_data_base": "Si prega di compilare tutti i campi.",
     "data_opt": "Dati opzionali - Compila solo ciò che desideri",
-    "proj_in": "Sembra che un progetto sia già in corso. Vuoi riprenderlo?"
+    "proj_in": "Sembra che un progetto sia già in corso. Vuoi riprenderlo?",
+    "lock_exec": "Un'altra istanza del programma è già in esecuzione, riprova più tardi. PID: ",
+    "lock_obs": "È stato trovato un blocco obsoleto che verrà rimosso.",
+    "lock_act": "Un blocco attivo è in corso, ma il processo associato è morto.\nAttendere la fine del timeout o riprovare più tardi.",
+    "error_workdir": "Errore nell'elaborazione della cartella di lavoro.",
+    "error_insert_files": "Errore nell'inserimento dei file nella struttura epub.",
+    "error_epubizer": "Errore nella compilazione dell'archivio epub.",
+    "error_depend_distro": "Impossibile verificare le dipendenze sul tuo sistema! Si prega di controllarle manualmente. Il programma potrebbe incontrare alcuni errori."
   },
   "entry": {
     "title": "Titolo",

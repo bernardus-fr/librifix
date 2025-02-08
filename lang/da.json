@@ -1,0 +1,55 @@
+{
+  "title": {
+    "error": "FEJL",
+    "warning": "ADVARSEL",
+    "info": "INFO",
+    "question": "Spørgsmål",
+    "metadata": "Metadata",
+    "browse": "Vælg arbejdsmappe"
+  },
+  "message": {
+    "file_not_found": "Fil ikke fundet.",
+    "re_install": "Geninstaller venligst programmet!",
+    "operation_success": "Handlingen lykkedes.",
+    "operation_failed": "Handlingen mislykkedes.",
+    "exit": "Lukker programmet.",
+    "invalid_dir": "Ugyldig sti.",
+    "try_again": "Prøv venligst igen.",
+    "check_integrity": "Kontroller venligst programmets integritet."
+  },
+  "label": {
+    "ok": "OK",
+    "cancel": "Annuller",
+    "next": "Næste",
+    "open": "Åbn",
+    "close": "Luk",
+    "yes": "Ja",
+    "no": "Nej"
+  },
+  "text": {
+    "data_base": "Basisdata - Alle felter er påkrævet",
+    "error_data_base": "Udfyld venligst alle felter.",
+    "data_opt": "Valgfrie data - Udfyld kun det, du ønsker",
+    "proj_in": "Det ser ud til, at et projekt allerede er i gang. Vil du genoptage det?",
+    "lock_exec": "En anden forekomst af programmet kører allerede, prøv igen senere. PID: ",
+    "lock_obs": "En forældet lås blev fundet og vil blive fjernet.",
+    "lock_act": "En aktiv lås er i gang, men den tilknyttede proces er død.\nVent til timeout er slut, eller prøv igen senere.",
+    "error_workdir": "Fejl under behandling af arbejdsmappe.",
+    "error_insert_files": "Fejl ved behandling af filer under indsættelse i epub-struktur.",
+    "error_epubizer": "Fejl under oprettelse af epub-arkivet.",
+    "error_depend_distro": "Kunne ikke kontrollere afhængigheder på dit system! Tjek dem manuelt. Programmet kan støde på nogle fejl."
+  },
+  "entry": {
+    "title": "Titel",
+    "creator": "Forfatter",
+    "lang": "Sprog",
+    "identifier": "Identifikator (ISBN)",
+    "date": "Dato (YYYY-MM-DD)",
+    "publisher": "Forlag",
+    "contributor": "Bidragydere",
+    "subject": "Kategori",
+    "source": "Kilde (original titel)",
+    "rights": "Rettigheder",
+    "description": "Beskrivelse"
+  }
+}

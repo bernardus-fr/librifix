@@ -25,9 +25,9 @@ if [ -d "$TEMP_DIR" ]; then
     # Enregistrement des logs
     "$LOG" add DEBUG "│ Dossier temp déjà existant: exécution choix utilisateur"
     # Le dossier existe, demander à l'utilisateur ce qu'il souhaite faire
-    ACTION=$(zenity --question --title="Projet existant" \
-        --text="Il semble qu'un projet soit déjà en cours. Voulez-vous le reprendre ?" \
-        --ok-label="Oui" --cancel-label="Non")
+    ACTION=$(zenity --question --title="$LANG_TITLE_QUESTION" \
+        --text="$LANG_TEXT_PROJ_IN" \
+        --ok-label="$LANG_LABEL_YES" --cancel-label="$LANG_LABEL_NO")
 
     if [ $? -eq 0 ]; then
         # L'utilisateur a choisi "Oui" (reprendre l'ancien projet) Enregistrement du log

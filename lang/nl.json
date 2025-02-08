@@ -1,0 +1,55 @@
+{
+  "title": {
+    "error": "FOUT",
+    "warning": "WAARSCHUWING",
+    "info": "INFO",
+    "question": "Vraag",
+    "metadata": "Metadata",
+    "browse": "Selecteer de werkmap"
+  },
+  "message": {
+    "file_not_found": "Bestand niet gevonden.",
+    "re_install": "Installeer het programma opnieuw!",
+    "operation_success": "Bewerking geslaagd.",
+    "operation_failed": "Bewerking mislukt.",
+    "exit": "Programma wordt afgesloten.",
+    "invalid_dir": "Ongeldig pad.",
+    "try_again": "Probeer het opnieuw.",
+    "check_integrity": "Controleer de integriteit van het programma."
+  },
+  "label": {
+    "ok": "OK",
+    "cancel": "Annuleren",
+    "next": "Volgende",
+    "open": "Openen",
+    "close": "Sluiten",
+    "yes": "Ja",
+    "no": "Nee"
+  },
+  "text": {
+    "data_base": "Basisgegevens - Alle velden zijn verplicht",
+    "error_data_base": "Vul alle velden in, alstublieft.",
+    "data_opt": "Optionele gegevens - Vul alleen in wat u wilt",
+    "proj_in": "Het lijkt erop dat er al een project bezig is. Wilt u doorgaan?",
+    "lock_exec": "Een andere instantie van het programma is al actief, probeer het later opnieuw. PID: ",
+    "lock_obs": "Een verouderde vergrendeling is gevonden en wordt verwijderd.",
+    "lock_act": "Er is een actieve vergrendeling, maar het bijbehorende proces is beëindigd.\nWacht op de timeout of probeer het later opnieuw.",
+    "error_workdir": "Fout bij het verwerken van de werkmap.",
+    "error_insert_files": "Fout bij het verwerken van bestanden bij invoegen in epub-structuur.",
+    "error_epubizer": "Fout bij het samenstellen van het epub-archief.",
+    "error_depend_distro": "Kan afhankelijkheden niet controleren op uw systeem! Controleer ze handmatig. Het programma kan enkele fouten tegenkomen."
+  },
+  "entry": {
+    "title": "Titel",
+    "creator": "Auteur",
+    "lang": "Taal",
+    "identifier": "Identificatie (ISBN)",
+    "date": "Datum (YYYY-MM-DD)",
+    "publisher": "Uitgever",
+    "contributor": "Bijdragers",
+    "subject": "Categorie",
+    "source": "Bron (originele titel)",
+    "rights": "Rechten",
+    "description": "Beschrijving"
+  }
+}

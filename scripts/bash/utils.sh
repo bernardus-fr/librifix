@@ -109,16 +109,6 @@ afficher_message() {
             ;;
     esac
 }
-afficher_fenetre_erreur() {
-    local message="$1"
-    zenity --error --title="Erreur" --text="$message"
-}
-
-# Affichage d'une fenêtre d'info Zenity
-afficher_fenetre_info() {
-    local message="$1"
-    zenity --info --title="Information" --text="$message"
-}
 
 # Fonction d'initialisation du config.ini
 initialize_config() {
@@ -222,7 +212,7 @@ check_and_install_system_dependencies() {
             ;;
         *)
             "$LOG" add WARNING "Gestionnaire de paquets inconnu pour la distribution $DISTRO..."
-            afficher_message error "Impossible de vérifier les dépendances sur votre système! Veuillez les vérifier manuellement. Il se peut que le programme rencontre quelques erreurs."
+            afficher_message error "$LANG_TEXT_ERROR_DEPEND_DISTRO"
             ;;
     esac
 
@@ -297,6 +287,12 @@ check_program_integrity() {
         "./utils/templates/epub/OEBPS/Styles/style-notes.css"
         "./utils/templates/epub/OEBPS/Text/nav.xhtml"
         "./utils/templates/epub/OEBPS/Text/page_de_garde.xhtml"
+        "./lang/fr.json"
+        "./lang/it.json"
+        "./lang/en.json"
+        "./lang/es.json"
+        "./lang/de.json"
+        "./lang/epub_fr.json"
     )
 
     # Vérification des scripts Bash

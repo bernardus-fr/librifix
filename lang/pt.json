@@ -1,0 +1,55 @@
+{
+  "title": {
+    "error": "ERRO",
+    "warning": "AVISO",
+    "info": "INFO",
+    "question": "Pergunta",
+    "metadata": "Metadados",
+    "browse": "Selecione a pasta de trabalho"
+  },
+  "message": {
+    "file_not_found": "Arquivo não encontrado.",
+    "re_install": "Por favor, reinstale o programa!",
+    "operation_success": "Operação bem-sucedida.",
+    "operation_failed": "Falha na operação.",
+    "exit": "Encerrando o programa.",
+    "invalid_dir": "Caminho inválido.",
+    "try_again": "Por favor, tente novamente.",
+    "check_integrity": "Por favor, verifique a integridade do programa."
+  },
+  "label": {
+    "ok": "OK",
+    "cancel": "Cancelar",
+    "next": "Próximo",
+    "open": "Abrir",
+    "close": "Fechar",
+    "yes": "Sim",
+    "no": "Não"
+  },
+  "text": {
+    "data_base": "Dados básicos - Todos os campos são obrigatórios",
+    "error_data_base": "Por favor, preencha todos os campos.",
+    "data_opt": "Dados opcionais - Preencha apenas o que desejar",
+    "proj_in": "Parece que um projeto já está em andamento. Deseja retomá-lo?",
+    "lock_exec": "Outra instância do programa já está em execução, tente novamente mais tarde. PID: ",
+    "lock_obs": "Um bloqueio obsoleto foi encontrado e será removido.",
+    "lock_act": "Um bloqueio ativo está em andamento, mas o processo associado está morto.\nAguarde o término do tempo limite ou tente novamente mais tarde.",
+    "error_workdir": "Erro ao processar a pasta de trabalho.",
+    "error_insert_files": "Erro ao processar os arquivos ao inseri-los na estrutura epub.",
+    "error_epubizer": "Erro na compilação do arquivo epub.",
+    "error_depend_distro": "Não foi possível verificar as dependências no seu sistema! Verifique-as manualmente. O programa pode encontrar alguns erros."
+  },
+  "entry": {
+    "title": "Título",
+    "creator": "Autor",
+    "lang": "Idioma",
+    "identifier": "Identificador (ISBN)",
+    "date": "Data (YYYY-MM-DD)",
+    "publisher": "Editora",
+    "contributor": "Contribuidores",
+    "subject": "Categoria",
+    "source": "Fonte (título original)",
+    "rights": "Direitos",
+    "description": "Descrição"
+  }
+}

@@ -40,10 +40,7 @@ fi
 USER_WORKDIR=$(jq -r '.workdir' "$METADATA_FILE")
 if [ -z "$USER_WORKDIR" ] || [ ! -d "$USER_WORKDIR" ]; then
   "$LOG" add ERROR "│ Erreur : le chemin utilisateur défini dans metadata.json est invalide ou inexistant."
-  afficher_message "error" "Le chemin du dossier est invalide ou inexistant"
-  #zenity --info --title="Fichiers non trouvés" \
- # 		--text="Le chemin du dossier est invalide ou inexistant" \
- #       --timeout=10
+  afficher_message error "$LANG_MESSAGE_INVALID_DIR"
   exit 1
 fi
 
@@ -61,10 +58,7 @@ cp -r "$USER_WORKDIR" "$WORKDIR"
 # Copie du template EPUB dans temp/
 if [ ! -d "$TEMPLATE_DIR" ]; then
   "$LOG" add ERROR "│ Template absent : $TEMPLATE_DIR"
-  afficher_message "error" "Certains fichiers ou dossier nécessaire au bon fonctionnement du programme sont absents, veuillez vérifier l'intégrité du programme"
-  #zenity --info --title="Fichiers manquants" \
-  #		--text="Certains fichiers ou dossier nécessaire au bon fonctionnement du programme sont absents, veuillez vérifier l'intégrité du programme" \
-  #      --timeout=10
+  afficher_message error "$LANG_MESSAGE_FILE_NOT_FOUND : $TEMPLATE_DIR. $LANG_MESSAGE_CHECK_INTEGRITY"
   exit 1
 fi
 cp -r "$TEMPLATE_DIR" "$EPUB_TEMP"

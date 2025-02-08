@@ -1,0 +1,55 @@
+{
+  "title": {
+    "error": "BŁĄD",
+    "warning": "OSTRZEŻENIE",
+    "info": "INFO",
+    "question": "Pytanie",
+    "metadata": "Metadane",
+    "browse": "Wybierz folder roboczy"
+  },
+  "message": {
+    "file_not_found": "Nie znaleziono pliku.",
+    "re_install": "Proszę ponownie zainstalować program!",
+    "operation_success": "Operacja zakończona sukcesem.",
+    "operation_failed": "Operacja nie powiodła się.",
+    "exit": "Zamykanie programu.",
+    "invalid_dir": "Nieprawidłowa ścieżka.",
+    "try_again": "Proszę spróbować ponownie.",
+    "check_integrity": "Proszę sprawdzić integralność programu."
+  },
+  "label": {
+    "ok": "OK",
+    "cancel": "Anuluj",
+    "next": "Dalej",
+    "open": "Otwórz",
+    "close": "Zamknij",
+    "yes": "Tak",
+    "no": "Nie"
+  },
+  "text": {
+    "data_base": "Podstawowe dane - Wszystkie pola są obowiązkowe",
+    "error_data_base": "Proszę wypełnić wszystkie pola.",
+    "data_opt": "Dane opcjonalne - Wypełnij tylko to, co chcesz",
+    "proj_in": "Wydaje się, że projekt jest już w toku. Czy chcesz go wznowić?",
+    "lock_exec": "Inna instancja programu jest już uruchomiona, spróbuj ponownie później. PID: ",
+    "lock_obs": "Znaleziono przestarzałą blokadę, która zostanie usunięta.",
+    "lock_act": "Aktywna blokada jest obecna, ale powiązany proces nie działa.\nProszę poczekać do końca limitu czasu lub spróbować ponownie później.",
+    "error_workdir": "Błąd podczas przetwarzania folderu roboczego.",
+    "error_insert_files": "Błąd podczas przetwarzania plików przy ich wstawianiu do struktury epub.",
+    "error_epubizer": "Błąd kompilacji archiwum epub.",
+    "error_depend_distro": "Nie można sprawdzić zależności w Twoim systemie! Sprawdź je ręcznie. Program może napotkać pewne błędy."
+  },
+  "entry": {
+    "title": "Tytuł",
+    "creator": "Autor",
+    "lang": "Język",
+    "identifier": "Identyfikator (ISBN)",
+    "date": "Data (YYYY-MM-DD)",
+    "publisher": "Wydawca",
+    "contributor": "Współautorzy",
+    "subject": "Kategoria",
+    "source": "Źródło (oryginalny tytuł)",
+    "rights": "Prawa",
+    "description": "Opis"
+  }
+}

@@ -1,8 +1,8 @@
 {
   "title": {
-    "error": "Error",
-    "warning": "Warning",
-    "info": "Information",
+    "error": "ERROR",
+    "warning": "WARNING",
+    "info": "INFO",
     "question": "Question",
     "metadata": "Metadata",
     "browse": "Select the working directory"
@@ -11,7 +11,11 @@
     "file_not_found": "File not found.",
     "re_install": "Please reinstall the program!",
     "operation_success": "Operation successful.",
-    "operation_failed": "Operation failed."
+    "operation_failed": "Operation failed.",
+    "exit": "Shutting down the program.",
+    "invalid_dir": "Invalid path.",
+    "try_again": "Please try again.",
+    "check_integrity": "Please check the integrity of the program."
   },
   "label": {
     "ok": "OK",
@@ -23,10 +27,17 @@
     "no": "No"
   },
   "text": {
-    "data_base": "Basic data - All fields are required",
-    "error_data_base": "Please fill in all the fields.",
+    "data_base": "Basic data - All fields are mandatory",
+    "error_data_base": "Please fill in all fields.",
     "data_opt": "Optional data - Fill in only what you want",
-    "proj_in": "It looks like a project is already in progress. Do you want to resume it?"
+    "proj_in": "It seems a project is already in progress. Do you want to resume it?",
+    "lock_exec": "Another instance of the program is already running, please try again later. PID: ",
+    "lock_obs": "An obsolete lock was found and will be removed.",
+    "lock_act": "An active lock is in progress, but the associated process is dead.\nPlease wait for the timeout to end or try again later.",
+    "error_workdir": "Error processing working directory.",
+    "error_insert_files": "Error processing files when inserting them into the epub structure.",
+    "error_epubizer": "Error compiling the epub archive.",
+    "error_depend_distro": "Unable to check dependencies on your system! Please check them manually. The program may encounter some errors."
   },
   "entry": {
     "title": "Title",
