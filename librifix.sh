@@ -37,21 +37,24 @@ check_lock() {
 
         # Vérifie si le processus est toujours actif
         if ps -p "$lock_pid" > /dev/null 2>&1; then
-            zenity --info --title="Instance Active" \
-                --text="Une autre instance du programme est déjà en cours d'exécution (PID : $lock_pid). Veuillez réessayer plus tard." \
-                --timeout=10
+            afficher_message "info" "Une autre instance du programme est déjà en cours d'exécution (PID : $lock_pid). Veuillez réessayer plus tard."
+            #zenity --info --title="Instance Active" \
+            #    --text="Une autre instance du programme est déjà en cours d'exécution (PID : $lock_pid). Veuillez réessayer plus tard." \
+            #    --timeout=10
             exit 1
         else
             # Vérifie si le verrou est expiré
             local current_time=$(date +%s)
             if (( current_time - lock_time > LOCK_TIMEOUT )); then
-                zenity --warning --title="Verrou Expiré" \
-                    --text="Un verrou obsolète a été trouvé et sera supprimé."
+                afficher_message "warning" "Un verrou obsolète a été trouvé et sera supprimé."
+                #zenity --warning --title="Verrou Expiré" \
+                #    --text="Un verrou obsolète a été trouvé et sera supprimé."
                 rm -f "$LOCK_FILE"
             else
-                zenity --info --title="Instance Active" \
-                    --text="Un verrou actif est en cours, mais le processus associé est mort.\nVeuillez attendre la fin du timeout ou réessayer plus tard." \
-                    --timeout=10
+                afficher_message "info" "Un verrou actif est en cours, mais le processus associé est mort.\nVeuillez attendre la fin du timeout ou réessayer plus tard."
+                #zenity --info --title="Instance Active" \
+                #    --text="Un verrou actif est en cours, mais le processus associé est mort.\nVeuillez attendre la fin du timeout ou réessayer plus tard." \
+                #    --timeout=10
                 exit 1
             fi
         fi
@@ -61,6 +64,7 @@ check_lock() {
 # Crée un verrou
 create_lock() {
     echo "${CURRENT_PID}:$(date +%s)" > "$LOCK_FILE"
+    # se détruit automatiquement lors de l'arrêt du programme
     trap "remove_lock" EXIT
 }
 
@@ -79,19 +83,59 @@ create_lock
 
 
 
-# 2. ACTIVATION DES LOGS
+# 2. INITIALISATION DU PROGRAMME
+#    A) Initialisation des logs
 "$LOG" create
 if [ $? -ne 0 ]; then
     echo "Erreur lors de l'activation des logs. Arrêt du programme."
     exit 1
 fi
+"$LOG" add DEBUG "Logs activés - Initialisaton du programme"
+#    -----------------
 
-# Ajout d'une entrée dans les logs pour le début de l'exécution
-"$LOG" add DEBUG "Début de l'exécution du script principal."
+#   B) Initilisation du programme
+if [[ ! -f "$CONFIG_FILE" ]]; then
+    # Premier lancement du programme
+    "$LOG" add DEBUG "Premier lancement détecté"
+
+    "$LOG" add DEBUG "Création de $CONFIG_FILE"
+    initialize_config
+
+    "$LOG" add DEBUG "Analyse de l'intégrité du programme..."
+    check_program_integrity
+    "$LOG" add DEBUG "Analyse de l'intégrité du programme [OK]"
+
+    "$LOG" add DEBUG "Analyse de la présence des dépendances"
+    check_and_install_system_dependencies
+    "$LOG" add DEBUG "Dépendances system [OK]"
+    check_and_install_python_dependencies
+    "$LOG" add DEBUG "Dépendances python [OK]"
+else
+    # Vérifier le dernier exit du programme
+    check_last_exit_status
+    if [ $? -ne 0 ]; then
+        # Le dernier exit indiquait une erreur
+        "$LOG" add WARNING "Erreur lors de la dernière fermeture du programme - Analyse..."
+
+        "$LOG" add DEBUG "Analyse de l'intégrité du programme..."
+        check_program_integrity
+        "$LOG" add DEBUG "Analyse de l'intégrité du programme [OK]"
+
+        "$LOG" add DEBUG "Analyse de la présence des dépendances..."
+        check_and_install_system_dependencies
+        "$LOG" add DEBUG "Dépendances system [OK]"
+        check_and_install_python_dependencies
+        "$LOG" add DEBUG "Dépendances python [OK]"
+    else
+        "$LOG" add DEBUG "Dernier exit : [OK]"
+    fi
+fi
 
 # --------------------------------------------------------------
 
 
+# Ajout d'une entrée dans les logs pour le début de l'exécution
+"$LOG" add DEBUG "Début de l'exécution du script principal."
 
 # 3. PROGRAMME PRINCIPAL
 #    A) Activation du dossier temporaire temp/
@@ -185,6 +229,6 @@ fi
 
 # Fin de l'exécution
 "$LOG" add DEBUG "Fin de l'exécution du script principal."
-"$LOG" close
+"$EXIT_SCRIPT" "success"
 
 exit 0

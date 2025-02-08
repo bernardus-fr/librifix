@@ -33,13 +33,13 @@ fi
 # a - Fenêtre pour les données obligatoires
 while true; do
   output=$(zenity --forms \
-    --title="Métadonnées obligatoires" \
-    --text="Tous les champs sont obligatoires." \
-    --add-entry="Titre" \
-    --add-entry="Auteur" \
-    --add-entry="Langue" \
-    --ok-label="Suivant" \
-    --cancel-label="Annuler")
+    --title="$LANG_TITLE_METADATA" \
+    --text="$LANG_TEXT_DATA_BASE" \
+    --add-entry="$LANG_ENTRY_TITLE" \
+    --add-entry="$LANG_ENTRY_CREATOR" \
+    --add-entry="$LANG_ENTRY_LANG" \
+    --ok-label="$LANG_LABEL_NEXT" \
+    --cancel-label="$LANG_LABEL_CANCEL")
 
   if [ $? -ne 0 ]; then
     # Entrée log
@@ -51,7 +51,7 @@ while true; do
   IFS="|" read -r title creator language <<< "$output"
 
   if [[ -z "$title" || -z "$creator" || -z "$language" ]]; then
-    zenity --error --text="Veuillez remplir tous les champs s'il vous plaît."
+    afficher_message error "$LANG_TEXT_ERROR_DATA_BASE"
     # Entrée log
     "$LOG" add DEBUG "│ Champs manquants lors de la saisie des données obligatoires."
   else
@@ -84,18 +84,18 @@ EOF
 #   2) RÉCUPÉRATION DES DONNÉES FACULTATIVES
 # a - Fenêtre pour les données facultatives
 output=$(zenity --forms \
-  --title="Métadonnées facultatives" \
-  --text="Données facultatives (remplissez uniquement ce que vous souhaitez)." \
-  --add-entry="Identifiant (ISBN)" \
-  --add-entry="Date (YYYY-MM-DD)" \
-  --add-entry="Éditeur" \
-  --add-entry="Contributeurs" \
-  --add-entry="Catégorie" \
-  --add-entry="Source (titre original)" \
-  --add-entry="Droits" \
-  --add-entry="Description" \
-  --ok-label="Suivant" \
-  --cancel-label="Annuler")
+  --title="$LANG_TITLE_METADATA" \
+  --text="$LANG_TEXT_DATA_OPT" \
+  --add-entry="$LANG_ENTRY_IDENTIFIER" \
+  --add-entry="$LANG_ENTRY_DATE" \
+  --add-entry="$LANG_ENTRY_PUBLISHER" \
+  --add-entry="$LANG_ENTRY_CONTRIBUTOR" \
+  --add-entry="$LANG_ENTRY_SUBJECT" \
+  --add-entry="$LANG_ENTRY_SOURCE" \
+  --add-entry="$LANG_ENTRY_RIGHTS" \
+  --add-entry="$LANG_ENTRY_DESCRIPTION" \
+  --ok-label="$LANG_LABEL_NEXT" \
+  --cancel-label="$LANG_LABEL_CANCEL")
 
 if [ $? -ne 0 ]; then
   # Entrée log
@@ -132,7 +132,7 @@ fi
 #   2) RÉCUPÉRATION DU DOSSIER DE TRAVAIL
 # a - Fenêtre pour sélectionner le dossier de travail
 while true; do
-  workdir=$(zenity --file-selection --directory --title="Sélectionnez le dossier de travail" --filename="~/")
+  workdir=$(zenity --file-selection --directory --title="$LANG_TITLE_BROWSE" --filename="~/")
 
   if [ $? -ne 0 ]; then
     # Entrée log

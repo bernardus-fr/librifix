@@ -1,0 +1,44 @@
+{
+  "title": {
+    "error": "Error",
+    "warning": "Warning",
+    "info": "Information",
+    "question": "Question",
+    "metadata": "Metadata",
+    "browse": "Select the working directory"
+  },
+  "message": {
+    "file_not_found": "File not found.",
+    "re_install": "Please reinstall the program!",
+    "operation_success": "Operation successful.",
+    "operation_failed": "Operation failed."
+  },
+  "label": {
+    "ok": "OK",
+    "cancel": "Cancel",
+    "next": "Next",
+    "open": "Open",
+    "close": "Close",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "text": {
+    "data_base": "Basic data - All fields are required",
+    "error_data_base": "Please fill in all the fields.",
+    "data_opt": "Optional data - Fill in only what you want",
+    "proj_in": "It looks like a project is already in progress. Do you want to resume it?"
+  },
+  "entry": {
+    "title": "Title",
+    "creator": "Author",
+    "lang": "Language",
+    "identifier": "Identifier (ISBN)",
+    "date": "Date (YYYY-MM-DD)",
+    "publisher": "Publisher",
+    "contributor": "Contributors",
+    "subject": "Category",
+    "source": "Source (original title)",
+    "rights": "Rights",
+    "description": "Description"
+  }
+}

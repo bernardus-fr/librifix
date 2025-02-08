@@ -48,10 +48,23 @@ cd "$EPUB_DIR"
 zip -Xr ../livre.epub mimetype * -x "*.DS_Store"
 cd - || exit 1
 
+cp "$EPUB_FILE" "livre.epub"
+EPUB_FILE="livre.epub"
+
 "$LOG" add DEBUG "│ L'EPUB a été créé avec succès sous le nom $EPUB_FILE."
 
 # Vérification de la conformité avec les normes epub.
-java -jar "$CHECK" "$EPUB_FILE"
+if [[ ! -f "$CHECK" ]]; then
+    "$LOG" add WARNING "│ EPUBCHECK n'a pas été trouvé, Impossible de vérifier la conformité epub."
+else
+    "$LOG" add DEBUG "│ Vérification de conformité avec EPUBCHECK..."
+    java -jar "$CHECK" "$EPUB_FILE"
+fi
 
-#ebook-viewer "$EPUB_FILE"
+# Exécution du livre dans ebook-viewer
+if command -v ebook-viewer &> /dev/null; then
+    "$LOG" add DEBUG "│ ebook-viewer présent dans le système, ouverture du livre..."
+    ebook-viewer "$EPUB_FILE" &
+fi
+
 exit 0

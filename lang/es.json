@@ -1,0 +1,44 @@
+{
+  "title": {
+    "error": "Error",
+    "warning": "Advertencia",
+    "info": "Información",
+    "question": "Pregunta",
+    "metadata": "Metadatos",
+    "browse": "Seleccione la carpeta de trabajo"
+  },
+  "message": {
+    "file_not_found": "Archivo no encontrado.",
+    "re_install": "Por favor, reinstale el programa!",
+    "operation_success": "Operación exitosa.",
+    "operation_failed": "Operación fallida."
+  },
+  "label": {
+    "ok": "OK",
+    "cancel": "Cancelar",
+    "next": "Siguiente",
+    "open": "Abrir",
+    "close": "Cerrar",
+    "yes": "Sí",
+    "no": "No"
+  },
+  "text": {
+    "data_base": "Datos básicos - Todos los campos son obligatorios",
+    "error_data_base": "Per favore, compila tutti i campi.",
+    "data_opt": "Datos opcionales - Rellene solo lo que desee",
+    "proj_in": "Parece que un proyecto ya está en curso. ¿Quieres retomarlo?"
+  },
+  "entry": {
+    "title": "Título",
+    "creator": "Autor",
+    "lang": "Idioma",
+    "identifier": "Identificador (ISBN)",
+    "date": "Fecha (YYYY-MM-DD)",
+    "publisher": "Editorial",
+    "contributor": "Colaboradores",
+    "subject": "Categoría",
+    "source": "Fuente (título original)",
+    "rights": "Derechos",
+    "description": "Descripción"
+  }
+}

@@ -27,6 +27,31 @@ source scripts/bash/utils.sh
 # Variables
 STATUS="$1"
 
+# Fonctio de mise à jour du status d'exit dans le config.ini
+update_last_exit_status() {
+    local status="$1"  # Récupère le statut passé en argument (ex: "success" ou "error")
+
+    # Vérifie que le fichier config.ini existe
+    if [[ ! -f "$CONFIG_FILE" ]]; then
+        "$LOG" add ERROR "Fichier de configuration introuvable : $CONFIG_FILE"
+        exit 1
+    fi
+
+    # Vérifie si la section [General] existe, sinon l'ajoute
+    if ! grep -q "^\[General\]" "$CONFIG_FILE"; then
+        echo -e "\n[General]" >> "$CONFIG_FILE"
+    fi
+
+    # Met à jour ou ajoute la valeur last_exit
+    if grep -q "^last_exit=" "$CONFIG_FILE"; then
+        sed -i "s|^last_exit=.*|last_exit=$status|" "$CONFIG_FILE"
+    else
+        echo "last_exit=$status" >> "$CONFIG_FILE"
+    fi
+
+    "$LOG" add DEBUG "Dernier état du programme enregistré : $status"
+}
+
 # Initialisation des logs
 "$LOG" add DEBUG "Annulation du programme"
 
@@ -40,11 +65,16 @@ fi
 # Fin des logs
 
 if [[ "$STATUS" == "error" ]]; then
+    update_last_exit_status "error"
     "$LOG" close error
 elif [[ "$STATUS" == "annulation" ]]; then
+    update_last_exit_status "cancel"
+    "$LOG" close
+elif [[ "$STATUS" == "success" ]]; then
+    update_last_exit_status "success"
     "$LOG" close
 else
-    echo "Mauvais usage du script. Utilisation : $0 {error|annulation}"
+    echo "Mauvais usage du script. Utilisation : $0 {error|annulation|success}"
     exit 1
 fi
 

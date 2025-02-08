@@ -45,9 +45,21 @@ Librifix runs with **Bash** and **Python**.
 ### Installation Steps
 
 1. Install the required dependencies:
-   - **Bash**:
+   - **ubuntu|debian|linuxmint**:
      ```sh
      sudo apt install zenity imagemagick zip default-jre python3 jq
+     ```
+   - **fedora|centos|rhel**:
+     ```sh
+     sudo dnf install zenity imagemagick zip default-jre python3 jq
+     ```
+   - **opensuse**:
+     ```sh
+     sudo zypper install zenity imagemagick zip default-jre python3 jq
+     ```
+   - **arch**:
+     ```sh
+     sudo pacman -S zenity imagemagick zip default-jre python3 jq
      ```
    - **Python libraries**:
      ```sh
@@ -113,10 +125,11 @@ Find the final file '**livre.epub**' in the '**temp**' folder of the program.
 
 ## Version History
 
-### Alpha Version 1.0
+### Alpha Version 1.XX
 
 - v1.0: Initial functional version of the project.
-- v1.1: Current version. See [CHANGELOG.md](CHANGELOG.md) for details.
+- v1.1: 2025-02-06 Minor update - small improvements
+- v1.2: 2025-02-08 Current version. See [CHANGELOG.md](CHANGELOG.md) for details.
 
 ### Beta Version 2.0 (Upcoming)
 

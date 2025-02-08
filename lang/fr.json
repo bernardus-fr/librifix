@@ -1,0 +1,44 @@
+{
+  "title": {
+    "error": "Erreur",
+    "warning": "Avertissement",
+    "info": "Information",
+    "question": "Question",
+    "metadata": "Métadonnées",
+    "browse": "Sélectionnez le dossier de travail"
+  },
+  "message": {
+    "file_not_found": "Fichier introuvable.",
+    "re_install": "Veuillez réinstaller le programme!",
+    "operation_success": "Opération réussie.",
+    "operation_failed": "Échec de l'opération."
+  },
+  "label": {
+    "ok": "OK",
+    "cancel": "Annuler",
+    "next": "Suivant",
+    "open": "Ouvrir",
+    "close": "Fermer",
+    "yes": "Oui",
+    "no": "Non"
+  },
+  "text": {
+    "data_base": "Données de base - Tous les champs sont obligatoire",
+    "error_data_base": "Veuillez remplir tous les champs s'il vous plaît.",
+    "data_opt": "Données optionnelles - Remplissez uniquement ce que vous souhaitez",
+    "proj_in": "Il semble qu'un projet soit déjà en cours. Voulez-vous le reprendre ?"
+  },
+  "entry": {
+    "title": "Titre",
+    "creator": "Auteur",
+    "lang": "Langue",
+    "identifier": "Identifiant (ISBN)",
+    "date": "Date (YYYY-MM-DD)",
+    "publisher": "Éditeur",
+    "contributor": "Contributeurs",
+    "subject": "Catégorie",
+    "source": "Source (titre original)",
+    "rights": "Droits",
+    "description": "Description"
+  }
+}
