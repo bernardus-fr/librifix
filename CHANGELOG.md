@@ -1,4 +1,4 @@
-# 📢 Librifix - Changelog (Alpha - V 1.2)
+# 📢 Librifix - Changelog (Alpha - V 1.2.2)
 
 ## 🚀 Improvements
 
@@ -29,12 +29,13 @@
 
 ### 🌍 Multi-language Support
 
-- Implemented language support for the interface (French, Italian, English, Spanish, German).
+- Implemented language support for the interface (French, Italian, English, Spanish, German...).
 - Simplified translation by using `lang.json` files without modifying the code.
 
 ## 🛠 Bug Fixes
 
 - Improved error handling and better `exit` management for smoother execution.
+- Fixed a bug where only the first paragraph of multi-paragraph notes was duplicated when synchronizing multiple references.
 
 ## 📄 Documentation Updates
 

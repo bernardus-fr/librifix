@@ -129,7 +129,7 @@ Find the final file '**livre.epub**' in the '**temp**' folder of the program.
 
 - v1.0: Initial functional version of the project.
 - v1.1: 2025-02-06 Minor update - small improvements
-- v1.2: 2025-02-08 Current version. See [CHANGELOG.md](CHANGELOG.md) for details.
+- v1.2.x: 2025-02-08 Current version. See [CHANGELOG.md](CHANGELOG.md) for details.
 
 ### Beta Version 2.0 (Upcoming)
 
