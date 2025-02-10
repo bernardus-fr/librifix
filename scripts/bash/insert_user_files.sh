@@ -106,6 +106,8 @@ while true; do
 
 done
 
+
+
 "$LOG" add DEBUG "│ Fin du script de gestion des fichiers."
 
 exit 0

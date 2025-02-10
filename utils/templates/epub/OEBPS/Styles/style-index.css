@@ -9,6 +9,10 @@ a {
   text-decoration: none;
   color: black;
 }
+ol {
+  list-style-type: none;
+  padding-left: 0;
+}
 .rang1 {
   text-align: justify;
   padding-top: 0.3em;

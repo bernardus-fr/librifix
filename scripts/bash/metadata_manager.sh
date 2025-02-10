@@ -29,6 +29,9 @@ if [ ! -d "$TEMP_DIR" ]; then
   "$LOG" add DEBUG "│ Répertoire temporaire créé : $TEMP_DIR"
 fi
 
+# Récupération de la liste de langue pour menu déroulant
+lang_list=$(paste -sd "|" "$EPUB_LANGS_FILE")
+
 #   1) RÉCUPÉRATION DES DONNÉES OBLIGATOIRES titre - auteur - langue
 # a - Fenêtre pour les données obligatoires
 while true; do
@@ -37,9 +40,11 @@ while true; do
     --text="$LANG_TEXT_DATA_BASE" \
     --add-entry="$LANG_ENTRY_TITLE" \
     --add-entry="$LANG_ENTRY_CREATOR" \
-    --add-entry="$LANG_ENTRY_LANG" \
+    --add-combo="$LANG_ENTRY_LANG" \
+    --combo-values="$lang_list" \
     --ok-label="$LANG_LABEL_NEXT" \
-    --cancel-label="$LANG_LABEL_CANCEL")
+    --cancel-label="$LANG_LABEL_CANCEL" \
+    --separator="|" )
 
   if [ $? -ne 0 ]; then
     # Entrée log
@@ -50,14 +55,26 @@ while true; do
 
   IFS="|" read -r title creator language <<< "$output"
 
+  # Vérification de la langue et passe au code iso.
+  language=$(echo "$language" | tr '[:upper:]' '[:lower:]')
+  EPUB_LANG=$(jq -r --arg lang "$language" '.[$lang] // empty' "$ISO_LANG")
+
+
   if [[ -z "$title" || -z "$creator" || -z "$language" ]]; then
     afficher_message error "$LANG_TEXT_ERROR_DATA_BASE"
     # Entrée log
     "$LOG" add DEBUG "│ Champs manquants lors de la saisie des données obligatoires."
   else
+    if [[ -z "$EPUB_LANG" ]]; then
+      afficher_message error "langue non pris en charge"
+    else
+      # Entrée log
+      "$LOG" add DEBUG "│ Données obligatoires collectées avec succès."
+      break
+    fi
     # Entrée log
     "$LOG" add DEBUG "│ Données obligatoires collectées avec succès."
-    break
+
   fi
 
   # Ajouter vérification que la langue soit bien prise en charge
@@ -71,7 +88,7 @@ cat > "$METADATA_FILE" <<EOF
 {
   "title": "$title",
   "creator": "$creator",
-  "language": "$language"
+  "language": "$EPUB_LANG"
 }
 EOF
 # Entrée log

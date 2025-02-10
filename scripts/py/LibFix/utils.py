@@ -22,4 +22,10 @@ import re
 
 def log_message(level, message):
     subprocess.run(["./scripts/bash/log_manager.sh", "add", level, message], check=True)
+
+# Chercher une valeur json
+def check_json_value(fichier, valeur):
+    with open(fichier, "r", encoding="utf-8") as file:
+        return json.load(file).get(valeur)
+
     

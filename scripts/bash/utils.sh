@@ -61,6 +61,7 @@ GEN_COVER="$PY_DIR/generate_cover.py"
 UPDATE_META_CONTENT="$PY_DIR/maj_meta_content.py"
 UPDATE_META_GARDE="$PY_DIR/maj_meta_garde.py"
 UPDATE_META_TOC="$PY_DIR/maj_meta_toc.py"
+UPDATE_META_NAV="$PY_DIR/maj_meta_nav.py"
 MAN_JSON="$PY_DIR/manage_json.py"
 UPDATE_MANIFEST="$PY_DIR/update_manifest.py"
 UPDATE_INDEX="$PY_DIR/update_index.py"
@@ -70,6 +71,7 @@ CURRENT_LOG="$LOG_DIR/current.log"
 METADATA_FILE="$TEMP_DIR/metadata.json"
 USER_FILES_JSON="$TEMP_DIR/user_files.json"
 CONFIG_FILE="config.ini"
+ISO_LANG="./utils/language_codes.json"
 
 # Variables générales du programme
 TEMP_STATUS=0   # 0 = pas de dossier temp, 1 = temp existant
@@ -110,6 +112,7 @@ case "$DISTRO" in
 esac
 
 # Configuration des variables de traduction
+# Traduction de l'interface
 if [[ -f "$CONFIG_FILE" ]]; then
     # Recherche de la langue
     SYS_LANG=$(grep "^language=" "$CONFIG_FILE" | cut -d '=' -f2)
@@ -117,9 +120,13 @@ else
     SYS_LANG=$(locale | grep "^LANG=" | cut -d= -f2 | cut -d_ -f1)
 fi
 
-LANG_FILE="lang/${SYS_LANG}.json"
+LANG_FILE="lang/interface/${SYS_LANG}.json"
 if [[ ! -f "$LANG_FILE" ]]; then
-    LANG_FILE="lang/en.json"
+    LANG_FILE="lang/interface/en.json"
+fi
+EPUB_LANGS_FILE="lang/epub/${SYS_LANG}.txt"
+if [[ ! -f "$EPUB_LANGS_FILE" ]]; then
+    EPUB_LANGS_FILE="lang/epub/fr.txt"
 fi
 
 # Définition des variables provenant du lang.json e.g. LANG_TITLE_ERROR...
@@ -351,17 +358,17 @@ check_program_integrity() {
         "./utils/templates/epub/OEBPS/Styles/style-notes.css"
         "./utils/templates/epub/OEBPS/Text/nav.xhtml"
         "./utils/templates/epub/OEBPS/Text/page_de_garde.xhtml"
-        "./lang/fr.json"
-        "./lang/it.json"
-        "./lang/en.json"
-        "./lang/es.json"
-        "./lang/de.json"
-        "./lang/da.json"
-        "./lang/hu.json"
-        "./lang/nl.json"
-        "./lang/pl.json"
-        "./lang/pt.json"
-        "./lang/epub_fr.json"
+        "./lang/interface/fr.json"
+        "./lang/interface/it.json"
+        "./lang/interface/en.json"
+        "./lang/interface/es.json"
+        "./lang/interface/de.json"
+        "./lang/interface/da.json"
+        "./lang/interface/hu.json"
+        "./lang/interface/nl.json"
+        "./lang/interface/pl.json"
+        "./lang/interface/pt.json"
+        "./lang/epub/fr.txt"
     )
 
     # Vérification des scripts Bash

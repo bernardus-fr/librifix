@@ -35,6 +35,7 @@ from LibFix import utils
 TOC_FILE = "temp/epub_temp/OEBPS/toc.ncx"
 NAV_FILE = "temp/epub_temp/OEBPS/Text/nav.xhtml"
 PACKAGE_NS = "http://www.idpf.org/2007/opf"
+METADATA_JSON = "temp/metadata.json"
 
 # Définir l'ordre de tri
 order_keys = [
@@ -251,18 +252,22 @@ def main():
         utils.log_message("ERROR", f"│ Fichier introuvable : {file_path}")
         sys.exit(1)
 
+    # Rechercher la langue de l'epub
+    langue = utils.check_json_value(METADATA_JSON, "language")
+    fichier_langue = f"lang/struct_epub/{langue}.json"
+
     if basename == "page_de_couverture":
-    	title_text = "Couverture"
+        title_text = utils.check_json_value(fichier_langue, "cover")
     elif basename == "quatrieme_couverture":
-    	title_text = "Quatrième de Couverture"
+        title_text = utils.check_json_value(fichier_langue, "back_cover")
     elif basename == "page_de_garde":
-    	title_text = "Page de Garde"
+        title_text = utils.check_json_value(fichier_langue, "guard_page")
     elif basename == "nav":
-    	title_text = "Table des Matières"
+        title_text = utils.check_json_value(fichier_langue, "table_of_contents")
     elif basename == "preface":
-    	title_text = "Préface"
+        title_text = utils.check_json_value(fichier_langue, "preface")
     elif basename == "introduction":
-    	title_text = "Introduction"
+        title_text = utils.check_json_value(fichier_langue, "intro")
     else:
     	title_text, file_id = extract_title_and_id(file_path)
 

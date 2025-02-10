@@ -109,6 +109,9 @@ def update_toc_ncx(metadata, language_map):
         utils.log_message("ERROR", f"│ Le fichier {toc_ncx_file} est introuvable.")
         raise FileNotFoundError(f"Le fichier {toc_ncx_file} est introuvable.")
 
+    # Rechercher la langue de l'epub
+    fichier_langue = f"lang/struct_epub/{metadata["language"]}.json"
+
     utils.log_message("DEBUG", "│ Mise à jour du fichier toc.ncx commencée.")
     tree = parse(toc_ncx_file)
     root = tree.getroot()
@@ -117,8 +120,8 @@ def update_toc_ncx(metadata, language_map):
     ncx_ns = "http://www.daisy.org/z3986/2005/ncx/"
 
     # Mise à jour de l'attribut xml:lang
-    language_code = get_language_code(metadata["language"], language_map)
-    root.set("{http://www.w3.org/XML/1998/namespace}lang", language_code)
+    #language_code = get_language_code(metadata["language"], language_map)
+    root.set("{http://www.w3.org/XML/1998/namespace}lang", metadata["language"])
     utils.log_message("DEBUG", f"│ Langue ajoutée: {metadata["language"]}")
 
     # Mise à jour de l'identifiant dans <meta name="dtb:uid">
@@ -137,6 +140,9 @@ def update_toc_ncx(metadata, language_map):
         text_elem = SubElement(doc_title_elem, f"{{{ncx_ns}}}text")
     text_elem.text = metadata["title"]
     utils.log_message("DEBUG", f"│ Titre ajouté: {metadata["title"]}")
+
+    for text in root.findall(f".//{{{ncx_ns}}}text"):
+        text.text = utils.check_json_value(fichier_langue, text.text)
 
     # Supprimer les préfixes des espaces de noms
     remove_namespace_prefixes(root)

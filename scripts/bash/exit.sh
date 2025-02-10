@@ -56,11 +56,11 @@ update_last_exit_status() {
 "$LOG" add DEBUG "Annulation du programme"
 
 # Nettoyage des fichiers temporaires
-if [ -d "$TEMP_DIR" ]; then
-	rm -r "$TEMP_DIR"
+#if [ -d "$TEMP_DIR" ]; then
+#	rm -r "$TEMP_DIR"
 	# Entrée dans les logs
-	"$LOG" add DEBUG "Suppression des fichiers temporaires: [OK]"
-fi
+#	"$LOG" add DEBUG "Suppression des fichiers temporaires: [OK]"
+#fi
 
 # Fin des logs
 

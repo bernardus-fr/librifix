@@ -185,6 +185,10 @@ distr_python "$UPDATE_META_TOC"
 distr_python "$UPDATE_META_GARDE"
 "$LOG" add DEBUG "├---- Sortie de maj_meta_garde.py ----"
 
+"$LOG" add DEBUG "├---- Exécution maj_meta_nav.py ----"
+distr_python "$UPDATE_META_NAV"
+"$LOG" add DEBUG "├---- Sortie de maj_nav.py ----"
+
 #    -----------------
 
 #   E) Traitement des fichiers utilisateur

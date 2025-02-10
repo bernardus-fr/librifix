@@ -13,13 +13,13 @@
   <navMap>
     <navPoint id="navpoint-1" playOrder="1">
       <navLabel>
-        <text>Page de Garde</text>
+        <text>guard_page</text>
       </navLabel>
       <content src="Text/page_de_garde.xhtml"/>
     </navPoint>
     <navPoint id="navpoint-2" playOrder="2">
       <navLabel>
-        <text>Table des matières</text>
+        <text>table_of_contents</text>
       </navLabel>
       <content src="Text/nav.xhtml"/>
     </navPoint>
