@@ -33,7 +33,7 @@ source scripts/bash/utils.sh
 # Mise à jour de user_files.json
 update_json() {
     local file="$1"
-    python3 "$MAN_JSON" update-status "$file" OK
+    distr_python "$MAN_JSON" update-status "$file" OK
     if [[ $? -eq 0 ]]; then
         "$LOG" add DEBUG "│ Fichier marqué comme traité dans user_files.json : $file"
     else
@@ -53,7 +53,7 @@ fi
 # Boucle principale pour traiter les fichiers
 while true; do
     # Récupérer le premier fichier non traité via un script Python
-    next_file=$(python3 "$MAN_JSON" get-first)
+    next_file=$(distr_python "$MAN_JSON" get-first)
 
     if [[ "$next_file" == "none" ]]; then
         "$LOG" add DEBUG "│ Aucun fichier à traiter dans user_files.json."
@@ -80,7 +80,7 @@ while true; do
         # Traitement des fichiers texte
         txt)
             "$LOG" add DEBUG "│ Fichier Texte détecté. Vérification des fichiers associés."
-            linked_notes=$(python3 "$MAN_JSON" find-note "$next_file")
+            linked_notes=$(distr_python "$MAN_JSON" find-note "$next_file")
 
             if [[ "$linked_notes" == "none" ]]; then
                 "$LOG" add DEBUG "│ Aucun fichier de notes associé trouvé."

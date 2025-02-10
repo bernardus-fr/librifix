@@ -152,7 +152,7 @@ fi
 # Vérification de l'identifient du livre:
 "$LOG" add DEBUG "│ VÉRIFICATION IDENTIFIENT DU LIVRE"
 "$LOG" add DEBUG "├---- Exécution uuid_gen.py ----"
-python3 "$GEN_UUID"
+distr_python "$GEN_UUID"
 "$LOG" add DEBUG "├---- Sortie de uuid_gen.py ----"
 
 #    -----------------
@@ -174,15 +174,15 @@ fi
 #   D) Mise à jour des métadonnées dans les fichiers de base epub
 "$LOG" add DEBUG "│ MISE À JOUR MÉTADONNÉES DANS FICHIERS DE BASE"
 "$LOG" add DEBUG "├--- Exécution maj_meta_content.py ----"
-python3 "$UPDATE_META_CONTENT"
+distr_python "$UPDATE_META_CONTENT"
 "$LOG" add DEBUG "├---- Sortie de maj_meta_content.py ----"
 
 "$LOG" add DEBUG "├---- Exécution maj_meta_toc.py ----"
-python3 "$UPDATE_META_TOC"
+distr_python "$UPDATE_META_TOC"
 "$LOG" add DEBUG "├---- Sortie de maj_meta_toc.py ----"
 
 "$LOG" add DEBUG "├---- Exécution maj_meta_garde.py ----"
-python3 "$UPDATE_META_GARDE"
+distr_python "$UPDATE_META_GARDE"
 "$LOG" add DEBUG "├---- Sortie de maj_meta_garde.py ----"
 
 #    -----------------
@@ -192,7 +192,7 @@ python3 "$UPDATE_META_GARDE"
 # - Analyse des fichiers utilisateurs:
 "$LOG" add DEBUG "│ - Analyser fichiers utilisateur -"
 "$LOG" add DEBUG "├---- Exécution analyse_files.py ----"
-python3 "$ANALYSE_FILES"
+distr_python "$ANALYSE_FILES"
 "$LOG" add DEBUG "├---- Sortie de analyse_files.py ----"
 
 # - Insersion des fichiers dans la sturture temporaire

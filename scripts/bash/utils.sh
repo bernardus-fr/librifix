@@ -73,7 +73,41 @@ CONFIG_FILE="config.ini"
 
 # Variables générales du programme
 TEMP_STATUS=0   # 0 = pas de dossier temp, 1 = temp existant
-DISTRO=None
+
+# Détecter la distribution
+if [ -f /etc/os-release ]; then
+    . /etc/os-release
+    DISTRO=$ID
+    #echo "Distribution système détectée $DISTRO"
+elif command -v lsb_release &>/dev/null; then
+    DISTRO=$(lsb_release -i | awk -F: '{print $2}' | xargs)
+    #echo "Distribution système détectée $DISTRO"
+else
+    echo "Impossible de détecter la distribution."
+fi
+
+# Définition des alias selon la distribution
+case "$DISTRO" in
+    ubuntu|debian|linuxmint)
+        distr_python() { python3 "$@"; }
+        distr_magick_convert() { convert "$@"; }
+        ;;
+    fedora|centos|rhel)
+        distr_python() { python3 "$@"; }
+        distr_magick_convert() { magick "$@"; }
+        ;;
+    opensuse*)
+        distr_python() { python3.12 "$@"; }
+        distr_magick_convert() { magick "$@"; }
+        ;;
+    arch)
+        distr_magick_convert() { magick convert "$@"; }
+        distr_python() { python "$@"; }
+        ;;
+    *)
+        echo "Distribution non supportée. Certaines commandes peuvent ne pas fonctionner."
+        ;;
+esac
 
 # Configuration des variables de traduction
 if [[ -f "$CONFIG_FILE" ]]; then
@@ -150,13 +184,14 @@ EOL
 # Fonction de vérification et installation des dépendances system du programme
 check_and_install_system_dependencies() {
     # Liste des dépendances système
-    local dependencies=("zenity" "zip" "imagemagick" "jq" "default-jre" "python3" "python3-pip")
+    
     DISTRO=$(grep "^distrib=" "$CONFIG_FILE" | cut -d '=' -f2)
     
     # Vérifications et installation en fonction de la distribution linux.
     case $DISTRO in
         ubuntu|debian|linuxmint) # Distribution Basée sur apt et dpgk
             "$LOG" add DEBUG "Vérification des dépendances système pour $DISTRO..."
+            local dependencies=("zenity" "zip" "imagemagick" "jq" "default-jre" "python3" "python3-pip" "python3-bs4")
             for pkg in "${dependencies[@]}"; do
                 if ! dpkg -s "$pkg" &>/dev/null; then
                     "$LOG" add DEBUG "$pkg non trouvé. Installation en cours..."
@@ -168,6 +203,7 @@ check_and_install_system_dependencies() {
             ;;
         fedora|centos|rhel) # Distribution basée sur dnf ou yum
             "$LOG" add DEBUG "Vérification des dépendances système pour $DISTRO..."
+            local dependencies=("zenity" "zip" "ImageMagick" "jq" "java-latest-openjdk" "python3" "python3-pip")
             for pkg in "${dependencies[@]}"; do
                 if command -v dnf &>/dev/null; then # Distribution basée sur dnf
                     if ! dnf list installed "$pkg" &>/dev/null; then
@@ -190,6 +226,7 @@ check_and_install_system_dependencies() {
             ;;
         opensuse) # Pour openSUSE avec zypper
             "$LOG" add DEBUG "Vérification des dépendances système pour $DISTRO..."
+            local dependencies=("zenity" "zip" "ImageMagick" "jq" "java-21-openjdk" "python312" "python312-pip" "python312-bs4")
             for pkg in "${dependencies[@]}"; do
                 if ! zypper se --installed-only "$pkg" &>/dev/null; then
                     "$LOG" add DEBUG "$pkg non trouvé. Installation en cours..."
@@ -201,6 +238,7 @@ check_and_install_system_dependencies() {
             ;;
         arch) # Pour Arch Linux avec pacman
             "$LOG" add DEBUG "Vérification des dépendances système pour $DISTRO..."
+            local dependencies=("zenity" "zip" "imagemagick" "jq" "jre-openjdk" "python" "python-pip")
             for pkg in "${dependencies[@]}"; do
                 if ! pacman -Q "$pkg" &>/dev/null; then
                     "$LOG" add DEBUG "$pkg non trouvé. Installation en cours..."
@@ -227,14 +265,40 @@ check_and_install_python_dependencies() {
 
     "$LOG" add DEBUG "Vérification des dépendances python..."
 
-    for module in "${modules[@]}"; do
-        if ! python3 -c "import $module" &>/dev/null; then
-            "$LOG" add DEBUG "Le module $module est manquant. Installation en cours..."
-            pip3 install "$module"
-        else
-            "$LOG" add DEBUG "$module [OK]]"
-        fi
-    done
+    case "$DISTRO" in
+        ubuntu|debian|linuxmint|fedora|centos|rhel)
+            for module in "${modules[@]}"; do
+                if ! python3 -c "import $module" &>/dev/null; then
+                    "$LOG" add DEBUG "Le module $module est manquant. Installation en cours..."
+                    pip3 install "$module"
+                else
+                    "$LOG" add DEBUG "$module [OK]]"
+                fi
+            done
+            ;;
+        opensuse*)
+            for module in "${modules[@]}"; do
+                if ! python3.12 -c "import $module" &>/dev/null; then
+                    "$LOG" add DEBUG "Le module $module est manquant. Installation en cours..."
+                    pip3.12 install "$module"
+                else
+                    "$LOG" add DEBUG "$module [OK]]"
+                fi
+            done
+            ;;
+        arch)
+            for module in "${modules[@]}"; do
+                if ! python -c "import $module" &>/dev/null; then
+                    "$LOG" add DEBUG "Le module $module est manquant. Installation en cours..."
+                    pip install "$module"
+                else
+                    "$LOG" add DEBUG "$module [OK]]"
+                fi
+            done
+            ;;
+    esac
+
+
     "$LOG" add DEBUG "Vérification des dépendances python terminée."
 }
 
@@ -292,6 +356,11 @@ check_program_integrity() {
         "./lang/en.json"
         "./lang/es.json"
         "./lang/de.json"
+        "./lang/da.json"
+        "./lang/hu.json"
+        "./lang/nl.json"
+        "./lang/pl.json"
+        "./lang/pt.json"
         "./lang/epub_fr.json"
     )
 

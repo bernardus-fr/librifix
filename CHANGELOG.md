@@ -14,7 +14,6 @@
   - Ubuntu, Debian, Linux Mint
   - Fedora, CentOS, RHEL
   - openSUSE
-  - Arch Linux
 
 ### 🔍 Integrity & Execution Checks
 

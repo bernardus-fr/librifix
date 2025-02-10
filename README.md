@@ -26,7 +26,9 @@ Librifix primarily handles EPUB file structuring. Once the EPUB is generated, ma
 Librifix runs with **Bash** and **Python**.
 
 - **Bash**: Requires `Zenity` and `json` libraries.
-- **Python**: Requires **Python 3.x** and the following libraries:
+- **Python**: WARNING Requires **Python 3.12** and the following libraries:
+  - `bs4` (BeautifulSoup)
+  - `uuid`
   - `os`
   - `json`
   - `pathlib`
@@ -36,34 +38,29 @@ Librifix runs with **Bash** and **Python**.
   - `xml.etree.ElementTree`
   - `datetime`
   - `time`
-  - `bs4` (BeautifulSoup)
-  - `uuid`
-- **Java**: Required to run **EPUBCheck**, which is included in the software.
 - **ImageMagick**: Required for image processing.
 - **Zip**: Required for EPUB archive creation.
+- **Rcommended Installations** :
+  - `Calibre` : Required to run the epub with `ebook-viewer` or modificate with E-Book Editor
+  - `Java` : Required to run **EPUBCheck**, which is included in the software.
 
 ### Installation Steps
 
 1. Install the required dependencies:
    - **ubuntu|debian|linuxmint**:
      ```sh
-     sudo apt install zenity imagemagick zip default-jre python3 jq
+     sudo apt install zenity jq imagemagick zip default-jre python3 python3-pip python3-bs4 calibre
+     pip3 install bs4 ; pip3 install uuid ; pip3 install os ; pip3 install json ; pip3 install pathlib ; pip3 install subprocess ; pip3 install re ; pip3 install sys xml.etree.ElementTree ; pip3 install datetime ; pip3 install time
      ```
    - **fedora|centos|rhel**:
      ```sh
-     sudo dnf install zenity imagemagick zip default-jre python3 jq
+     sudo dnf install zenity jq ImageMagick zip java-latest-openjdk python3 python3-pip
+     pip3 install bs4 ; pip3 install uuid ; pip3 install os ; pip3 install json ; pip3 install pathlib ; pip3 install subprocess ; pip3 install re ; pip3 install sys xml.etree.ElementTree ; pip3 install datetime ; pip3 install time
      ```
    - **opensuse**:
      ```sh
-     sudo zypper install zenity imagemagick zip default-jre python3 jq
-     ```
-   - **arch**:
-     ```sh
-     sudo pacman -S zenity imagemagick zip default-jre python3 jq
-     ```
-   - **Python libraries**:
-     ```sh
-     pip install bs4 os json pathlib subprocess re sys xml.etree.ElementTree datetime time uuid
+     sudo zypper install zenity jq ImageMagick zip java-17-openjdk python312 python312-pip python312-bs4
+     pip3.12 install bs4 ; pip3.12 install uuid ; pip3.12 install os ; pip3.12 install json ; pip3.12 install pathlib ; pip3.12 install subprocess ; pip3.12 install re ; pip3.12 install sys xml.etree.ElementTree ; pip3.12 install datetime ; pip3.12 install time
      ```
 2. Clone the repository:
    ```sh

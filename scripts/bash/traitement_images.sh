@@ -64,14 +64,14 @@ process_image() {
     # Redimensionner l'image si elle excède les dimensions autorisées
     if (( image_width > 1300 || image_height > 2000 )); then
         "$LOG" add DEBUG "│ Redimensionnement de l'image au plus proche de 1024x1600 pixels."
-        convert "$image_path" -resize 1024x1600\> "$image_path"
+        distr_magick_convert "$image_path" -resize 1024x1600\> "$image_path"
     fi
 
     # Convertir en JPG si ce n'est pas déjà le cas
     if [[ ! "$image_file" =~ \.jpg$ ]]; then
         "$LOG" add DEBUG "│ Conversion de l'image en format JPG."
         local new_image_path="${image_path%.*}.jpg"
-        convert "$image_path" "$new_image_path"
+        distr_magick_convert "$image_path" "$new_image_path"
         image_path="$new_image_path"
         image_file="$(basename "$new_image_path")"
     fi
@@ -94,32 +94,32 @@ if [[ "$image_basename" == "cover" || "$image_basename" == "4cover" ]]; then
     # Génération de la page XHTML correspondante
     if [[ "$image_basename" == "cover" ]]; then
         "$LOG" add DEBUG "│ Génération de la page de couverture au format xhtml."
-        python3 "$PY_DIR/generate_cover.py" "Images/$image_basename.jpg"
+        distr_python "$PY_DIR/generate_cover.py" "Images/$image_basename.jpg"
         "$LOG" add DEBUG "│ Génération xhtml terminée pour cover."
 
         # Mise à jour du manifest
         "$LOG" add DEBUG "│ Mise à jour du manifest pour cover."
-        python3 "$PY_DIR/update_manifest.py" "Images/$image_basename.jpg"
-        python3 "$PY_DIR/update_manifest.py" "Text/page_de_couverture.xhtml"
-        python3 "$PY_DIR/update_manifest.py" "Styles/style-cover.css"
-        python3 "$PY_DIR/update_index.py" "page_de_couverture.xhtml"
+        distr_python "$PY_DIR/update_manifest.py" "Images/$image_basename.jpg"
+        distr_python "$PY_DIR/update_manifest.py" "Text/page_de_couverture.xhtml"
+        distr_python "$PY_DIR/update_manifest.py" "Styles/style-cover.css"
+        distr_python "$PY_DIR/update_index.py" "page_de_couverture.xhtml"
     elif [[ "$image_basename" == "4cover" ]]; then
         "$LOG" add DEBUG "│ Génération de la quatrième de couverture au format xhtml."
-        python3 "$PY_DIR/generate_cover.py" "Images/$image_basename.jpg"
+        distr_python "$PY_DIR/generate_cover.py" "Images/$image_basename.jpg"
         "$LOG" add DEBUG "│ Génération xhtml terminée pour 4cover."
 
         # Mise à jour du manifest
         "$LOG" add DEBUG "│ Mise à jour du manifest pour 4cover."
-        python3 "$PY_DIR/update_manifest.py" "Images/$image_basename.jpg"
-        python3 "$PY_DIR/update_manifest.py" "Text/quatrieme_couverture.xhtml"
-        python3 "$PY_DIR/update_manifest.py" "Styles/style-cover.css"
-        python3 "$PY_DIR/update_index.py" "quatrieme_couverture.xhtml"
+        distr_python "$PY_DIR/update_manifest.py" "Images/$image_basename.jpg"
+        distr_python "$PY_DIR/update_manifest.py" "Text/quatrieme_couverture.xhtml"
+        distr_python "$PY_DIR/update_manifest.py" "Styles/style-cover.css"
+        distr_python "$PY_DIR/update_index.py" "quatrieme_couverture.xhtml"
     fi
 else
     # Traitement générique pour les autres images
     process_image "$image_path" "$image_file"
     "$LOG" add DEBUG "│ Mise à jour du manifest pour une image générique."
-    python3 "$PY_DIR/update_manifest.py" "Images/${image_basename}.jpg"
+    distr_python "$PY_DIR/update_manifest.py" "Images/${image_basename}.jpg"
 fi
 
 "$LOG" add DEBUG "│ Traitement terminé pour l'image : $image_file"

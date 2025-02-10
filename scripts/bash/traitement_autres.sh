@@ -70,7 +70,7 @@ if cp "$source_file" "$dest_path"; then
     "$LOG" add DEBUG "│ Fichier déplacé vers : $dest_path"
     # Mise à jour du manifest avec le script Python
     relative_path="${dest_subdir}/${file_name}"
-    if python3 "$UPDATE_MANIFEST" "$relative_path"; then
+    if distr_python "$UPDATE_MANIFEST" "$relative_path"; then
         "$LOG" add DEBUG "│ Fichier ajouté au manifest via le script Python : $relative_path"
     else
         "$LOG" add ERROR "│ Échec de la mise à jour du manifest pour : $relative_path"

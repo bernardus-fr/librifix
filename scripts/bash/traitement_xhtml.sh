@@ -69,7 +69,7 @@ treat_with_notes() {
 	local texte_out="$TXT_DIR/${index_texte}.xhtml"
 
 	# Étape 1 : Synchronisation des notes
-    python3 "$SYNC_CHAP_NOTES" "$texte" "$notes" "$notes_sync"
+    distr_python "$SYNC_CHAP_NOTES" "$texte" "$notes" "$notes_sync"
     if [[ $? -ne 0 ]]; then
         "$LOG" add ERROR "│ Synchronisation : Erreur de traitement pour $texte et $notes"
         exit 1
@@ -77,12 +77,12 @@ treat_with_notes() {
     "$LOG" add DEBUG "│ Synchronisation réussie pour $texte et $notes : $notes_sync"
 
     # Étape 2 : Traitement des notes synchronisées
-    python3 "$TRAIT_NOTES_REF" "$notes_sync" "$texte_xhtml" "$notes_modif"
+    distr_python "$TRAIT_NOTES_REF" "$notes_sync" "$texte_xhtml" "$notes_modif"
     if [[ $? -ne 0 ]]; then
     	"$LOG" add ERROR "│ Erreur lors du traitement de : $notes_sync"
         exit 1
     fi
-    python3 "$TRAIT_NOTES_HTML" "$index_notes" "$notes_modif" "$notes_out"
+    distr_python "$TRAIT_NOTES_HTML" "$index_notes" "$notes_modif" "$notes_out"
     if [[ $? -ne 0 ]]; then
     	"$LOG" add ERROR "│ Erreur lors du traitement de : $notes_modif"
         exit 1
@@ -90,12 +90,12 @@ treat_with_notes() {
     "$LOG" add DEBUG "│ Traitement des notes Terminé: $notes_xhtml"
 
     # Étape 3 : Traitement du chapitre
-    python3 "$TRAIT_CHAP_REF" "$texte" "$notes_xhtml" "$texte_modif"
+    distr_python "$TRAIT_CHAP_REF" "$texte" "$notes_xhtml" "$texte_modif"
     if [[ $? -ne 0 ]]; then
     	"$LOG" add ERROR "│ Erreur lors du traitement de : $texte"
         exit 1
     fi
-    python3 "$TRAIT_CHAP_HTML" "$index_texte" "$texte_modif" "$texte_out"
+    distr_python "$TRAIT_CHAP_HTML" "$index_texte" "$texte_modif" "$texte_out"
     if [[ $? -ne 0 ]]; then
     	"$LOG" add ERROR "│ Erreur lors du traitement de : $texte_modif"
         exit 1
@@ -109,10 +109,10 @@ treat_with_notes() {
     "$LOG" add DEBUG "│ Fichiers temporaires supprimés: $notes_sync $notes_modif $texte_modif"
 
     # Mise à jour du manifest et de la table des matières
-    python3 "$PY_DIR/update_manifest.py" "Text/${index_texte}.xhtml"
-    python3 "$PY_DIR/update_manifest.py" "Text/${index_notes}.xhtml"
+    distr_python "$PY_DIR/update_manifest.py" "Text/${index_texte}.xhtml"
+    distr_python "$PY_DIR/update_manifest.py" "Text/${index_notes}.xhtml"
     "$LOG" add INFO "│ <manifest> mis à jour avec: Text/${index_texte}.xhtml Text/${index_notes}.xhtml"
-    python3 "$PY_DIR/update_index.py" "${index_texte}.xhtml"
+    distr_python "$PY_DIR/update_index.py" "${index_texte}.xhtml"
     "$LOG" add INFO "│ Index mis à jour avec: Text/${index_texte}.xhtml"
 }
 
@@ -128,7 +128,7 @@ treat_no_notes() {
 	local texte_out="$TXT_DIR/${index_texte}.xhtml"
 
 	# Génération du html
-    python3 "$TRAIT_CHAP_HTML" "$index_texte" "$texte" "$texte_out"
+    distr_python "$TRAIT_CHAP_HTML" "$index_texte" "$texte" "$texte_out"
     if [[ $? -ne 0 ]]; then
     	"$LOG" add ERROR "│ Erreur lors du traitement de : $texte"
         exit 1
@@ -136,9 +136,9 @@ treat_no_notes() {
     "$LOG" add DEBUG "│ Traitement du texte Terminé: $texte_xhtml"
 
     # Mise à jour du manifest
-    python3 "$PY_DIR/update_manifest.py" "Text/${index_texte}.xhtml"
+    distr_python "$PY_DIR/update_manifest.py" "Text/${index_texte}.xhtml"
     "$LOG" add DEBUG "│ <manifest> mis à jour avec: Text/${index_texte}.xhtml"
-    python3 "$PY_DIR/update_index.py" "${index_texte}.xhtml"
+    distr_python "$PY_DIR/update_index.py" "${index_texte}.xhtml"
     "$LOG" add DEBUG "│ Index mis à jour avec: Text/${index_texte}.xhtml"
 }
 
