@@ -15,8 +15,18 @@
 
 
 #       FONCTION DU SCRIPT:
+<<<<<<< HEAD
+#  Script de mise à jour de l'index: fichiers nav.xhtml et toc.ncx par la réception d'un fichiers
+# à la foi, reçu en argument, et qui doit être intégré dans l'ordre de lecture juste.
+# Extraction du titre et son ID
+# Défénition de l'ordre
+# Attention aux namespaces
+# Indentation du xml
+# Mise à jour des fichiers respectifs toc et nav.
+=======
 #  Script de mise à jour de l'index: fichiers nav.xhtml avec les simples métadonnées reçues
 # de l'utilisateur, spécialement la langue
+>>>>>>> 6ab396747c4d7624ad3f78fcf17e802bfb8c382a
 
 
 import os

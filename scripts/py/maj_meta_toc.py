@@ -48,23 +48,6 @@ def load_metadata():
     utils.log_message("DEBUG", "│ Méta-données chargées avec succès.")
     return metadata
 
-# Chargement de la correspondance des codes de langue
-def load_language_codes():
-    if not os.path.exists(language_codes_file):
-        utils.log_message("ERROR", f"│ Le fichier {language_codes_file} est introuvable.")
-        raise FileNotFoundError(f"Le fichier {language_codes_file} est introuvable.")
-
-    with open(language_codes_file, "r", encoding="utf-8") as f:
-        language_map = json.load(f)
-
-    utils.log_message("DEBUG", "│ Fichier de codes de langues chargé avec succès.")
-    return language_map
-
-# Conversion du nom de la langue en code ISO
-def get_language_code(language_name, language_map):
-    language_name_lower = language_name.strip().lower()
-    return language_map.get(language_name_lower, language_name_lower)
-
 # Ajout de l'indentation pour le formatage XML
 def indent_tree(elem, level=0):
     i = "\n" + level * "  "
@@ -104,7 +87,7 @@ def get_current_iso8601():
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 # Mise à jour du fichier toc.ncx
-def update_toc_ncx(metadata, language_map):
+def update_toc_ncx(metadata):
     if not os.path.exists(toc_ncx_file):
         utils.log_message("ERROR", f"│ Le fichier {toc_ncx_file} est introuvable.")
         raise FileNotFoundError(f"Le fichier {toc_ncx_file} est introuvable.")
@@ -120,7 +103,10 @@ def update_toc_ncx(metadata, language_map):
     ncx_ns = "http://www.daisy.org/z3986/2005/ncx/"
 
     # Mise à jour de l'attribut xml:lang
+<<<<<<< HEAD
+=======
     #language_code = get_language_code(metadata["language"], language_map)
+>>>>>>> 6ab396747c4d7624ad3f78fcf17e802bfb8c382a
     root.set("{http://www.w3.org/XML/1998/namespace}lang", metadata["language"])
     utils.log_message("DEBUG", f"│ Langue ajoutée: {metadata["language"]}")
 
@@ -160,8 +146,7 @@ def main():
     try:
         utils.log_message("DEBUG", "│ Début de la mise à jour du fichier toc.ncx.")
         metadata = load_metadata()
-        language_map = load_language_codes()
-        update_toc_ncx(metadata, language_map)
+        update_toc_ncx(metadata)
         utils.log_message("DEBUG", "│ Mise à jour du fichier toc.ncx terminée avec succès.")
     except Exception as e:
         utils.log_message("ERROR", f"│ Erreur : {e}")

@@ -1,0 +1,22 @@
+{
+	"fr": ["français", "französisch", "french", "francese", "francuski", "fransk", "francés", "franca", "ranskalainen", "francia", "fraincis", "franska", "gallica", "frans", "francês", "franceză", "francouzština"],
+	"en": ["anglais", "english", "inglese", "englisch", "engleski", "engelsk", "inglés", "anglan", "englanti", "angol", "béarla", "ensku", "anglicus", "engelsk", "engels", "angielski", "inglês", "engleză", "angličtina"],
+	"it": ["italien", "italian", "italiano", "italienisch", "italiensk", "olasz", "italiaans", "włoski", "italiană", "italský", "ítalska", "iodálach", "itala", "talijanski", "talianu"],
+	"de": ["allemand", "german", "tedesco", "deutsch", "tysk", "alemán", "saksa", "német", "duits", "niemiecki", "alemão", "germană", "německy", "þýska", "gearmáinis", "germana", "njemački", "tedescu"],
+	"da": ["danois", "danish", "danese", "dänisch", "dansk", "danés", "tanska", "dán", "deens", "duński", "dinamarquês", "daneză", "dánština", "danska", "danmhairgis", "dana", "danski", "danica"],
+	"es": ["espagnol", "spanish", "spagnolo", "spanisch", "spansk", "español", "espanja", "spanyol", "spaans", "hiszpański", "espanhol", "spaniolă", "spanělština", "spænska", "spáinnis", "hispana", "španjolski", "spagnolu", "hispanice"],
+	"fi": ["finnois", "finnish", "finlandese", "finnisch", "finsk", "finlandés", "suomi", "finn", "fins", "fiński", "finlandês", "finlandeză", "finština", "finnska", "fionlainnis", "finna", "finski", "finnicum"],
+	"hu": ["hongrois", "hungarian", "ungherese", "ungarisch", "ungarsk", "húngaro", "unkari", "magyar", "hongaars", "węgierski", "maghiară", "maďarština", "ungverska", "ungáiris", "hungara", "mađarski", "hungarica"],
+	"no": ["norvégien", "norwegian", "norvegese", "norwegisch", "norsk", "noruego", "norja", "norvég", "noors", "norweski", "norueguês", "norvegiană", "norština", "norska", "ioruais", "norvega", "norveški", "novegese", "norvegica"],
+	"nl": ["néerlandais", "hollandais", "dutch", "olandese", "niederländisch", "hollandsk", "holandés", "hollanti", "holland", "nederlandsk", "nederlands", "niderlandzki", "neerlandês", "olandeză", "nizozemština", "hollenska", "ollainnis", "nederlanda", "nizozemski", "ulandesa", "batavica"],
+	"pl": ["polonais", "polish", "polacco", "polnisch", "polsk", "polaco", "puola", "lengyel", "pools", "polski", "poloneză", "polština", "pólsku", "polainnis", "pola", "polirati", "pulaccu", "polonica"],
+	"pt": ["portugais", "portuguese", "portoghese", "portugiesisch", "portugisisk", "portugués", "portugali", "portugál", "portugees", "portugalski", "português", "portugheză", "portugalština", "portúgalska", "portaingéilis", "portugala", "portughese"],
+	"ro": ["roumain", "romanian", "rumeno", "rumänisch", "rumænsk", "rumano", "román", "rumensk", "roemeens", "rumuński", "romeno", "română", "rumunština", "rúmenska", "rómáinis", "rumana", "rumunjski", "rumenu"],
+	"cs": ["tchèque", "czech", "ceco", "tschechisch", "tjekkisk", "checo", "tšekki", "cseh", "tsjekkisk", "tsjechisch", "czeski", "cehă", "čeština", "tékkneska", "seiceach", "ĉeĥa", "češki", "ceccu"],
+	"la": ["latin", "latino", "lateinisch", "latinalainen", "latijn", "łacina", "latim", "latină", "latinsky", "latína", "laidin", "latina", "latinski", "latinu", "latinus"],
+	"is": ["islandais", "icelandic", "islandese", "isländisch", "islandsk", "islandés", "islanti", "izlandi", "ijslands", "islandzki", "islandês", "islandeză", "islandština", "íslenskur", "íoslainnis", "islanda", "islandski", "islandesu", "islandic"],
+	"ga": ["irlandais", "irish", "irlandese", "irisch", "irsk", "irlandés", "irlannin", "ír", "iers", "irlandzki", "irlandês", "irlandeză", "irština", "írska", "gaeilge", "irlandano", "irski", "hibernica"],
+	"eo": ["espéranto", "esperanto", "eszperantó", "esperantó", "esperantu"],
+	"hr": ["croate", "croatian", "croato", "kroatisch", "kroatisk", "croata", "kroatian", "horvát", "chorwacki", "croată", "chorvatština", "króatíska", "cróitis", "kroata", "hrvatski", "cruatu"],
+	"co": ["corse", "corsican", "corso", "korsika", "korsikansk", "córcega", "korzikai", "corsicaans", "korsykański", "córsego", "corsicană", "korsičtina", "korsíka", "chorsaic", "korsiko", "korzika", "corsica"]
+}

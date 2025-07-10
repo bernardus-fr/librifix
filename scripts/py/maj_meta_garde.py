@@ -47,24 +47,7 @@ def load_metadata():
     utils.log_message("DEBUG", "│ Méta-données chargées avec succès.")
     return metadata
 
-# Chargement de la correspondance des codes de langue
-def load_language_codes():
-    if not os.path.exists(language_codes_file):
-        utils.log_message("ERROR", f"│ Le fichier {language_codes_file} est introuvable.")
-        raise FileNotFoundError(f"Le fichier {language_codes_file} est introuvable.")
-
-    with open(language_codes_file, "r", encoding="utf-8") as f:
-        language_map = json.load(f)
-
-    utils.log_message("DEBUG", "│ Fichier de codes de langues chargé avec succès.")
-    return language_map
-
-# Conversion du nom de la langue en code ISO
-def get_language_code(language_name, language_map):
-    language_name_lower = language_name.strip().lower()
-    return language_map.get(language_name_lower, language_name_lower)
-
-def update_cover_page(metadata, language_map):
+def update_cover_page(metadata):
     try:
         # Ouvrir et lire le fichier HTML de la page de garde
         utils.log_message("DEBUG", f"│ Ouverture de {cover_page_file}")
@@ -74,11 +57,10 @@ def update_cover_page(metadata, language_map):
         utils.log_message("DEBUG", "│ Inscription des métadonnées")
 
         # Mise à jour de la langue dans la balise <html>
-        language_code = get_language_code(metadata["language"], language_map)
         html_tag = soup.find('html')
         if html_tag:
-            html_tag['xml:lang'] = language_code
-            html_tag['lang'] = language_code
+            html_tag['xml:lang'] = metadata["language"]
+            html_tag['lang'] = metadata["language"]
 
         utils.log_message("DEBUG", f"│ Langue mise à jour {metadata["language"]}")
 
@@ -115,8 +97,7 @@ def main():
     try:
         utils.log_message("DEBUG", "│ Début de la mise à jour de la page de garde.")
         metadata = load_metadata()
-        language_map = load_language_codes()
-        update_cover_page(metadata, language_map)
+        update_cover_page(metadata)
         utils.log_message("DEBUG", "│ Mise à jour de la page de garde terminée avec succès.")
     except Exception as e:
         utils.log_message("ERROR", f"│ Erreur : {e}")

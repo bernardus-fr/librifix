@@ -49,23 +49,6 @@ def load_metadata():
     utils.log_message("DEBUG", "│ Méta-données chargées avec succès.")
     return metadata
 
-# Chargement de la correspondance des codes de langue
-def load_language_codes():
-    if not os.path.exists(language_codes_file):
-        utils.log_message("ERROR", f"│ Le fichier {language_codes_file} est introuvable.")
-        raise FileNotFoundError(f"Le fichier {language_codes_file} est introuvable.")
-
-    with open(language_codes_file, "r", encoding="utf-8") as f:
-        language_map = json.load(f)
-
-    utils.log_message("DEBUG", "│ Fichier de codes de langues chargé avec succès.")
-    return language_map
-
-# Conversion du nom de la langue en code ISO
-def get_language_code(language_name, language_map):
-    language_name_lower = language_name.strip().lower()
-    return language_map.get(language_name_lower, language_name_lower)
-
 # Ajout de l'indentation pour le formatage XML
 def indent_tree(elem, level=0):
     i = "\n" + level * "  "
@@ -96,7 +79,7 @@ def get_current_iso8601():
     # return datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
 
 # Mise à jour du fichier content.opf
-def update_content_opf(metadata, language_map):
+def update_content_opf(metadata):
     if not os.path.exists(content_opf_file):
         utils.log_message("ERROR", f"│ Le fichier {content_opf_file} est introuvable.")
         raise FileNotFoundError(f"Le fichier {content_opf_file} est introuvable.")
@@ -136,8 +119,7 @@ def update_content_opf(metadata, language_map):
     update_or_create("creator", metadata["creator"])
     utils.log_message("DEBUG", f"│ Auteur ajouté: {metadata["creator"]}")
 
-    language_code = get_language_code(metadata["language"], language_map)
-    update_or_create("language", language_code)
+    update_or_create("language", metadata["language"])
     utils.log_message("DEBUG", f"│ Lange ajoutée: {metadata["language"]}")
 
     # Mise à jour de la balise dcterms:modified
@@ -182,8 +164,7 @@ def main():
     try:
         utils.log_message("DEBUG", "│ Début de la mise à jour des métadonnées EPUB.")
         metadata = load_metadata()
-        language_map = load_language_codes()
-        update_content_opf(metadata, language_map)
+        update_content_opf(metadata)
         utils.log_message("DEBUG", "│ Mise à jour des métadonnées terminée avec succès.")
     except Exception as e:
         utils.log_message("ERROR", f"│ Erreur : {e}")

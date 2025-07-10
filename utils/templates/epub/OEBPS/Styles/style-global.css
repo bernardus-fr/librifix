@@ -18,3 +18,37 @@ a {
   text-decoration: none;
   color: black;
 }
+
+.image-flottante-g {
+  float: left;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  text-align: center;
+  width: 45%;
+  text-indent: 0;
+}
+
+.image-flottante-d {
+  float: right;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  text-align: center;
+  width: 45%;
+  text-indent: 0;
+}
+
+.IDT {
+  width: 100%;
+}
+
+.txt-image {
+  text-align: center;
+  font-size: 0.6em;
+  font-style: italic;
+  font-weight: normal;
+  margin-bottom: 0;
+  margin-top: 1%;
+  text-indent: 0;
+}

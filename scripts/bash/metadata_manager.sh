@@ -56,8 +56,14 @@ while true; do
   IFS="|" read -r title creator language <<< "$output"
 
   # Vérification de la langue et passe au code iso.
+<<<<<<< HEAD
+  EPUB_LANG=$(get_lang_iso_code "$language")
+  #language=$(echo "$language" | tr '[:upper:]' '[:lower:]')
+  #EPUB_LANG=$(jq -r --arg lang "$language" '.[$lang] // empty' "$ISO_LANG")
+=======
   language=$(echo "$language" | tr '[:upper:]' '[:lower:]')
   EPUB_LANG=$(jq -r --arg lang "$language" '.[$lang] // empty' "$ISO_LANG")
+>>>>>>> 6ab396747c4d7624ad3f78fcf17e802bfb8c382a
 
 
   if [[ -z "$title" || -z "$creator" || -z "$language" ]]; then

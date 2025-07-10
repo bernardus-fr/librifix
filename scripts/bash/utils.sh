@@ -71,7 +71,11 @@ CURRENT_LOG="$LOG_DIR/current.log"
 METADATA_FILE="$TEMP_DIR/metadata.json"
 USER_FILES_JSON="$TEMP_DIR/user_files.json"
 CONFIG_FILE="config.ini"
+<<<<<<< HEAD
+ISO_LANG="./lang/iso_code_lang.json"
+=======
 ISO_LANG="./utils/language_codes.json"
+>>>>>>> 6ab396747c4d7624ad3f78fcf17e802bfb8c382a
 
 # Variables générales du programme
 TEMP_STATUS=0   # 0 = pas de dossier temp, 1 = temp existant
@@ -102,9 +106,9 @@ case "$DISTRO" in
         distr_python() { python3.12 "$@"; }
         distr_magick_convert() { magick "$@"; }
         ;;
-    arch)
+    arch|cachyos)
         distr_magick_convert() { magick convert "$@"; }
-        distr_python() { python "$@"; }
+        distr_python() { python3.13 "$@"; }
         ;;
     *)
         echo "Distribution non supportée. Certaines commandes peuvent ne pas fonctionner."
@@ -340,6 +344,7 @@ check_program_integrity() {
         "$UPDATE_META_CONTENT"
         "$UPDATE_META_GARDE"
         "$UPDATE_META_TOC"
+        "$UPDATE_META_NAV"
         "$MAN_JSON"
         "$UPDATE_MANIFEST"
         "$UPDATE_INDEX"
@@ -347,7 +352,6 @@ check_program_integrity() {
 
     # Liste des autres fichiers
     local others_files=(
-        "./utils/language_codes.json"
         "./utils/templates/epub/mimetype"
         "./utils/templates/epub/META-INF/container.xml"
         "./utils/templates/epub/OEBPS/content.opf"
@@ -358,6 +362,11 @@ check_program_integrity() {
         "./utils/templates/epub/OEBPS/Styles/style-notes.css"
         "./utils/templates/epub/OEBPS/Text/nav.xhtml"
         "./utils/templates/epub/OEBPS/Text/page_de_garde.xhtml"
+<<<<<<< HEAD
+        "./lang/files_name.json"
+        "./lang/iso_code_lang.json"
+=======
+>>>>>>> 6ab396747c4d7624ad3f78fcf17e802bfb8c382a
         "./lang/interface/fr.json"
         "./lang/interface/it.json"
         "./lang/interface/en.json"
@@ -467,4 +476,24 @@ check_last_exit_status() {
             return 1
             ;;
     esac
+}
+
+get_lang_iso_code() {
+    local lang="$1"
+
+    # Conversion de la casse en minuscule
+    local language=$(echo "$language" | tr '[:upper:]' '[:lower:]')
+
+    # Recherche du code ISO avec jq
+    iso_code=$(jq -r --arg lang "$language" '
+        to_entries[] | select(.value[] | ascii_downcase == $lang) | .key' "$ISO_LANG"
+    )
+
+    # Vérification du résultat
+    if [[ -n "$iso_code" ]]; then
+        echo "$iso_code"
+    else
+        echo "en"
+    fi
+
 }
