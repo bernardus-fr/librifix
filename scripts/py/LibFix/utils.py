@@ -28,7 +28,6 @@ def check_json_value(fichier, valeur):
     with open(fichier, "r", encoding="utf-8") as file:
         return json.load(file).get(valeur)
 
-<<<<<<< HEAD
 # Rechercher code iso d'une langue
 def get_lang_iso_code(language):
     # Fichier de conversion:
@@ -47,8 +46,3 @@ def get_lang_iso_code(language):
             return iso_code
 
     return None
-
-
-=======
->>>>>>> 6ab396747c4d7624ad3f78fcf17e802bfb8c382a
-    

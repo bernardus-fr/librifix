@@ -1,8 +1,4 @@
 Français
-<<<<<<< HEAD
-Allemand
-Anglais
-=======
 Afrikaans
 Albanais
 Allemand
@@ -20,26 +16,10 @@ Bulgare
 Catalan
 Chinois
 Coréen
->>>>>>> 6ab396747c4d7624ad3f78fcf17e802bfb8c382a
 Corse
 Croate
 Danois
 Espagnol
-<<<<<<< HEAD
-Espéranto
-Finnois
-Hongrois
-Irlandais
-Islandais
-Italien
-Latin
-Norvégien
-Néerlandais
-Polonais
-Portugais
-Roumain
-Tchèque
-=======
 Estonien
 Finnois
 Grec
@@ -69,4 +49,3 @@ Persan
 Polonais
 Portugais
 Roumain
->>>>>>> 6ab396747c4d7624ad3f78fcf17e802bfb8c382a

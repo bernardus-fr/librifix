@@ -71,11 +71,7 @@ CURRENT_LOG="$LOG_DIR/current.log"
 METADATA_FILE="$TEMP_DIR/metadata.json"
 USER_FILES_JSON="$TEMP_DIR/user_files.json"
 CONFIG_FILE="config.ini"
-<<<<<<< HEAD
 ISO_LANG="./lang/iso_code_lang.json"
-=======
-ISO_LANG="./utils/language_codes.json"
->>>>>>> 6ab396747c4d7624ad3f78fcf17e802bfb8c382a
 
 # Variables générales du programme
 TEMP_STATUS=0   # 0 = pas de dossier temp, 1 = temp existant
@@ -247,9 +243,9 @@ check_and_install_system_dependencies() {
                 fi
             done
             ;;
-        arch) # Pour Arch Linux avec pacman
+        arch|cachyos) # Pour Arch Linux avec pacman
             "$LOG" add DEBUG "Vérification des dépendances système pour $DISTRO..."
-            local dependencies=("zenity" "zip" "imagemagick" "jq" "jre-openjdk" "python" "python-pip")
+            local dependencies=("zenity" "zip" "imagemagick" "jq" "jre-openjdk" "python" "python-pip" "python-virtualenv" "python-pipenv" "python-beautifulsoup4" "calibre")
             for pkg in "${dependencies[@]}"; do
                 if ! pacman -Q "$pkg" &>/dev/null; then
                     "$LOG" add DEBUG "$pkg non trouvé. Installation en cours..."
@@ -362,11 +358,8 @@ check_program_integrity() {
         "./utils/templates/epub/OEBPS/Styles/style-notes.css"
         "./utils/templates/epub/OEBPS/Text/nav.xhtml"
         "./utils/templates/epub/OEBPS/Text/page_de_garde.xhtml"
-<<<<<<< HEAD
         "./lang/files_name.json"
         "./lang/iso_code_lang.json"
-=======
->>>>>>> 6ab396747c4d7624ad3f78fcf17e802bfb8c382a
         "./lang/interface/fr.json"
         "./lang/interface/it.json"
         "./lang/interface/en.json"

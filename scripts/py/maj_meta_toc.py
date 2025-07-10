@@ -103,10 +103,6 @@ def update_toc_ncx(metadata):
     ncx_ns = "http://www.daisy.org/z3986/2005/ncx/"
 
     # Mise à jour de l'attribut xml:lang
-<<<<<<< HEAD
-=======
-    #language_code = get_language_code(metadata["language"], language_map)
->>>>>>> 6ab396747c4d7624ad3f78fcf17e802bfb8c382a
     root.set("{http://www.w3.org/XML/1998/namespace}lang", metadata["language"])
     utils.log_message("DEBUG", f"│ Langue ajoutée: {metadata["language"]}")
 
