@@ -24,7 +24,9 @@
 
 
 # Définition des Variables d'environnement:
-source scripts/bash/utils.sh
+#source scripts/bash/utils.sh
+source scripts/bash/utils_variables.sh
+source scripts/bash/utils_fonctions.sh
 
 # Vérification des arguments
 if [[ $# -ne 1 ]]; then

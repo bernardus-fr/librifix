@@ -89,6 +89,7 @@ The user must organize files within a dedicated folder using a well-defined stru
 - **Images**:
   - Cover image: `cover.[jpg|jpeg|png]`
   - Back cover: `4cover.[jpg|jpeg|png]`
+  - Others images: `other_image.[jpg|jpeg|png]`
 - **Text files**:
   - Title page: `page_de_garde.xhtml`
   - Preface: `preface.txt`
@@ -111,7 +112,6 @@ The user must organize files within a dedicated folder using a well-defined stru
 ### Text File Formatting Rules
 
 - The first line of the file must be the chapter title.
-- Any images should be on a single line, starting with the image link followed by its optional description separated by a colon (:). For example, `turing-machine.jpg: Optional description of the image!` or `link/to/image.jpg`...
 - Footnote references within a chapter should be formatted as numbers in parentheses: `(1)`, `(2)`, `(X)`, etc.
 - In footnote files, each note should start with a number followed by a closing parenthesis: `1)`, `2)`, `X)`, etc.
 
@@ -133,7 +133,7 @@ Find the final file '**livre.epub**' in the '**temp**' folder of the program.
 
 - v1.0: Initial functional version of the project.
 - v1.1: 2025-02-06 Minor update - small improvements
-- v1.2.5: 2025-02-08 Current version. See [CHANGELOG.md](CHANGELOG.md) for details.
+- v1.2.6: 2025-07-11 Current version. See [CHANGELOG.md](CHANGELOG.md) for details.
 
 ### Beta Version 2.0 (Upcoming)
 
@@ -144,7 +144,6 @@ Find the final file '**livre.epub**' in the '**temp**' folder of the program.
 ### Release Version 3.0 (Planned)
 
 - Stable and finalized version
-- The project will result in three or four tools: an automated installation tool, the core in CLI mode, a GUI tool for users, and a WebUI tool for online access.
 
 ## License
 

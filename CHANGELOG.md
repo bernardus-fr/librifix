@@ -1,12 +1,11 @@
-# 📢 Librifix - Changelog (Alpha - V 1.2.5)
+# 📢 Librifix - Changelog (Alpha - V 1.2.6)
 
 ## 🚀 New Features
 ### 🖼️ Image Support
-- Added support for images in text content.
+- Improved handling of images
+- Management of 1-bit images
+- Automated conversion of images to optimal format and dimensions
 
 ## 🚀 Improvements
-### 📦 Dependency Management
-- Added support for Arch Linux (including CachyOS).
-
-### 🔧 HTML Generation
-- Enhanced HTML generation scripts with broader use of BeautifulSoup4 (bs4) for better parsing and manipulation.
+### 🛠 Code Enhancement:**
+-  Separation of global variables and recurring functions in the bash part of the tool

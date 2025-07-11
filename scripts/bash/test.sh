@@ -1,6 +1,8 @@
 #!/bin/bash
 
-source scripts/bash/utils.sh
+#source scripts/bash/utils.sh
+source scripts/bash/utils_variables.sh
+source scripts/bash/utils_fonctions.sh
 
 language="Italien"
 

@@ -25,7 +25,9 @@
 
 
 # Définition des Variables d'environnement:
-source scripts/bash/utils.sh
+#source scripts/bash/utils.sh
+source scripts/bash/utils_variables.sh
+source scripts/bash/utils_fonctions.sh
 
 # Vérification de l'argument pour le dossier
 if [ $# -eq 0 ]; then

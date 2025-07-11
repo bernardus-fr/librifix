@@ -27,7 +27,9 @@
 
 
 # Définition des Variables d'environnement:
-source scripts/bash/utils.sh
+#source scripts/bash/utils.sh
+source scripts/bash/utils_variables.sh
+source scripts/bash/utils_fonctions.sh
 
 # Définition des Fonctions:
 # Mise à jour de user_files.json
